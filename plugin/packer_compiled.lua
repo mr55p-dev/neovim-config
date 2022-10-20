@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["luatab.nvim"] = {
+    loaded = true,
+    path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/luatab.nvim",
+    url = "https://github.com/alvarosevilla95/luatab.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -143,6 +148,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
     url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
+  ["nord.nvim"] = {
+    loaded = true,
+    path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/nord.nvim",
+    url = "https://github.com/shaunsingh/nord.nvim"
   },
   ["nui.nvim"] = {
     loaded = true,
@@ -163,6 +173,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-scrollbar"] = {
+    loaded = true,
+    path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/nvim-scrollbar",
+    url = "https://github.com/petertriho/nvim-scrollbar"
   },
   ["nvim-surround"] = {
     loaded = true,
