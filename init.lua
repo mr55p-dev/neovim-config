@@ -35,6 +35,9 @@ require('packer').startup(function(use)
   use 'voldikss/vim-floaterm' -- This one is interesting, like toggleterm but floating
   use 'glepnir/dashboard-nvim' -- Dashboard
   use 'kshenoy/vim-signature' -- Marks in the gutter
+  use 'petertriho/nvim-scrollbar' -- Scrollbar
+  use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' } -- Tabline
+  use 'shaunsingh/nord.nvim' -- Nord theme
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -89,6 +92,9 @@ vim.o.smartindent = true
 -- Save undo history
 vim.o.undofile = true
 
+-- Automatically reload from disk when changes are made
+vim.o.autoread = true
+
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -99,7 +105,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme nord]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -498,6 +504,11 @@ db.custom_center = {
     shortcut = 'SPC f d' },
 }
 
+-- Scrollbar
+require('scrollbar').setup()
+
+-- Tabline
+require('luatab').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
