@@ -503,6 +503,7 @@ db.custom_center = {
     action = 'Telescope find_files hidden=true path=' .. home .. '/.config/nvim',
     shortcut = 'SPC f d' },
 }
+db.session_directory = home .. "/.config/nvim/sessions"
 
 -- Scrollbar
 require('scrollbar').setup()
