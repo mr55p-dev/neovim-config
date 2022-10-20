@@ -33,6 +33,7 @@ require('packer').startup(function(use)
   use { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', -- Nerdtree but better
     requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" } }
   use 'voldikss/vim-floaterm' -- This one is interesting, like toggleterm but floating
+  use 'glepnir/dashboard-nvim' -- Dashboard
 
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -458,6 +459,9 @@ vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', {})
 vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
 vim.keymap.set('n', '<Leader>tn', function() vim.cmd('FloatermNew --height=0.7 --width=0.7 --wintype=float --name=nnn nnn') end)
 vim.keymap.set('n', '<Leader>gt', function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
+
+-- Dashboard
+local dashboard = require('dashboard')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

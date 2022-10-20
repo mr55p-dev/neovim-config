@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/codewindow.nvim",
     url = "https://github.com/gorbit99/codewindow.nvim"
   },
+  ["dashboard-nvim"] = {
+    loaded = true,
+    path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
+    url = "https://github.com/glepnir/dashboard-nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
