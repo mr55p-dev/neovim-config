@@ -34,7 +34,7 @@ require('packer').startup(function(use)
     requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" } }
   use 'voldikss/vim-floaterm' -- This one is interesting, like toggleterm but floating
   use 'glepnir/dashboard-nvim' -- Dashboard
-
+  use 'kshenoy/vim-signature' -- Marks in the gutter
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }

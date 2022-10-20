@@ -229,6 +229,11 @@ _G.packer_plugins = {
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
     url = "https://github.com/tpope/vim-rhubarb"
   },
+  ["vim-signature"] = {
+    loaded = true,
+    path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/vim-signature",
+    url = "https://github.com/kshenoy/vim-signature"
+  },
   ["vim-sleuth"] = {
     loaded = true,
     path = "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/vim-sleuth",
