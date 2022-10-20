@@ -456,6 +456,7 @@ vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', {})
 
 -- Floatterm
 vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
+vim.keymap.set('n', '<Leader>tn', function() vim.cmd('FloatermNew --height=0.7 --width=0.7 --wintype=float --name=nnn nnn') end)
 vim.keymap.set('n', '<Leader>gt', function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
