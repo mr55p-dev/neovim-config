@@ -131,10 +131,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Keybinds for moving between splits
-vim.keymap.set({'n', 'v'}, '<C-h>', function() vim.cmd("wincmd h") end, { silent = true })
-vim.keymap.set({'n', 'v'}, '<C-j>', function() vim.cmd("wincmd j") end, { silent = true })
-vim.keymap.set({'n', 'v'}, '<C-k>', function() vim.cmd("wincmd k") end, { silent = true })
-vim.keymap.set({'n', 'v'}, '<C-l>', function() vim.cmd("wincmd l") end, { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-h>', function() vim.cmd("wincmd h") end, { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-j>', function() vim.cmd("wincmd j") end, { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-k>', function() vim.cmd("wincmd k") end, { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-l>', function() vim.cmd("wincmd l") end, { silent = true })
 
 -- Fugitive mappings
 vim.keymap.set('n', '<Leader>gg', ":Git ")
@@ -434,7 +434,7 @@ end, { remap = true })
 hop.setup {}
 
 -- Surround
-require "nvim-surround".setup{}
+require "nvim-surround".setup {}
 
 -- Glow
 local glow = require('glow')
@@ -457,8 +457,10 @@ vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', {})
 
 -- Floatterm
 vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
-vim.keymap.set('n', '<Leader>tn', function() vim.cmd('FloatermNew --height=0.7 --width=0.7 --wintype=float --name=nnn nnn') end)
-vim.keymap.set('n', '<Leader>gt', function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
+vim.keymap.set('n', '<Leader>tn',
+  function() vim.cmd('FloatermNew --height=0.7 --width=0.7 --wintype=float --name=nnn nnn') end)
+vim.keymap.set('n', '<Leader>gt',
+  function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
 
 -- Dashboard
 local home = os.getenv('HOME')
