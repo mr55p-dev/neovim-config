@@ -472,8 +472,8 @@ vim.keymap.set('n', '<Leader>gt',
 local home = os.getenv('HOME')
 local db = require('dashboard')
 
--- dashboard.preview_command = 'cat | lolcat -F 0.3'
-db.preview_command = 'cat'
+db.preview_command = 'cat | lolcat -F 0.3'
+-- db.preview_command = 'cat'
 db.preview_file_height = 6
 db.preview_file_width = 55
 db.preview_file_path = home .. '/.config/nvim/dashboard_cover.cat'
