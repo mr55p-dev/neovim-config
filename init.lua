@@ -461,7 +461,41 @@ vim.keymap.set('n', '<Leader>tn', function() vim.cmd('FloatermNew --height=0.7 -
 vim.keymap.set('n', '<Leader>gt', function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
 
 -- Dashboard
-local dashboard = require('dashboard')
+local home = os.getenv('HOME')
+local db = require('dashboard')
+
+-- dashboard.preview_command = 'cat | lolcat -F 0.3'
+db.preview_command = 'cat'
+db.preview_file_height = 6
+db.preview_file_width = 55
+db.preview_file_path = home .. '/.config/nvim/dashboard_cover.cat'
+db.custom_center = {
+  { icon = '  ',
+    desc = 'Recently latest session                  ',
+    shortcut = 'SPC s l',
+    action = 'SessionLoad' },
+  -- { icon = '  ',
+  --   desc = 'Recently opened files                   ',
+  --   action = 'DashboardFindHistory',
+  --   shortcut = 'SPC f h' },
+  { icon = '  ',
+    desc = 'Find  File                              ',
+    action = 'Telescope find_files find_command=rg,--hidden,--files',
+    shortcut = 'SPC f f' },
+  -- { icon = '  ',
+  --   desc = 'File Browser                            ',
+  --   action = 'Telescope find_files',
+  --   shortcut = 'SPC f b' },
+  { icon = '  ',
+    desc = 'Find  word                              ',
+    action = 'Telescope live_grep',
+    shortcut = 'SPC f w' },
+  { icon = '  ',
+    desc = 'Open Personal dotfiles                  ',
+    action = 'Telescope find_files hidden=true path=' .. home .. '/.config/nvim',
+    shortcut = 'SPC f d' },
+}
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
