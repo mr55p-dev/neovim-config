@@ -27,11 +27,13 @@ require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'ellisonleao/glow.nvim' -- Markdown syntax control
   use { 'phaazon/hop.nvim', branch = 'v2' } -- hop
-  use 'kylechui/nvim-surround'
-  use 'gorbit99/codewindow.nvim'
-  use 'windwp/nvim-autopairs'
-  use { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x',
+  use 'kylechui/nvim-surround' -- We love this one
+  use 'gorbit99/codewindow.nvim' -- Some weird code minimap, perhaps remove?
+  use 'windwp/nvim-autopairs' -- Automatic bracket pairing
+  use { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', -- Nerdtree but better
     requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" } }
+  use 'voldikss/vim-floaterm' -- This one is interesting, like toggleterm but floating
+
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -126,6 +128,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Keybinds for moving between splits
+vim.keymap.set({'n', 'v'}, '<C-h>', function() vim.cmd("wincmd h") end, { silent = true })
+vim.keymap.set({'n', 'v'}, '<C-j>', function() vim.cmd("wincmd j") end, { silent = true })
+vim.keymap.set({'n', 'v'}, '<C-k>', function() vim.cmd("wincmd k") end, { silent = true })
+vim.keymap.set({'n', 'v'}, '<C-l>', function() vim.cmd("wincmd l") end, { silent = true })
+
+-- Fugitive mappings
+vim.keymap.set('n', '<Leader>gg', ":Git ")
+vim.keymap.set('n', '<Leader>gl', function() vim.cmd("Git log --graph --oneline") end, { silent = true })
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
@@ -442,6 +454,9 @@ autopair.setup {}
 vim.api.nvim_set_keymap('n', '<C-n>', ':NeoTreeShowToggle<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', {})
 
+-- Floatterm
+vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
+vim.keymap.set('n', '<Leader>gt', function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
