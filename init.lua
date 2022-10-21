@@ -467,8 +467,8 @@ local autopair = require('nvim-autopairs')
 autopair.setup {}
 
 -- Neotree
-vim.api.nvim_set_keymap('n', '<C-n>', ':NeoTreeShowToggle<CR>', {})
-vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', {})
+vim.api.nvim_set_keymap('n', '<C-n>', ':NeoTreeShowToggle<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', { silent = true })
 
 -- Floatterm
 vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
