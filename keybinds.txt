@@ -1,0 +1,56 @@
+# Treesitter
+
+<Leader>a :: Swap function argument
+<Leader>A :: Swap function argument (backwards)
+af :: Visually select outer function
+if :: Visually select inner function
+ac :: Visually select outer class
+ic :: Visually select inner class
+<C-space> :: Start selection (and increment by expanding scope)
+<C-backspace> :: Decremenent selection
+
+# Telescope
+
+<Leader>? :: Pick recently opened files
+<Leader><space> :: Pick buffers
+<Leader>/ :: Search in buffer
+<Leader>sf :: Search files
+<Leader>sh :: Search help tags
+<Leader>sw :: Search including the current word
+<Leader>sg :: Grep in buffer
+<Leader>sd :: Search LSP diagnostics
+
+## Fugitive
+
+<Leader>gg :: Prefill cmd bar with :Git 
+<Leader>gl :: Git log output
+<Leader>gt :: Open lazygit through a floating terminal
+
+# Diagnostics
+
+<Leader>q :: Open diagnostics buffer
+[d :: Goto next issue
+]d :: Goto previous issue
+
+# LSP
+
+<Leader>rn :: Rename symbol
+<F2> :: Rename symbol
+<Leader>ca :: Bring up code actions
+gd :: Goto definition
+gi :: Goto implementation
+gD :: Goto declaration
+gr :: Display references
+<Leader>ds :: Display and search document symbols
+<Leader>ws :: Display and search workspace symbols
+K :: Display function documentation
+<C-k> :: Display signature documentation
+<Leader>D :: Goto type definition
+<Leader>wa :: Workspace add folder
+<Leader>wr :: Workspace remove folder
+<Leader>wl :: Workspace list folder
+<A-f> :: Format current buffer
+
+# CMP
+
+
