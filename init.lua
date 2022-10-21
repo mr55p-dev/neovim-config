@@ -38,6 +38,7 @@ require('packer').startup(function(use)
   use 'petertriho/nvim-scrollbar' -- Scrollbar
   use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' } -- Tabline
   use 'shaunsingh/nord.nvim' -- Nord theme
+  use { 'abecodes/tabout.nvim' } -- Tabout for getting out of autopairs
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -87,7 +88,6 @@ vim.o.mouse = 'a'
 -- Enable break indent
 -- vim.o.breakindent = true
 vim.o.autoindent = true
-vim.o.smartindent = true
 
 -- Save undo history
 vim.o.undofile = true
@@ -216,7 +216,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'sql' },
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -298,6 +298,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<F2>', vim.lsp.buf.rename, 'Rename')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
@@ -328,6 +329,7 @@ local on_attach = function(_, bufnr)
     end
   end, { desc = 'Format current buffer with LSP' })
 end
+vim.keymap.set('n', '<A-f>', function() vim.cmd('Format') end, { silent = true })
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -392,14 +394,23 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-Space>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.abort()
+      elseif cmp.visible then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
+        cmp.confirm { select = true }
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       else
@@ -407,9 +418,7 @@ cmp.setup {
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      if luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -510,6 +519,28 @@ require('scrollbar').setup()
 
 -- Tabline
 require('luatab').setup()
+
+-- Tabout
+require('tabout').setup {
+  tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+  backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+  act_as_tab = true, -- shift content if tab out is not possible
+  act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+  default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+  default_shift_tab = '<C-d>', -- reverse shift default action,
+  enable_backwards = true, -- well ...
+  completion = true, -- if the tabkey is used in a completion pum
+  tabouts = {
+    { open = "'", close = "'" },
+    { open = '"', close = '"' },
+    { open = '`', close = '`' },
+    { open = '(', close = ')' },
+    { open = '[', close = ']' },
+    { open = '{', close = '}' }
+  },
+  ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+  exclude = {} -- tabout will ignore these filetypes
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
