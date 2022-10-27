@@ -450,6 +450,9 @@ end, { remap = true })
 vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 end, { remap = true })
+vim.keymap.set('', '<Leader>hw', function ()
+  hop.hint_words()
+end, { remap = true })
 hop.setup {}
 
 -- Surround
