@@ -51,6 +51,65 @@ K :: Display function documentation
 <Leader>wl :: Workspace list folder
 <A-f> :: Format current buffer
 
-# CMP
+# Hop
+<Leader>hw :: Hop word (to any word in the screen)
 
+# Surround
+
+ysiw :: Surround inner word
+dsf :: Delete surrounding function but keep arguments
+cst[tag] :: Change the surrounding html tag for [tag]
+
+# Minimap
+
+<Leader>mo :: Open minimap
+<Leader>mc :: Close minimap
+<Leader>mm :: Toggle minimap
+<Leader>mf :: Focus/unfocus minimap
+
+# Neotree
+
+<C-n> :: Toggle neotree
+<C-A-n> :: Toggle floating neotree
+
+# Toggleterm
+
+<C-\> :: Toggle terminal
+
+# Floatterm
+
+<Leader>tt :: Toggle floating terminal
+<Leader>tn :: Toggle floating nnn window
+
+# Dashboard
+
+<Leader>sss :: Save current session
+<Leader>ssl :: Load previous session
+
+# Pomodoro
+
+<Leader>ps :: Start pomodoro
+<Leader>pp :: Show pomodoro status
+<Leader>px :: Stop pomodoro
+
+# VS-tasks
+
+<Leader>ta :: Pick VSTasks
+<Leader>ti :: Pick VS inputs
+<Leader>th :: Pick VS history
+<Leader>tl :: Pick VS loaders (?)
+
+# Winshift
+
+<C-w> :: Show the winshift picker
+
+# DAP
+
+<Leader>db :: Set breakpoint
+<Leader>dc :: Continue debugger
+<F5> :: Continue debugger
+<Leader>dso :: Step over
+<F6> :: Step over
+<Leader>dsi :: Step into
+<Leader>dr :: Open REPL
 
