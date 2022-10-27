@@ -43,6 +43,7 @@ require('packer').startup(function(use)
   use { 'akinsho/toggleterm.nvim', tag = '*' } -- Popup terminal buffer
   use { 'EthanJWright/vs-tasks.nvim',
     requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } } -- IDE tasks
+  use 'sindrets/winshift.nvim' -- Winshift
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -587,6 +588,9 @@ require('vstask').setup {
   },
   terminal = 'toggleterm',
 }
+
+-- Winshift
+vim.keymap.set('n', '<C-w>', function() vim.cmd'WinShift' end, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
