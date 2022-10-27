@@ -41,6 +41,8 @@ require('packer').startup(function(use)
   use { 'abecodes/tabout.nvim' } -- Tabout for getting out of autopairs
   use { 'wthollingsworth/pomodoro.nvim', requires = 'MunifTanjim/nui.nvim' } -- Pomodoro timer
   use { 'akinsho/toggleterm.nvim', tag = '*' } -- Popup terminal buffer
+  use { 'EthanJWright/vs-tasks.nvim',
+    requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } } -- IDE tasks
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -454,7 +456,7 @@ end, { remap = true })
 vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 end, { remap = true })
-vim.keymap.set('', '<Leader>hw', function ()
+vim.keymap.set('', '<Leader>hw', function()
   hop.hint_words()
 end, { remap = true })
 hop.setup {}
@@ -569,6 +571,23 @@ vim.keymap.set('n', '<Leader>ps', function() vim.cmd('PomodoroStart') end, { sil
 vim.keymap.set('n', '<Leader>px', function() vim.cmd('PomodoroStop') end, { silent = false })
 vim.keymap.set('n', '<Leader>pp', function() vim.cmd('PomodoroStatus') end, { silent = false })
 
+-- Bindings for vs-tasks
+vim.keymap.set('n', '<Leader>ta', function() require('telescope').extensions.vstask.tasks() end, {})
+vim.keymap.set('n', '<Leader>ti', function() require('telescope').extensions.vstask.inputs() end, {})
+vim.keymap.set('n', '<Leader>th', function() require('telescope').extensions.vstask.history() end, {})
+vim.keymap.set('n', '<Leader>tl', function() require('telescope').extensions.vstask.launch() end, {})
+require('vstask').setup {
+  autodetect = {
+    npm = 'on'
+  },
+  telescope_keys = {
+    vertical = "<C-v>",
+    split = "<C-x>",
+    tab = "<C-t>",
+    current = "<CR>"
+  },
+  terminal = 'toggleterm',
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
