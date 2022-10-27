@@ -39,6 +39,7 @@ require('packer').startup(function(use)
   use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' } -- Tabline
   use 'shaunsingh/nord.nvim' -- Nord theme
   use { 'abecodes/tabout.nvim' } -- Tabout for getting out of autopairs
+  use { 'wthollingsworth/pomodoro.nvim', requires = 'MunifTanjim/nui.nvim' } -- Pomodoro timer
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -155,6 +156,9 @@ require('lualine').setup {
     component_separators = '|',
     section_separators = '',
   },
+  sections = {
+    lualine_c = { 'filename', require('pomodoro').statusline }
+  }
 }
 
 -- Enable Comment.nvim
@@ -541,6 +545,18 @@ require('tabout').setup {
   ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
   exclude = {} -- tabout will ignore these filetypes
 }
+
+-- Pomodoro
+require('pomodoro').setup {
+  time_work = 25,
+  time_break = 5,
+  time_break_long = 15,
+  timers_to_long_break = 4
+}
+vim.keymap.set('n', '<Leader>ps', function() vim.cmd('PomodoroStart') end, { silent = false })
+vim.keymap.set('n', '<Leader>px', function() vim.cmd('PomodoroStop') end, { silent = false })
+vim.keymap.set('n', '<Leader>pp', function() vim.cmd('PomodoroStatus') end, { silent = false })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
