@@ -484,7 +484,7 @@ autopair.setup {}
 
 -- Neotree
 vim.api.nvim_set_keymap('n', '<C-n>', ':NeoTreeShowToggle<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<leader><C-n>', ':NeoTreeFloatToggle<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-n>', ':NeoTreeFloatToggle<CR>', { silent = true })
 
 -- Floatterm
 vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)
@@ -534,6 +534,8 @@ db.custom_center = {
     shortcut = 'SPC f d' },
 }
 db.session_directory = home .. "/.config/nvim/sessions"
+vim.keymap.set('n', '<Leader>sss', function() vim.cmd'SessionSave' end, {})
+vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'SessionLoad' end, {})
 
 -- Scrollbar
 require('scrollbar').setup()
