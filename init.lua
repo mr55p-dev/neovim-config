@@ -582,9 +582,8 @@ require('vstask').setup {
   },
   telescope_keys = {
     vertical = "<C-v>",
-    split = "<C-x>",
+    split = "<CR>",
     tab = "<C-t>",
-    current = "<CR>"
   },
   terminal = 'toggleterm',
 }
