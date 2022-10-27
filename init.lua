@@ -49,6 +49,7 @@ require('packer').startup(function(use)
   use { 'dnlhc/glance.nvim' } -- Glance window for code
   use { 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'kyazdani42/nvim-web-devicons', } } -- gh command integration
   use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
+  use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -316,6 +317,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<F2>', vim.lsp.buf.rename, 'Rename')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<C-.>', function() vim.cmd('CodeActionMenu') end, 'Code action')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
