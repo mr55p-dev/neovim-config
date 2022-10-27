@@ -40,6 +40,7 @@ require('packer').startup(function(use)
   use 'shaunsingh/nord.nvim' -- Nord theme
   use { 'abecodes/tabout.nvim' } -- Tabout for getting out of autopairs
   use { 'wthollingsworth/pomodoro.nvim', requires = 'MunifTanjim/nui.nvim' } -- Pomodoro timer
+  use { 'akinsho/toggleterm.nvim', tag = '*' } -- Popup terminal buffer
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -104,6 +105,9 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+-- Set hidden
+vim.o.hidden = true
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme nord]]
@@ -138,10 +142,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Keybinds for moving between splits
-vim.keymap.set({ 'n', 'v' }, '<C-h>', function() vim.cmd("wincmd h") end, { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<C-j>', function() vim.cmd("wincmd j") end, { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<C-k>', function() vim.cmd("wincmd k") end, { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<C-l>', function() vim.cmd("wincmd l") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 't' }, '<C-h>', function() vim.cmd("wincmd h") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 't' }, '<C-j>', function() vim.cmd("wincmd j") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 't' }, '<C-k>', function() vim.cmd("wincmd k") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 't' }, '<C-l>', function() vim.cmd("wincmd l") end, { silent = true })
 
 -- Fugitive mappings
 vim.keymap.set('n', '<Leader>gg', ":Git ")
@@ -483,6 +487,11 @@ vim.keymap.set('n', '<Leader>tn',
   function() vim.cmd('FloatermNew --height=0.7 --width=0.7 --wintype=float --name=nnn nnn') end)
 vim.keymap.set('n', '<Leader>gt',
   function() vim.cmd('FloatermNew --height=0.9 --width=0.9 --wintype=float --name=Git lazygit') end)
+
+-- Toggleterm
+require('toggleterm').setup({
+  open_mapping = [[<C-\>]]
+})
 
 -- Dashboard
 local home = os.getenv('HOME')
