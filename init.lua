@@ -46,6 +46,8 @@ require('packer').startup(function(use)
   use 'sindrets/winshift.nvim' -- Winshift
   use 'mfussenegger/nvim-dap' -- Debug adapter protocol
   use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
+  use { 'dnlhc/glance.nvim' } -- Glance window for code
+  use { 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'kyazdani42/nvim-web-devicons', } }
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -638,6 +640,32 @@ vim.keymap.set('n', '<Leader>dr', function () require('dap').repl.open() end, {}
 
 vim.keymap.set('n', '<F5>', function () require('dap').continue() end, {})
 vim.keymap.set('n', '<F6>', function () require('dap').step_over() end, {})
+
+
+-- Glance config
+local glance = require('glance')
+local actions = glance.actions
+
+glance.setup({
+  height = 18, -- Height of the window
+  border = {
+    enable = false, -- Show window borders. Only horizontal borders allowed
+    top_char = '―',
+    bottom_char = '―',
+  },
+})
+
+-- Lua
+vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
+vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
+vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
+vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
+
+-- octo
+
+require("octo").setup({
+  default_remote = ['origin', 'upstream']
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
