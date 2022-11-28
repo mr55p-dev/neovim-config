@@ -47,7 +47,8 @@ require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap' -- Debug adapter protocol
   use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
   use { 'dnlhc/glance.nvim' } -- Glance window for code
-  use { 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'kyazdani42/nvim-web-devicons', } }
+  use { 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'kyazdani42/nvim-web-devicons', } } -- gh command integration
+  use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -664,7 +665,8 @@ vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
 -- octo
 
 require("octo").setup({
-  default_remote = ['origin', 'upstream']
+  default_remote = {'origin', 'upstream'},
+  ssh_aliases = {['github-personal'] = 'github.com'},
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
