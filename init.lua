@@ -14,7 +14,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Add git related info in the signs columns and popups
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
+  use { 'nvim-treesitter/nvim-treesitter', tag = '*' } -- Highlight, edit, and navigate code
   use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } } -- Additional textobjects for treesitter
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'williamboman/mason.nvim' -- Manage external editor tooling i.e LSP servers
@@ -50,6 +50,7 @@ require('packer').startup(function(use)
   use { 'pwntester/octo.nvim', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'kyazdani42/nvim-web-devicons', } } -- gh command integration
   use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+  use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', run = ':Neorg sync-parsers' } -- neorg, might be fun
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
