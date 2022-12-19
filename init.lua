@@ -319,9 +319,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<C-.>', function() vim.cmd('CodeActionMenu') end, 'Code action')
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('gr', require('telescope.builtin').lsp_references)
+  nmap('gD', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('gR', require('telescope.builtin').lsp_references)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
@@ -659,10 +659,10 @@ glance.setup({
 })
 
 -- Lua
-vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
-vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
-vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
-vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
+vim.keymap.set('n', 'gd', '<CMD>Glance definitions<CR>')
+vim.keymap.set('n', 'gr', '<CMD>Glance references<CR>')
+vim.keymap.set('n', 'gy', '<CMD>Glance type_definitions<CR>')
+vim.keymap.set('n', 'gm', '<CMD>Glance implementations<CR>')
 
 -- octo
 
