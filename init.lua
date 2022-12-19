@@ -24,7 +24,7 @@ require('packer').startup(function(use)
   use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  -- use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'ellisonleao/glow.nvim' -- Markdown syntax control
   use { 'phaazon/hop.nvim', branch = 'v2' } -- hop
   use 'kylechui/nvim-surround' -- We love this one
@@ -51,6 +51,7 @@ require('packer').startup(function(use)
   use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
   use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', run = ':Neorg sync-parsers' } -- neorg, might be fun
+  use { 'rmagatti/auto-session' }
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -118,6 +119,15 @@ vim.wo.signcolumn = 'yes'
 -- Set hidden
 vim.o.hidden = true
 
+-- Set tabs
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 0
+vim.o.expandtab = false
+
+-- Set sessionoptions
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme nord]]
@@ -166,12 +176,12 @@ vim.keymap.set('n', '<Leader>gl', function() vim.cmd("Git log --graph --oneline"
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
-    component_separators = '|',
+    theme = 'nord',
+    -- component_separators = '|',
     section_separators = '',
   },
   sections = {
-    lualine_c = { 'filename', require('pomodoro').statusline }
+    lualine_c = { 'filename', require('pomodoro').statusline, require('auto-session-library').current_session_name }
   }
 }
 
@@ -539,9 +549,29 @@ db.custom_center = {
     action = 'Telescope find_files hidden=true path=' .. home .. '/.config/nvim',
     shortcut = 'SPC f d' },
 }
-db.session_directory = home .. "/.config/nvim/sessions"
-vim.keymap.set('n', '<Leader>sss', function() vim.cmd'SessionSave' end, {})
-vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'SessionLoad' end, {})
+
+-- Autosession
+local function close_neo_tree()
+  require 'neo-tree.sources.manager'.close_all()
+  vim.notify('closed all')
+end
+
+require('auto-session').setup {
+	auto_session_create_enabled = false,
+	auto_save_enabled = true,
+	auto_restore_enabled = true,
+	auto_session_use_git_branch = true,
+	bypass_session_save_file_types = { "neo-tree" },
+	pre_save_cmds = {
+		function() require 'neo-tree.sources.manager'.close_all() end,
+	},
+	cwd_change_handling = {
+		restore_upcoming_session = true
+	},
+}
+
+vim.keymap.set('n', '<Leader>sss', function() vim.cmd'SaveSession' end, {})
+vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'RestoreSession' end, {})
 
 -- Scrollbar
 require('scrollbar').setup()
@@ -600,7 +630,7 @@ require('vstask').setup {
 }
 
 -- Winshift
-vim.keymap.set('n', '<C-w>', function() vim.cmd'WinShift' end, {})
+vim.keymap.set('n', '<C-w><CR>', function() vim.cmd'WinShift' end, {})
 
 -- DAP
 local dap = require('dap')
