@@ -723,5 +723,21 @@ require("octo").setup({
   ssh_aliases = {['github-personal'] = 'github.com'},
 })
 
+-- neorg
+require"neorg".setup{
+	load = {
+		["core.defaults"] = {},
+		["core.norg.dirman"] = {
+            config = {
+                workspaces = {
+                    work = "~/notes/work",
+                    home = "~/notes/home",
+                }
+            }
+        }
+
+	}
+}
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
