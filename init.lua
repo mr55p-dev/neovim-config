@@ -173,15 +173,32 @@ vim.keymap.set('n', '<Leader>gl', function() vim.cmd("Git log --graph --oneline"
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
+
+-- Override 'encoding': Don't display if encoding is UTF-8.
+local encoding = function()
+  local ret, _ = (vim.bo.fenc or vim.go.enc):gsub("^utf%-8$", "")
+  return ret
+end
+-- fileformat: Don't display if &ff is unix.
+local fileformat = function()
+  local ret, _ = vim.bo.fileformat:gsub("^unix$", "")
+  return ret
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'nord',
     -- component_separators = '|',
-    section_separators = '',
+    -- section_separators = '',
   },
   sections = {
-    lualine_c = { 'filename', require('pomodoro').statusline, require('auto-session-library').current_session_name }
+    lualine_c = {
+      { 'filename', path=1 },
+      require('pomodoro').statusline
+	},
+	lualine_x = { 'filetype', 'windows', 'tabs' },
+	lualine_y = { encoding(), 'progress', fileformat() }
   }
 }
 
@@ -419,6 +436,10 @@ cmp.setup {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
