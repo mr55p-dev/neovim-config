@@ -1,12 +1,17 @@
 local M = {
-	floatterm = {}
+	floatterm = {},
+	toggleterm = {},
 }
 
-function M.toggleterm()
+function M.toggleterm.setup()
 	require('toggleterm').setup{
-		open_mapping = [[C-\]]
+		open_mapping = [[<C-\>]]
 	}
 end
+
+M.toggleterm.keys = {
+	[[<C-\>]]
+}
 
 function M.floatterm.setup()
 	vim.keymap.set('n', '<Leader>tt', function() vim.cmd('FloatermToggle') end)

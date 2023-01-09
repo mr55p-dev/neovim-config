@@ -3,7 +3,7 @@ local M = {}
 function M.config() 
 	require('nvim-treesitter.configs').setup {
 	  -- Add languages to be installed here that you want installed for treesitter
-	  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'sql' },
+	  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'sql', 'vim' },
 
 	  highlight = { enable = true },
 	  indent = { enable = true },

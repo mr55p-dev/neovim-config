@@ -85,4 +85,43 @@ function M.glance()
 	vim.keymap.set('n', 'gm', '<CMD>Glance implementations<CR>')
 end
 
+M.treesj = {
+	keys = {
+		'<Leader>ms',
+		'<Leader>mj',
+	}
+}
+
+function M.treesj.setup()
+	require('treesj').setup{
+		use_default_keymaps = false
+	}
+
+	vim.keymap.set('n', '<Leader>ms', '<cmd>TSJSplit<CR>', { silent = true, desc = "Split all arguments onto their own lines" } )
+	vim.keymap.set('n', '<Leader>mj', '<cmd>TSJJoin<CR>', { silent = true, desc = "Join all arguments to one line" } )
+end
+
+M.fsread = {
+	keys = {
+		'<Leader>fr'
+	}
+}
+
+function M.fsread.setup()
+	vim.keymap.set('n', '<Leader>fr', function() vim.cmd'FSToggle' end, { silent = true, desc = "Toggle the fast reader state" } )
+	vim.keymap.set('n', '<Leader>fc', function() vim.cmd'FSClear' end, { silent = true, desc = "Clear the fast reader state"} )
+end
+
+M.duck = {
+	keys = {
+		'<Leader>dd',
+		'<Leader>dk',
+	}
+}
+
+function M.duck.setup()
+	vim.keymap.set('n', '<leader>dd', function() require("duck").hatch() end, {}) 
+	vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
+end
+
 return M

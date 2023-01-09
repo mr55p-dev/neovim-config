@@ -4,8 +4,8 @@ local M = {
 
 function M.autosession()
 	local function close_neo_tree()
-	require 'neo-tree.sources.manager'.close_all()
-	vim.notify('closed all')
+		require 'neo-tree.sources.manager'.close_all()
+		vim.notify('closed all')
 	end
 
 	require('auto-session').setup {
@@ -82,6 +82,22 @@ function M.dashboard()
 		action = 'Telescope find_files hidden=true path=' .. home .. '/.config/nvim',
 		shortcut = 'SPC f d' },
 	}
+end
+
+function M.pop()
+	vim.ui.select = require"popui.ui-overrider"
+	vim.ui.input = require"popui.input-overrider"
+
+	vim.api.nvim_set_keymap("n", ",d", ':lua require"popui.diagnostics-navigator"()<CR>', { noremap = true, silent = true, desc="Show diagnostics navigator" })
+	vim.api.nvim_set_keymap("n", ",m", ':lua require"popui.marks-manager"()<CR>', { noremap = true, silent = true, desc="Show marks navigator" })
+end
+
+function M.animate()
+	require('mini.animate').setup()
+end
+
+function M.notify()
+	vim.notify = require('notify')
 end
 
 return M

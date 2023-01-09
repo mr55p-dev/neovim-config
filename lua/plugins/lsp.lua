@@ -1,109 +1,88 @@
 local M = {}
 
-function M.setup()
-	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-	vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-	vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
-	-- LSP settings.
-	--  This function gets run when an LSP connects to a particular buffer.
-	local on_attach = function(_, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
-	local nmap = function(keys, func, desc)
-		if desc then
-			desc = 'LSP: ' .. desc
-		end
-		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-	end
-
-	nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-	nmap('<F2>', vim.lsp.buf.rename, 'Rename')
-	nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-	nmap('<C-.>', function() vim.cmd('CodeActionMenu') end, 'Code action')
-
-	nmap('gD', vim.lsp.buf.definition, '[G]oto [D]efinition')
-	nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-	nmap('gR', require('telescope.builtin').lsp_references)
-	nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-	nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-	-- See `:help K` for why this keymap
-	nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-	-- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-	-- Lesser used LSP functionality
-	nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-	nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-	nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-	nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-	nmap('<leader>wl', function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, '[W]orkspace [L]ist Folders')
-
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-		if vim.lsp.buf.format then
-		vim.lsp.buf.format()
-		elseif vim.lsp.buf.formatting then
-		vim.lsp.buf.formatting()
-		end
-	end, { desc = 'Format current buffer with LSP' })
-	end
-
-	vim.keymap.set('n', '<A-f>', function() vim.cmd('Format') end, { silent = true } )
-	-- nvim-cmp supports additional completion capabilities
-	local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-	require('mason').setup()
-	
-	-- Enable the following language servers
-	local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua' }
-
-	-- Ensure the servers above are installed
-	require('mason-lspconfig').setup {
-	  ensure_installed = servers,
-	  automatic_installation = true,
+function M.mason()
+	require('mason').setup {
+		ui = {
+			border = "single",
+		},
 	}
 
-	for _, lsp in ipairs(servers) do
-	  require('lspconfig')[lsp].setup {
-	    on_attach = on_attach,
-	    capabilities = capabilities,
-	  }
-	end
-	--
-	-- Make runtime files discoverable to the server
-	local runtime_path = vim.split(package.path, ';')
-	table.insert(runtime_path, 'lua/?.lua')
-	table.insert(runtime_path, 'lua/?/init.lua')
+	vim.keymap.set('n', '<Leader>ma', '<cmd>:Mason<CR>', { silent = true, desc = "Open mason" })
+end
 
-	require('lspconfig').sumneko_lua.setup {
-	  on_attach = on_attach,
-	  capabilities = capabilities,
-	  settings = {
-	    Lua = {
-	      runtime = {
-	        -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-	        version = 'LuaJIT',
-	        -- Setup your lua path
-	        path = runtime_path,
-	      },
-	      diagnostics = {
-	        globals = { 'vim' },
-	      },
-	      workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-	      -- Do not send telemetry data containing a randomized but unique identifier
-	      telemetry = { enable = false },
-	    },
-	  },
+function M.mason_lspconfig()
+	require("mason-lspconfig").setup({
+		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua' },
+		automatic_installation = true,
+	})
+end
+
+function M.lspconfig()
+	-- Mappings.
+	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+	local opts = { noremap = true, silent = true }
+	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+	vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+	-- Use an on_attach function to only map the following keys
+	-- after the language server attaches to the current buffer
+	local on_attach = function(client, bufnr)
+		-- Enable completion triggered by <c-x><c-o>
+		vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+		-- Mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		local bufopts = { noremap = true, silent = true, buffer = bufnr }
+		vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
+		vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+		vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+		vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+		vim.keymap.set('n', '<Leader>wl', function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end, bufopts)
+		vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
+		vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
+		vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
+		vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+		vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+	end
+
+	local lsp_flags = {
+		-- This is the default in Nvim 0.7+
+		debounce_text_changes = 150,
 	}
 
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+	require('lspconfig')['pyright'].setup {
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	}
+
+	require('lspconfig')['tsserver'].setup {
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	}
+
+	require('lspconfig')['sumneko_lua'].setup {
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { 'vim' }
+				}
+			}
+		}
+	}
 
 end
 

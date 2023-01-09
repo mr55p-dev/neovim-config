@@ -20,34 +20,41 @@ function M.setup()
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		-- ['<C-Space>'] = cmp.mapping.complete {},
 		['<C-Space>'] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.abort()
-		elseif cmp.visible then
-			cmp.complete()
-		else
-			fallback()
-		end
+			if cmp.visible() then
+				cmp.abort()
+			elseif cmp.visible then
+				cmp.complete()
+			else
+				fallback()
+			end
 		end, { 'i', 's' }),
-		['<CR>'] = cmp.mapping.confirm {
-		behavior = cmp.ConfirmBehavior.Replace,
-		select = true,
-		},
+		-- ['<CR>'] = cmp.mapping.confirm {
+		-- behavior = cmp.ConfirmBehavior.Replace,
+		-- select = true,
+		-- },
 		['<Tab>'] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.confirm { select = true }
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.expand_or_jump()
-		else
-			fallback()
-		end
+			if cmp.visible() then
+				cmp.confirm { select = true }
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
 		end, { 'i', 's' }),
 		['<S-Tab>'] = cmp.mapping(function(fallback)
-		if luasnip.jumpable(-1) then
-			luasnip.jump(-1)
-		else
-			fallback()
-		end
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
 		end, { 'i', 's' }),
+		-- ['<ESC>'] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		cmp.abort()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { 'i', 's' })
 	},
 	sources = {
 		{ name = 'nvim_lsp' },
