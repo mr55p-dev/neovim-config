@@ -1,7 +1,7 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 vim.wo.number = true
 
@@ -56,3 +56,5 @@ vim.o.completeopt = 'menu,menuone,noselect'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Enable nord borders
+vim.g.nord_borders = true

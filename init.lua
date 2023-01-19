@@ -16,7 +16,8 @@ local terminal = require('plugins.terminal')
 local telescope = require('plugins.telescope')
 local cmp = require('plugins.cmp')
 local lsp = require('plugins.lsp')
-local ft_plugins = require("plugins.ft_plugins")
+local ft_plugins = require('plugins.ft_plugins')
+local neorg = require('plugins.neorg')
 
 require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
@@ -28,26 +29,27 @@ require('packer').startup(function(use)
 	-- Application
 	use { 'rmagatti/auto-session', config = application.autosession }
 	use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
-	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys, event = "WinEnter" } -- Winshift
+	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys,
+		event = "WinEnter" } -- Winshift
 	use { 'glepnir/dashboard-nvim', config = application.dashboard }
 	use { 'hood/popui.nvim', config = application.pop }
-	use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
+	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 	use { 'rcarriga/nvim-notify', config = application.notify }
 
 	-- Editor pane
 	use { 'numToStr/Comment.nvim', keys = { { 'v', 'gc' }, 'gc' }, config = editor.comment } -- "gc" to comment visual regions/lines
 	use { 'tpope/vim-sleuth', disable = true } -- Detect tabstop and shiftwidth automatically
-	use { 'windwp/nvim-autopairs', event = 'InsertEnter', config = editor.autopairs } -- Automatic bracket pairing
+	use { 'windwp/nvim-autopairs', event = 'InsertEnter', config = editor.autopairs, module = 'nvim-autopairs' } -- Automatic bracket pairing
 	use { 'kylechui/nvim-surround', tag = '*', event = 'BufReadPost', config = editor.surround } -- We love this one
 	use { 'phaazon/hop.nvim', branch = 'v2', keys = editor.hop.keys, config = editor.hop.config } -- hop
-	use { 'abecodes/tabout.nvim', tag = '*', event = "InsertEnter", requires = { 'nvim-treesitter' }, config = editor.tabout } -- Tabout for getting out of autopairs
+	use { 'abecodes/tabout.nvim', event = "InsertEnter", requires = { 'nvim-treesitter' }, config = editor.tabout } -- Tabout for getting out of autopairs
 	use { 'dnlhc/glance.nvim', config = editor.glance, event = "BufReadPost" } -- Glance window for code
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
 
 	-- Interface
-	use { 'nvim-lualine/lualine.nvim', tag = "*", config = interface.lualine } -- Fancier statusline
+	use { 'nvim-lualine/lualine.nvim', config = interface.lualine } -- Fancier statusline
 	use { 'lukas-reineke/indent-blankline.nvim', event = "BufReadPost", config = interface.blankline } -- Add indentation guides on blank lines
 	use { 'gorbit99/codewindow.nvim', keys = { "<Leader>mm" }, config = interface.codewindow } -- Code minimap
 	use 'kshenoy/vim-signature' -- Marks in the gutter
@@ -55,6 +57,8 @@ require('packer').startup(function(use)
 	use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons',
 		config = function() require('luatab').setup() end } -- Tabline
 	use { 's1n7ax/nvim-window-picker', tag = 'v1.*', config = function() require 'window-picker'.setup() end, }
+	use { "shortcuts/no-neck-pain.nvim", tag = "*", config = function() require 'no-neck-pain'.setup() end,
+		cmd = 'NoNeckPain', module = 'no-neck-pain' }
 
 	-- Neotree
 	local neotree_requires = { "nvim-lua/plenary.nvim", 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
@@ -79,14 +83,15 @@ require('packer').startup(function(use)
 	use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } } -- Additional textobjects for treesitter
 
 	-- CMP
-	use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path' },
+	use { 'hrsh7th/nvim-cmp',
+		requires = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'onsails/lspkind.nvim' },
 		config = cmp.setup } -- Autocompletion
 	use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
 
 	-- LSP
 	use { 'williamboman/mason.nvim', config = lsp.mason } -- Manage external editor tooling i.e LSP servers
 	use { 'williamboman/mason-lspconfig.nvim', config = lsp.mason_lspconfig } -- Automatically install language servers to stdpath
-	use { 'neovim/nvim-lspconfig', config = lsp.lspconfig } -- Collection of configurations for built-in LSP client
+	use { 'neovim/nvim-lspconfig', config = lsp.lspconfig, } -- Collection of configurations for built-in LSP client
 	use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 
 	-- FT-specific
@@ -99,7 +104,7 @@ require('packer').startup(function(use)
 	-- use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
 
 	-- Neorg
-	-- use { 'nvim-neorg/neorg', disabled=true requires = 'nvim-lua/plenary.nvim', run = ':Neorg sync-parsers' } -- neorg, might be fun
+	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup } -- neorg, might be fun
 
 	if is_bootstrap then
 		require('packer').sync()

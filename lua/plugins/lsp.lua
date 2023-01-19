@@ -38,7 +38,7 @@ function M.lspconfig()
 		vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
 		vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+		vim.keymap.set('n', '<Leader>K>', vim.lsp.buf.signature_help, bufopts)
 		vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
 		vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
 		vim.keymap.set('n', '<Leader>wl', function()
@@ -48,7 +48,8 @@ function M.lspconfig()
 		vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
-		vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+		vim.keymap.set('n', '<C-.>', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 		vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 	end
 
@@ -84,6 +85,9 @@ function M.lspconfig()
 		}
 	}
 
+end
+
+function M.signature()
 end
 
 return M
