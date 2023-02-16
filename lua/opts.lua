@@ -3,6 +3,7 @@
 
 vim.o.hlsearch = true
 
+vim.o.number = true
 vim.wo.number = true
 
 -- Enable mouse mode
@@ -18,9 +19,12 @@ vim.o.autowrite = true
 
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
+vim.o.wrap = true
+
 
 vim.o.showmode = false
 
+vim.o.cmdheight = 0
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -46,7 +50,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 
 -- Set sessionoptions
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.o.termguicolors = true
 
 -- Set completeopt to have a better completion experience

@@ -18,12 +18,14 @@ local cmp = require('plugins.cmp')
 local lsp = require('plugins.lsp')
 local ft_plugins = require('plugins.ft_plugins')
 local neorg = require('plugins.neorg')
+local mini_config = require('plugins.mini_config')
 
 require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
 
 	-- Color schemes
 	use { 'shaunsingh/nord.nvim', config = function() vim.cmd 'colorscheme nord' end } -- Nord theme
+	-- use { 'andersevenrud/nordic.nvim', config = function () require('nordic').colorscheme({ italic_comments=true }) end }
 	use { 'mjlbach/onedark.nvim', disabled = true } -- Theme inspired by Atom
 
 	-- Application
@@ -47,6 +49,7 @@ require('packer').startup(function(use)
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
+	-- use { 'echasnovski/mini.nvim', config = mini_config.setup }
 
 	-- Interface
 	use { 'nvim-lualine/lualine.nvim', config = interface.lualine } -- Fancier statusline

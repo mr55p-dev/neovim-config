@@ -12,7 +12,7 @@ end
 
 function M.mason_lspconfig()
 	require("mason-lspconfig").setup({
-		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua' },
+		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'sqlls' },
 		automatic_installation = true,
 	})
 end
@@ -61,6 +61,12 @@ function M.lspconfig()
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 	require('lspconfig')['pyright'].setup {
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	}
+
+	require('lspconfig')['sqlls'].setup {
 		on_attach = on_attach,
 		flags = lsp_flags,
 		capabilities = capabilities,
