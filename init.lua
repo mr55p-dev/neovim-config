@@ -74,7 +74,7 @@ require('packer').startup(function(use)
 	use { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', config = interface.neotree, requires = neotree_requires }
 
 	-- Git
-	use { 'tpope/vim-fugitive', keys = { '<Leader>gg' }, cmd = 'Git', config = git.fugitive } -- Git commands in nvim
+	use { 'tpope/vim-fugitive', keys = git.fugitive.keys, cmd = 'Git', config = git.fugitive.setup } -- Git commands in nvim
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = git.gitsigns }
 
 	-- Telescope
