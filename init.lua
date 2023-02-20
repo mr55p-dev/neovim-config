@@ -7,6 +7,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd [[packadd packer.nvim]]
 end
 
+vim.wo.number = true
+vim.o.number = true
+
 local editor = require('plugins.editor')
 local interface = require('plugins.interface')
 local application = require('plugins.application')
@@ -18,7 +21,7 @@ local cmp = require('plugins.cmp')
 local lsp = require('plugins.lsp')
 local ft_plugins = require('plugins.ft_plugins')
 local neorg = require('plugins.neorg')
-local mini_config = require('plugins.mini_config')
+-- local mini_config = require('plugins.mini_config')
 
 require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
@@ -37,6 +40,7 @@ require('packer').startup(function(use)
 	use { 'hood/popui.nvim', config = application.pop }
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 	use { 'rcarriga/nvim-notify', config = application.notify }
+	use { 'terror/chatgpt.nvim', run = 'pip3 install -r requirements.txt' }
 
 	-- Editor pane
 	use { 'numToStr/Comment.nvim', keys = { { 'v', 'gc' }, 'gc' }, config = editor.comment } -- "gc" to comment visual regions/lines
@@ -50,6 +54,7 @@ require('packer').startup(function(use)
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
 	-- use { 'echasnovski/mini.nvim', config = mini_config.setup }
+	use { 'aduros/ai.vim' }
 
 	-- Interface
 	use { 'nvim-lualine/lualine.nvim', config = interface.lualine } -- Fancier statusline

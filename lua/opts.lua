@@ -4,7 +4,6 @@
 vim.o.hlsearch = true
 
 vim.o.number = true
-vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -22,9 +21,8 @@ vim.o.sidescrolloff = 8
 vim.o.wrap = true
 
 
-vim.o.showmode = false
-
-vim.o.cmdheight = 0
+-- vim.o.showmode = false
+-- vim.o.cmdheight = 0
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true

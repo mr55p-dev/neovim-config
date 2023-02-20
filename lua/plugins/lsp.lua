@@ -12,7 +12,7 @@ end
 
 function M.mason_lspconfig()
 	require("mason-lspconfig").setup({
-		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'sqlls' },
+		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua-language-server', 'sqlls' },
 		automatic_installation = true,
 	})
 end
@@ -78,7 +78,7 @@ function M.lspconfig()
 		capabilities = capabilities,
 	}
 
-	require('lspconfig')['sumneko_lua'].setup {
+	require('lspconfig')['lua_ls'].setup {
 		on_attach = on_attach,
 		flags = lsp_flags,
 		capabilities = capabilities,

@@ -22,8 +22,8 @@ function M.autosession()
 		},
 	}
 
-	vim.keymap.set('n', '<Leader>sss', function() vim.cmd'SaveSession' end, {})
-	vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'RestoreSession' end, {})
+	-- vim.keymap.set('n', '<Leader>ssw', function() vim.cmd'SaveSession' end, {})
+	-- vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'RestoreSession' end, {})
 end
 
 function M.pomodoro()
