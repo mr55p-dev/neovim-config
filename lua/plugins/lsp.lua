@@ -12,7 +12,7 @@ end
 
 function M.mason_lspconfig()
 	require("mason-lspconfig").setup({
-		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua-language-server', 'sqlls' },
+		ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'sqlls' },
 		automatic_installation = true,
 	})
 end

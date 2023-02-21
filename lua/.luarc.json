@@ -57,6 +57,7 @@
         "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after",
         "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/octo.nvim/after",
         "/Users/ellis.lunnon/.local/share/nvim/site/pack/packer/start/vim-signature/after",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }
