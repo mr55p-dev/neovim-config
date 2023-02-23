@@ -17,6 +17,7 @@ vim.keymap.set({ 'n', 'v', 't' }, '<C-l>', function() vim.cmd("wincmd l") end, {
 
 vim.keymap.set({ 'n' }, '<C-q>', function() vim.cmd'SaveSession' vim.cmd'wqa' end, { silent = true })
 vim.keymap.set('n', '<Leader>ps', function() vim.cmd'PackerSync' end)
+vim.keymap.set('n', '<Leader>pc', function() vim.cmd'PackerCompile' end)
 
 -- Move lines
 vim.keymap.set({ 'n', 'v', 'i' }, '<A-j>', function () vim.cmd("move+") end, { silent = true })
