@@ -21,7 +21,7 @@ local cmp = require('plugins.cmp')
 local lsp = require('plugins.lsp')
 local ft_plugins = require('plugins.ft_plugins')
 local neorg = require('plugins.neorg')
--- local mini_config = require('plugins.mini_config')
+local mini_config = require('plugins.mini_config')
 
 require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
@@ -53,7 +53,7 @@ require('packer').startup(function(use)
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
-	-- use { 'echasnovski/mini.nvim', config = mini_config.setup }
+	use { 'echasnovski/mini.nvim', config = mini_config.setup }
 	use { 'aduros/ai.vim' }
 
 	-- Interface
