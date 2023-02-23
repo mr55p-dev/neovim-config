@@ -36,7 +36,7 @@ require('packer').startup(function(use)
 	use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
 	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys,
 		event = "WinEnter" } -- Winshift
-	use { 'glepnir/dashboard-nvim', config = application.dashboard }
+	-- use { 'glepnir/dashboard-nvim', config = application.dashboard }
 	use { 'hood/popui.nvim', config = application.pop }
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 	use { 'rcarriga/nvim-notify', config = application.notify }
