@@ -23,4 +23,3 @@ vim.keymap.set('n', '<Leader>pc', function() vim.cmd'PackerCompile' end)
 vim.keymap.set({ 'n', 'v', 'i' }, '<A-j>', function () vim.cmd("move+") end, { silent = true })
 vim.keymap.set({ 'n', 'v', 'i' }, '<A-k>', function () vim.cmd("move-2") end, { silent = true })
 
-
