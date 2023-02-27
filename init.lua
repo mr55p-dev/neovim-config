@@ -7,9 +7,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd [[packadd packer.nvim]]
 end
 
-vim.wo.number = true
-vim.o.number = true
-
 local editor = require('plugins.editor')
 local interface = require('plugins.interface')
 local application = require('plugins.application')
@@ -38,10 +35,13 @@ require('packer').startup(function(use)
 		event = "WinEnter" } -- Winshift
 	-- use { 'glepnir/dashboard-nvim', config = application.dashboard }
 	use { 'hood/popui.nvim', config = application.pop }
-	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 	use { 'rcarriga/nvim-notify', config = application.notify }
 	use { 'terror/chatgpt.nvim', run = 'pip3 install -r requirements.txt' }
 
+	-- mini
+	use { 'echasnovski/mini.basics', config = mini_config.setup }
+	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
+	
 	-- Editor pane
 	use { 'numToStr/Comment.nvim', keys = { { 'v', 'gc' }, 'gc' }, config = editor.comment } -- "gc" to comment visual regions/lines
 	use { 'tpope/vim-sleuth', disable = true } -- Detect tabstop and shiftwidth automatically
@@ -53,7 +53,6 @@ require('packer').startup(function(use)
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
-	use { 'echasnovski/mini.nvim', config = mini_config.setup }
 	use { 'aduros/ai.vim' }
 
 	-- Interface
