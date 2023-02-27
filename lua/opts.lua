@@ -20,6 +20,9 @@ vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
 vim.o.wrap = true
 
+-- Enable folds
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- vim.o.showmode = false
 -- vim.o.cmdheight = 0
