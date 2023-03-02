@@ -76,7 +76,8 @@ require('packer').startup(function(use)
 	-- Git
 	use { 'tpope/vim-fugitive', keys = git.fugitive.keys, cmd = 'Git', config = git.fugitive.setup } -- Git commands in nvim
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = git.gitsigns }
-
+	use { 'ldelossa/gh.nvim', config = git.gh, requires = { { 'ldelossa/litee.nvim' } }
+}
 	-- Telescope
 	use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' }, keys = telescope.keys,
 		config = telescope.setup, cmd = 'Telescope' }
