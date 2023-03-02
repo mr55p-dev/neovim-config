@@ -17,6 +17,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
         end
     end,
 })
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    callback = function()
+		vim.cmd"normal zR"
+    end,
+})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
