@@ -28,6 +28,7 @@ end
 M.floatterm.keys = {
 	"<Leader>tt",
 	"<Leader>tn",
+	"<Leader>ts",
 	"<Leader>rr",
 	"<Leader>gt",
 }

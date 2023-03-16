@@ -114,7 +114,7 @@ require('packer').startup(function(use)
 	-- use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
 
 	-- Neorg
-	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup, ft = "norg", tag = "*", after = "nvim-treesitter" } -- neorg, might be fun
+	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup, tag = "*", after = "nvim-treesitter" } -- neorg, might be fun
 
 	if is_bootstrap then
 		require('packer').sync()
