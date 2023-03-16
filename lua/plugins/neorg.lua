@@ -4,6 +4,7 @@ function M.setup()
 	require("neorg").setup({
 		load = {
 			["core.defaults"] = {},
+			["core.norg.concealer"] = {},
 			["core.norg.dirman"] = {
 	            config = {
 	                workspaces = {
@@ -11,8 +12,10 @@ function M.setup()
 	                    home = "~/notes/home",
 	                }
 	            }
-	        }
-
+	        },
+			["core.norg.completion"] = {
+				engine = "nvim-cmp"
+			}
 		}
 	})
 end

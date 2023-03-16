@@ -5,7 +5,8 @@ local M = {
 
 function M.toggleterm.setup()
 	require('toggleterm').setup{
-		open_mapping = [[<C-\>]]
+		open_mapping = [[<C-\>]],
+		-- shade_terminals = false,
 	}
 end
 

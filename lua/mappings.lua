@@ -20,6 +20,9 @@ vim.keymap.set('n', '<Leader>ps', function() vim.cmd'PackerSync' end)
 vim.keymap.set('n', '<Leader>pc', function() vim.cmd'PackerCompile' end)
 
 -- Move lines
-vim.keymap.set({ 'n', 'v', 'i' }, '<A-j>', function () vim.cmd("move+") end, { silent = true })
-vim.keymap.set({ 'n', 'v', 'i' }, '<A-k>', function () vim.cmd("move-2") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-S-j>', function () vim.cmd("move+") end, { silent = true })
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-S-k>', function () vim.cmd("move-2") end, { silent = true })
+
+-- Exit terminal mode
+vim.keymap.set({ 't' }, '<Esc>', [[<C-\><C-n>]])
 

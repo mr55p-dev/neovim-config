@@ -16,14 +16,13 @@ function M.lualine()
 	require('lualine').setup {
 	  options = {
 		icons_enabled = true,
-		theme = 'nord',
+		theme = 'tokyonight',
 		component_separators = '|',
 		section_separators = '',
 	  },
 	  sections = {
 		lualine_c = {
 		  { 'filename', path=1 },
-		  -- require('pomodoro').statusline
 		},
 		lualine_x = { 'filetype', 'windows', 'tabs' },
 		lualine_y = { encoding(), 'progress', fileformat() }

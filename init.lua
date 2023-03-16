@@ -24,15 +24,16 @@ require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
 
 	-- Color schemes
-	use { 'shaunsingh/nord.nvim', config = function() vim.cmd 'colorscheme nord' end } -- Nord theme
+	-- use { 'shaunsingh/nord.nvim', config = function() vim.cmd 'colorscheme nord' end } -- Nord theme
 	-- use { 'andersevenrud/nordic.nvim', config = function () require('nordic').colorscheme({ italic_comments=true }) end }
-	use { 'mjlbach/onedark.nvim', disabled = true } -- Theme inspired by Atom
+	-- use { 'mjlbach/onedark.nvim', disabled = true } -- Theme inspired by Atom
+	use { 'folke/tokyonight.nvim', config = function() vim.cmd'colorscheme tokyonight' end}
 
 	-- Application
 	use { 'rmagatti/auto-session', config = application.autosession }
 	use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
-	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys,
-		event = "WinEnter" } -- Winshift
+	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys, event = "WinEnter" } -- Winshift
+	use { 'willothy/flatten.nvim', config = function() require('flatten').setup{} end }
 	-- use { 'glepnir/dashboard-nvim', config = application.dashboard }
 	use { 'hood/popui.nvim', config = application.pop }
 	use { 'rcarriga/nvim-notify', config = application.notify }
@@ -41,7 +42,7 @@ require('packer').startup(function(use)
 	-- mini
 	use { 'echasnovski/mini.basics', config = mini_config.setup }
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
-	
+
 	-- Editor pane
 	use { 'numToStr/Comment.nvim', keys = { { 'v', 'gc' }, 'gc' }, config = editor.comment } -- "gc" to comment visual regions/lines
 	use { 'tpope/vim-sleuth', disable = true } -- Detect tabstop and shiftwidth automatically
@@ -113,7 +114,7 @@ require('packer').startup(function(use)
 	-- use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
 
 	-- Neorg
-	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup } -- neorg, might be fun
+	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup, ft = "norg", tag = "*", after = "nvim-treesitter" } -- neorg, might be fun
 
 	if is_bootstrap then
 		require('packer').sync()
