@@ -97,6 +97,12 @@ function M.lspconfig()
 		}
 	}
 
+	require('lspconfig')['terraform-ls'].setup {
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	}
+
 end
 
 function M.signature()

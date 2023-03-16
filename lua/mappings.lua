@@ -26,3 +26,5 @@ vim.keymap.set({ 'n', 'v', 'i' }, '<C-S-k>', function () vim.cmd("move-2") end, 
 -- Exit terminal mode
 vim.keymap.set({ 't' }, '<Esc>', [[<C-\><C-n>]])
 
+-- Zen mode
+vim.keymap.set('n', 'zn', function() require("zen-mode").toggle() end, { silent = true })

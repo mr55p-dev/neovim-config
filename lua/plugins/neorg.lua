@@ -14,10 +14,18 @@ function M.setup()
 	            }
 	        },
 			["core.norg.completion"] = {
-				engine = "nvim-cmp"
+				config = {
+					engine = "nvim-cmp"
+				}
+			},
+			["core.presenter"] = {
+				config = {
+					zen_mode = "zen-mode"
+				}
 			}
 		}
 	})
+	vim.keymap.set('n', '<Leader>nc', function() vim.cmd[[Neorg toggle-concealer]] end, { silent = true })
 end
 
 return M

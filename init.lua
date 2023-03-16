@@ -68,7 +68,7 @@ require('packer').startup(function(use)
 	use { "shortcuts/no-neck-pain.nvim", tag = "*", config = function() require 'no-neck-pain'.setup() end,
 		cmd = 'NoNeckPain', module = 'no-neck-pain' }
 	use { "folke/noice.nvim", config = interface.noice , requires = { "MunifTanjim/nui.nvim",  "rcarriga/nvim-notify", } }
-
+	use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup{} end }
 	-- Neotree
 	local neotree_requires = { "nvim-lua/plenary.nvim", 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
 		's1n7ax/nvim-window-picker' }
