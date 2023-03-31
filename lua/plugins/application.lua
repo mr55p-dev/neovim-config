@@ -3,11 +3,6 @@ local M = {
 }
 
 function M.autosession()
-	local function close_neo_tree()
-		require 'neo-tree.sources.manager'.close_all()
-		vim.notify('closed all')
-	end
-
 	require('auto-session').setup {
 		auto_session_create_enabled = false,
 		auto_save_enabled = true,

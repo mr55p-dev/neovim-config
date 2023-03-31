@@ -20,7 +20,6 @@ function M.setup()
 	mapping = cmp.mapping.preset.insert {
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		-- ['<C-Space>'] = cmp.mapping.complete {},
 		['<C-Space>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.abort()
@@ -36,7 +35,7 @@ function M.setup()
 		-- },
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				cmp.confirm { select = true }
+				cmp.confirm { select = false }
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			else
@@ -61,8 +60,8 @@ function M.setup()
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-		-- { name = "buffer" },
-		-- { name = "path" },
+		{ name = "buffer" },
+		{ name = "path" },
 	},
 	formatting = {
 			format = lspkind.cmp_format{
@@ -93,5 +92,9 @@ function M.setup()
 	})
 
 end
+
+-- function M.copilot()
+-- 	
+-- end
 
 return M

@@ -28,3 +28,6 @@ vim.keymap.set({ 't' }, '<Esc>', [[<C-\><C-n>]])
 
 -- Zen mode
 vim.keymap.set('n', 'zn', function() require("zen-mode").toggle() end, { silent = true })
+
+-- notify
+vim.keymap.set('n', "<Leader>nd", function () require("notify").dismiss() end)
