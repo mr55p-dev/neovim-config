@@ -54,6 +54,7 @@ require('packer').startup(function(use)
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
+	use { 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' }, config = editor.harpoon.setup, event = "BufReadPost" } -- Some more navigation
 	use { 'aduros/ai.vim' }
 
 	-- Interface
@@ -97,7 +98,8 @@ require('packer').startup(function(use)
 		requires = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'onsails/lspkind.nvim' },
 		config = cmp.setup } -- Autocompletion
 	use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
-	use { 'github/copilot.vim' }
+	use { "zbirenbaum/copilot.lua", config = cmp.copilot }
+	use { "zbirenbaum/copilot-cmp", after = { "copilot.lua" }, config = cmp.copilot_cmp }
 
 	-- LSP
 	use { 'williamboman/mason.nvim', config = lsp.mason } -- Manage external editor tooling i.e LSP servers

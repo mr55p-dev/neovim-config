@@ -124,4 +124,14 @@ function M.duck.setup()
 	vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
 end
 
+M.harpoon = {}
+
+function M.harpoon.setup()
+	local mark = require("harpoon.mark")
+	local ui = require("harpoon.ui")
+
+	vim.keymap.set("n", "<leader>a", mark.add_file)
+	-- vim.keymap.set("n", "<C-l>", ui.toggle_quick_menu)
+end
+
 return M

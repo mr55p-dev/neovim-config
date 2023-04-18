@@ -26,11 +26,13 @@ function M.setup()
 	end, { desc = '[/] Fuzzily search in current buffer]' })
 
 	vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+	vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 	vim.keymap.set('n', '<leader>ss', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = '[S]earch [S]ymbols' })
 	vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 	vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 	vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 	vim.keymap.set('n', '<leader>sn', require('telescope').extensions.notify.notify, { desc = '[S]earch [N]otify' })
+	vim.keymap.set('n', '<C-p>', require('telescope.builtin').pickers, { desc = "All [P]ickers" })
 end
 
 M.keys = {
@@ -38,11 +40,13 @@ M.keys = {
 	'<leader><space>',
 	'<leader>/',
 	'<leader>sf',
+	'<leader>sb',
 	'<leader>ss',
 	'<leader>sw',
 	'<leader>sg',
 	'<leader>sr',
 	'<leader>sn',
+	'<C-p>',
 }
 
 return M

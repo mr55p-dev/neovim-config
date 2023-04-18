@@ -35,7 +35,10 @@ function M.setup()
 		-- },
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				cmp.confirm { select = false }
+				cmp.confirm {
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = false,
+				}
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			else
@@ -59,6 +62,7 @@ function M.setup()
 	},
 	sources = {
 		{ name = 'nvim_lsp' },
+		{ name = "copilot", group_index = 2 },
 		{ name = 'luasnip' },
 		{ name = "buffer" },
 		{ name = "path" },
@@ -93,8 +97,15 @@ function M.setup()
 
 end
 
--- function M.copilot()
--- 	
--- end
+function M.copilot()
+	require("copilot").setup({
+		suggestion = { enabled = false },
+		panel = { enabled = false },
+	})
+end
+
+function M.copilot_cmp()
+	require("copilot_cmp").setup()
+end
 
 return M
