@@ -23,6 +23,7 @@ vim.o.wrap = true
 -- Enable folds
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 999
 
 -- vim.o.showmode = false
 -- vim.o.cmdheight = 0

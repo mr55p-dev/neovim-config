@@ -18,7 +18,7 @@ M.fugitive = {
 		'<Leader>gg',
 		'<Leader>gl',
 		'<Leader>gs',
-		'<Leader>gc',
+		'<Leader>gcc',
 		'<Leader>gca',
 		'<Leader>gce',
 		'<Leader>gcf',
@@ -32,7 +32,7 @@ function M.fugitive.setup()
 	vim.keymap.set('n', '<Leader>gl', function() vim.cmd("Git lg") end, { silent = true })
 	vim.keymap.set('n', '<Leader>gs', function() vim.cmd("Git status") end, { silent = true })
 
-	vim.keymap.set('n', '<Leader>gc', ":Git commit ")
+	vim.keymap.set('n', '<Leader>gcc', ":Git commit ")
 	vim.keymap.set('n', '<Leader>gca', function() vim.cmd("Git commit -a") end)
 	vim.keymap.set('n', '<Leader>gce', function() vim.cmd("Git commit --allow-empty") end)
 	vim.keymap.set('n', '<Leader>gcf', function() vim.cmd("Git commit --no-verify") end)
