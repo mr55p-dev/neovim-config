@@ -62,7 +62,7 @@ function M.setup()
 	},
 	sources = {
 		{ name = 'nvim_lsp' },
-		{ name = "copilot", group_index = 2 },
+		-- { name = "copilot", group_index = 2 },
 		{ name = 'luasnip' },
 		{ name = "buffer" },
 		{ name = "path" },
@@ -97,15 +97,15 @@ function M.setup()
 
 end
 
-function M.copilot()
-	require("copilot").setup({
-		suggestion = { enabled = false },
-		panel = { enabled = false },
-	})
-end
+-- function M.copilot()
+-- 	require("copilot").setup({
+-- 		suggestion = { enabled = false },
+-- 		panel = { enabled = false },
+-- 	})
+-- end
 
-function M.copilot_cmp()
-	require("copilot_cmp").setup()
-end
+-- function M.copilot_cmp()
+-- 	require("copilot_cmp").setup()
+-- end
 
 return M
