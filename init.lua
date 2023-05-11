@@ -36,7 +36,6 @@ require('packer').startup(function(use)
 	use { 'willothy/flatten.nvim', config = function() require('flatten').setup{} end }
 	-- use { 'glepnir/dashboard-nvim', config = application.dashboard }
 	use { 'hood/popui.nvim', config = application.pop }
-	use { 'rcarriga/nvim-notify', config = application.notify }
 	use { 'terror/chatgpt.nvim', run = 'pip3 install -r requirements.txt' }
 
 	-- mini
@@ -68,7 +67,7 @@ require('packer').startup(function(use)
 	use { 's1n7ax/nvim-window-picker', tag = 'v1.*', config = function() require 'window-picker'.setup() end, }
 	use { "shortcuts/no-neck-pain.nvim", tag = "*", config = function() require 'no-neck-pain'.setup() end,
 		cmd = 'NoNeckPain', module = 'no-neck-pain' }
-	use { "folke/noice.nvim", config = interface.noice , requires = { "MunifTanjim/nui.nvim",  "rcarriga/nvim-notify", } }
+	use { "folke/noice.nvim", config = interface.noice , requires = { "MunifTanjim/nui.nvim" } }
 	use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup{} end }
 	-- Neotree
 	local neotree_requires = { "nvim-lua/plenary.nvim", 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
@@ -106,6 +105,7 @@ require('packer').startup(function(use)
 	use { 'williamboman/mason-lspconfig.nvim', config = lsp.mason_lspconfig } -- Automatically install language servers to stdpath
 	use { 'neovim/nvim-lspconfig', config = lsp.lspconfig, } -- Collection of configurations for built-in LSP client
 	use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+	use { 'jose-elias-alvarez/null-ls.nvim', config = lsp.nullls }
 
 	-- FT-specific
 	use { 'ellisonleao/glow.nvim', ft = { "markdown" }, config = ft_plugins.glow } -- Markdown syntax control

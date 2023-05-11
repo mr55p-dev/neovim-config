@@ -91,10 +91,4 @@ function M.animate()
 	require('mini.animate').setup()
 end
 
-function M.notify()
-	require("notify").setup({
-		background_colour = "#000000",
-	})
-end
-
 return M
