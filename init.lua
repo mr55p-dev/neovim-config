@@ -17,7 +17,6 @@ local telescope = require('plugins.telescope')
 local cmp = require('plugins.cmp')
 local lsp = require('plugins.lsp')
 local ft_plugins = require('plugins.ft_plugins')
-local neorg = require('plugins.neorg')
 local mini_config = require('plugins.mini_config')
 
 require('packer').startup(function(use)
@@ -30,11 +29,11 @@ require('packer').startup(function(use)
 	use { 'folke/tokyonight.nvim', config = function() vim.cmd'colorscheme tokyonight' end}
 
 	-- Application
-	use { 'rmagatti/auto-session', config = application.autosession }
+	-- use { 'rmagatti/auto-session', config = application.autosession }
 	use { 'djoshea/vim-autoread' } -- Auto-reload files from disk
 	use { 'sindrets/winshift.nvim', config = application.winshift.setup, keys = application.winshift.keys, event = "WinEnter" } -- Winshift
 	use { 'willothy/flatten.nvim', config = function() require('flatten').setup{} end }
-	-- use { 'glepnir/dashboard-nvim', config = application.dashboard }
+	-- use { 'glepnir/dashboard-nvim', config = application.dashboard, event = "VimEnter", requires = {'nvim-tree/nvim-web-devicons'} }
 	use { 'hood/popui.nvim', config = application.pop }
 	use { 'terror/chatgpt.nvim', run = 'pip3 install -r requirements.txt' }
 
@@ -115,9 +114,6 @@ require('packer').startup(function(use)
 	-- 	requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } } -- IDE tasks
 	-- use 'mfussenegger/nvim-dap' -- Debug adapter protocol
 	-- use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
-
-	-- Neorg
-	use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', config = neorg.setup, tag = "*", after = "nvim-treesitter" } -- neorg, might be fun
 
 	if is_bootstrap then
 		require('packer').sync()
