@@ -31,8 +31,8 @@ function M.setup()
 	vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 	vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 	vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-	vim.keymap.set('n', '<C-p>', require('telescope.builtin').commands, { desc = "All commands" })
-	vim.keymap.set('n', '<C-P>', function() vim.cmd[[Telescope]] end, { desc = "All commands" })
+	vim.keymap.set('n', '<C-p>', function() vim.cmd[[Telescope]] end, { desc = "All commands" })
+	vim.keymap.set('n', '<C-A-p>', require('telescope.builtin').commands, { desc = "All commands" })
 end
 
 M.keys = {
@@ -47,7 +47,7 @@ M.keys = {
 	'<leader>sr',
 	'<leader>sh',
 	'<C-p>',
-	'<C-P>',
+	'<C-A-p>',
 }
 
 return M
