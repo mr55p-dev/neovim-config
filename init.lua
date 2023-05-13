@@ -171,7 +171,7 @@ require("packer").startup(function(use)
 
 	-- LSP
 	use({ "williamboman/mason.nvim", config = lsp.mason })                  -- Manage external editor tooling i.e LSP servers
-	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig }) -- Automatically install language servers to stdpath
+	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig, after = { "mason.nvim" }}) -- Automatically install language servers to stdpath
 	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig })                -- Collection of configurations for built-in LSP client
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu", config = lsp.action_menu })
 	use({ "jose-elias-alvarez/null-ls.nvim", config = lsp.null_ls })
