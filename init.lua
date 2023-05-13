@@ -57,23 +57,29 @@ require("packer").startup(function(use)
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 
 	-- Editor pane
-	use({ "numToStr/Comment.nvim", keys = { { "v", "gc" }, "gc" }, config = editor.comment }) -- "gc" to comment visual regions/lines
-	use({ "tpope/vim-sleuth", disable = true }) -- Detect tabstop and shiftwidth automatically
+	use({ "numToStr/Comment.nvim", keys = { { "v", "gc" }, "gc" }, config = editor.comment })                     -- "gc" to comment visual regions/lines
+	use({ "tpope/vim-sleuth", disable = true })                                                                   -- Detect tabstop and shiftwidth automatically
 	use({ "windwp/nvim-autopairs", event = "InsertEnter", config = editor.autopairs, module = "nvim-autopairs" }) -- Automatic bracket pairing
-	use({ "kylechui/nvim-surround", tag = "*", event = "BufReadPost", config = editor.surround }) -- We love this one
-	use({ "phaazon/hop.nvim", branch = "v2", keys = editor.hop.keys, config = editor.hop.config }) -- hop
+	use({ "kylechui/nvim-surround", tag = "*", event = "BufReadPost", config = editor.surround })                 -- We love this one
+	use({ "phaazon/hop.nvim", branch = "v2", keys = editor.hop.keys, config = editor.hop.config })                -- hop
 	use({ "abecodes/tabout.nvim", event = "InsertEnter", requires = { "nvim-treesitter" }, config = editor.tabout }) -- Tabout for getting out of autopairs
-	use({ "dnlhc/glance.nvim", config = editor.glance, event = "BufReadPost" }) -- Glance window for code
+	use({ "dnlhc/glance.nvim", config = editor.glance, event = "BufReadPost" })                                   -- Glance window for code
 	use({ "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys })
 	use({ "Wansmer/treesj", requires = { "nvim-treesitter" }, config = editor.treesj.setup, keys = editor.treesj.keys })
 	use({ "tamton-aquib/duck.nvim", config = editor.duck.setup, keys = editor.duck.keys })
 	use({ "aduros/ai.vim" })
+	use({
+		"mbbill/undotree",
+		config = function()
+			vim.keymap.set("n", "<F1>", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
+		end,
+	})
 
 	-- Interface
-	use({ "nvim-lualine/lualine.nvim", config = interface.lualine }) -- Fancier statusline
+	use({ "nvim-lualine/lualine.nvim", config = interface.lualine })                                 -- Fancier statusline
 	use({ "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", config = interface.blankline }) -- Add indentation guides on blank lines
-	use({ "gorbit99/codewindow.nvim", keys = { "<Leader>mm" }, config = interface.codewindow }) -- Code minimap
-	use("kshenoy/vim-signature") -- Marks in the gutter
+	use({ "gorbit99/codewindow.nvim", keys = { "<Leader>mm" }, config = interface.codewindow })      -- Code minimap
+	use("kshenoy/vim-signature")                                                                     -- Marks in the gutter
 	use({
 		"petertriho/nvim-scrollbar",
 		config = function()
