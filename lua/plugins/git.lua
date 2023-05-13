@@ -27,7 +27,7 @@ M.fugitive = {
 }
 
 function M.fugitive.setup()
-	vim.keymap.set("n", "<Leader>gg", ":Git<CR>", { silent = true, desc = "Open Git" })
+	vim.keymap.set("n", "<Leader>gg", ":Git ", { desc = "Open Git" })
 	vim.keymap.set("n", "<Leader>gs", function()
 		vim.cmd("Git")
 	end, { silent = true, desc = "Git status" })
