@@ -145,4 +145,10 @@ function M.null_ls()
 	})
 end
 
+function M.action_menu()
+	vim.keymap.set({ "n", "i" }, "<C-.>", function()
+		vim.cmd([[CodeActionMenu]])
+	end, { desc = "Code actions" })
+end
+
 return M

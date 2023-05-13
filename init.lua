@@ -141,7 +141,12 @@ require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
 	-- Terminal
-	use({ "voldikss/vim-floaterm", keys = terminal.floatterm.keys, config = terminal.floatterm.setup, cmd = "Floatterm" })
+	use({
+		"voldikss/vim-floaterm",
+		keys = terminal.floatterm.keys,
+		config = terminal.floatterm.setup,
+		cmd = "Floatterm",
+	})
 	use({ "akinsho/toggleterm.nvim", tag = "*", keys = terminal.toggleterm.keys, config = terminal.toggleterm.setup })
 
 	-- Treesitter
@@ -162,9 +167,17 @@ require("packer").startup(function(use)
 	use({ "williamboman/mason.nvim", config = lsp.mason })                  -- Manage external editor tooling i.e LSP servers
 	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig }) -- Automatically install language servers to stdpath
 	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig })                -- Collection of configurations for built-in LSP client
-	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
+	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu", config = lsp.action_menu })
 	use({ "jose-elias-alvarez/null-ls.nvim", config = lsp.null_ls })
-
+	use({
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({})
+			vim.keymap.set('n', '<leader>q', function () vim.cmd[[TroubleToggle document_diagnostics]] end, {desc="Toggle document diagnostics"})
+			vim.keymap.set('n', '<leader>Q', function () vim.cmd[[TroubleToggle workspace_diagnostics]] end, {desc="Toggle workspace diagnostics"})
+		end,
+	})
 	-- FT-specific
 	use({ "ellisonleao/glow.nvim", ft = { "markdown" }, config = ft_plugins.glow }) -- Markdown syntax control
 
