@@ -75,6 +75,15 @@ function M.noice()
 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
 			lsp_doc_border = false, -- add a border to hover docs and signature help
 		},
-		})
-	end
+	})
+end
+
+function M.which_key()
+	vim.o.timeout = true
+	vim.o.timeoutlen = 300
+	require("which-key").setup({
+		
+	})
+end
+
 return M
