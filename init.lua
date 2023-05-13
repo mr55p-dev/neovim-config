@@ -157,22 +157,22 @@ require("packer").startup(function(use)
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", tag = "*", config = ts.config, run = ":TSUpdate" }) -- Highlight, edit, and navigate code
-	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } }) -- Additional textobjects for treesitter
+	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })     -- Additional textobjects for treesitter
 
 	-- CMP
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "onsails/lspkind.nvim" },
 		config = cmp.setup,
-	}) -- Autocompletion
+	})                                                                  -- Autocompletion
 	use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } }) -- Snippet Engine and Snippet Expansion
 	-- use { "zbirenbaum/copilot.lua", config = cmp.copilot }
 	-- use { "zbirenbaum/copilot-cmp", after = { "copilot.lua" }, config = cmp.copilot_cmp }
 
 	-- LSP
-	use({ "williamboman/mason.nvim", config = lsp.mason }) -- Manage external editor tooling i.e LSP servers
+	use({ "williamboman/mason.nvim", config = lsp.mason })                  -- Manage external editor tooling i.e LSP servers
 	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig }) -- Automatically install language servers to stdpath
-	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig }) -- Collection of configurations for built-in LSP client
+	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig })                -- Collection of configurations for built-in LSP client
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu", config = lsp.action_menu })
 	use({ "jose-elias-alvarez/null-ls.nvim", config = lsp.null_ls })
 	use({
