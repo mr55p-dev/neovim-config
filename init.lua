@@ -174,18 +174,16 @@ require("packer").startup(function(use)
 		requires = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({})
-			vim.keymap.set('n', '<leader>q', function () vim.cmd[[TroubleToggle document_diagnostics]] end, {desc="Toggle document diagnostics"})
-			vim.keymap.set('n', '<leader>Q', function () vim.cmd[[TroubleToggle workspace_diagnostics]] end, {desc="Toggle workspace diagnostics"})
+			vim.keymap.set("n", "<leader>q", function()
+				vim.cmd([[TroubleToggle document_diagnostics]])
+			end, { desc = "Toggle document diagnostics" })
+			vim.keymap.set("n", "<leader>Q", function()
+				vim.cmd([[TroubleToggle workspace_diagnostics]])
+			end, { desc = "Toggle workspace diagnostics" })
 		end,
 	})
 	-- FT-specific
 	use({ "ellisonleao/glow.nvim", ft = { "markdown" }, config = ft_plugins.glow }) -- Markdown syntax control
-
-	-- IDE
-	-- use { 'EthanJWright/vs-tasks.nvim',
-	-- 	requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' } } -- IDE tasks
-	-- use 'mfussenegger/nvim-dap' -- Debug adapter protocol
-	-- use { 'mfussenegger/nvim-dap-python', requires = 'mfussenegger/nvim-dap'} -- Debug support for python, requires debugpy
 
 	if is_bootstrap then
 		require("packer").sync()

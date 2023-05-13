@@ -7,7 +7,7 @@ function M.mason()
 		},
 	})
 
-	vim.keymap.set("n", "<Leader>ma", "<cmd>:Mason<CR>", { silent = true, desc = "Open mason" })
+	vim.keymap.set("n", "<Leader>lm", "<cmd>:Mason<CR>", { silent = true, desc = "Open mason" })
 end
 
 function M.mason_lspconfig()
@@ -21,10 +21,8 @@ function M.lspconfig()
 	-- Mappings.
 	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 	local opts = { noremap = true, silent = true }
-	vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-	vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
@@ -35,27 +33,27 @@ function M.lspconfig()
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local bufopts = { noremap = true, silent = true, buffer = bufnr }
-		vim.keymap.set("n", "gD", vim.lsp.buf.definition, bufopts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+		local function setOpts(description)
+			return { noremap = true, silent = true, buffer = bufnr, desc = description }
+		end
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, setOpts("Lsp hover"))
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-		vim.keymap.set("n", "<Leader>K>", vim.lsp.buf.signature_help, bufopts)
-		vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-		vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-		vim.keymap.set("n", "<Leader>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, bufopts)
-		vim.keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, bufopts)
-		vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, bufopts)
-		vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, bufopts)
-		-- vim.keymap.set('n', '<C-.>', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set("n", "<Leader>K", vim.lsp.buf.signature_help, setOpts("Show signature"))
+		-- vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+		-- vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+		-- vim.keymap.set("n", "<Leader>wl", function()
+		-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		-- end, bufopts)
+		vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.type_definition, setOpts("Goto type definition"))
+		vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, setOpts("Rename symbol"))
+		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, setOpts("Rename symbol"))
+		vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, setOpts("Code action"))
 		vim.keymap.set("n", "<C-.>", function()
 			vim.cmd([[CodeActionMenu]])
-		end, bufopts)
-		vim.keymap.set("n", "gR", vim.lsp.buf.references, bufopts)
-		vim.keymap.set("n", "<Leader>f", function()
+		end, setOpts("Code action"))
+		vim.keymap.set("n", "<Leader>lf", function()
 			vim.lsp.buf.format({ async = true })
-		end, bufopts)
+		end, setOpts("Format buffer"))
 	end
 
 	local lsp_flags = {
@@ -109,7 +107,8 @@ function M.lspconfig()
 	})
 end
 
-function M.signature() end
+function M.signature()
+end
 
 function M.null_ls()
 	local null_ls = require("null-ls")
