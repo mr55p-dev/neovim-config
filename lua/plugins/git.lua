@@ -37,8 +37,8 @@ function M.fugitive.setup()
 	vim.keymap.set('n', '<Leader>gce', function() vim.cmd("Git commit --allow-empty") end, { desc = "Commit empty" })
 	vim.keymap.set('n', '<Leader>gcf', function() vim.cmd("Git commit --no-verify") end, { desc = "Commit forced (no verify)" } )
 
-	vim.keymap.set('n', '<Leader>ga', ":Git add ")
-	vim.keymap.set('n', '<Leader>gA', function() vim.cmd("Git add .") end)
+	vim.keymap.set('n', '<Leader>ga', ":Git add ", { desc = "Open Git add" })
+	vim.keymap.set('n', '<Leader>gA', function() vim.cmd("Git add .") end, { desc = "Add workdir" })
 end
 
 function M.gh()
