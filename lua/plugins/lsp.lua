@@ -35,7 +35,7 @@ function M.lspconfig()
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local bufopts = { noremap = true, silent = true, buffer = bufnr }
-		-- vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
+		vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
 		vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 		vim.keymap.set('n', '<Leader>K>', vim.lsp.buf.signature_help, bufopts)
@@ -44,7 +44,7 @@ function M.lspconfig()
 		vim.keymap.set('n', '<Leader>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, bufopts)
-		-- vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
+		vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
