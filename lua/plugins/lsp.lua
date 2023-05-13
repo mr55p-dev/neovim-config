@@ -35,7 +35,7 @@ function M.lspconfig()
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local bufopts = { noremap = true, silent = true, buffer = bufnr }
-		vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
+		-- vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
 		vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 		vim.keymap.set('n', '<Leader>K>', vim.lsp.buf.signature_help, bufopts)
@@ -44,11 +44,12 @@ function M.lspconfig()
 		vim.keymap.set('n', '<Leader>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, bufopts)
-		vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
+		-- vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
 		vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
-		vim.keymap.set('n', '<C-.>', vim.lsp.buf.code_action, bufopts)
+		-- vim.keymap.set('n', '<C-.>', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set('n', '<C-.>', function () vim.cmd[[CodeActionMenu]] end, bufopts)
 		vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 		vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 	end
@@ -108,19 +109,38 @@ end
 function M.signature()
 end
 
-function M.nullls()
+function M.null_ls()
 	local null_ls = require("null-ls")
 
 	null_ls.setup({
 		sources = {
-			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.completion.spell,
 
-			null_ls.builtins.diagnostics.eslint,
 
 			null_ls.builtins.code_actions.eslint,
 			null_ls.builtins.code_actions.refactoring,
-			null_ls.builtins.code_actions.gitsigns
+			null_ls.builtins.code_actions.gitsigns,
+
+			null_ls.builtins.diagnostics.checkmake,
+			null_ls.builtins.diagnostics.commitlint,
+			null_ls.builtins.diagnostics.eslint,
+			null_ls.builtins.diagnostics.jsonlint,
+			null_ls.builtins.diagnostics.sqlfluff.with({
+				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
+			}),
+			null_ls.builtins.diagnostics.yamllint,
+
+			null_ls.builtins.formatting.black,
+			null_ls.builtins.formatting.codespell,
+			null_ls.builtins.formatting.eslint,
+			null_ls.builtins.formatting.fixjson,
+			null_ls.builtins.formatting.prettier,
+			null_ls.builtins.formatting.stylua,
+			null_ls.builtins.formatting.sqlfluff.with({
+				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
+			}),
+			null_ls.builtins.formatting.terraform_fmt,
+
 		},
 	})
 end

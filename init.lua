@@ -74,7 +74,7 @@ require('packer').startup(function(use)
 	use { 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', config = interface.neotree, requires = neotree_requires }
 
 	-- Git
-	use { 'tpope/vim-fugitive', keys = git.fugitive.keys, cmd = 'Git', config = git.fugitive.setup } -- Git commands in nvim
+	use { 'tpope/vim-fugitive', config = git.fugitive.setup } -- Git commands in nvim
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = git.gitsigns }
 	use { 'ldelossa/gh.nvim', config = git.gh, requires = { { 'ldelossa/litee.nvim' } }
 }
@@ -103,8 +103,8 @@ require('packer').startup(function(use)
 	use { 'williamboman/mason.nvim', config = lsp.mason } -- Manage external editor tooling i.e LSP servers
 	use { 'williamboman/mason-lspconfig.nvim', config = lsp.mason_lspconfig } -- Automatically install language servers to stdpath
 	use { 'neovim/nvim-lspconfig', config = lsp.lspconfig, } -- Collection of configurations for built-in LSP client
-	use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
-	use { 'jose-elias-alvarez/null-ls.nvim', config = lsp.nullls }
+	use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', config =  }
+	use { 'jose-elias-alvarez/null-ls.nvim', config = lsp.null_ls }
 
 	-- FT-specific
 	use { 'ellisonleao/glow.nvim', ft = { "markdown" }, config = ft_plugins.glow } -- Markdown syntax control
