@@ -52,7 +52,6 @@ require('packer').startup(function(use)
 	use { "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys }
 	use { 'Wansmer/treesj', requires = { 'nvim-treesitter' }, config = editor.treesj.setup, keys = editor.treesj.keys }
 	use { 'tamton-aquib/duck.nvim', config = editor.duck.setup, keys = editor.duck.keys }
-	use { 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' }, config = editor.harpoon.setup, event = "BufReadPost" } -- Some more navigation
 	use { 'aduros/ai.vim' }
 
 	-- Interface
@@ -67,7 +66,9 @@ require('packer').startup(function(use)
 	use { "shortcuts/no-neck-pain.nvim", tag = "*", config = function() require 'no-neck-pain'.setup() end,
 		cmd = 'NoNeckPain', module = 'no-neck-pain' }
 	use { "folke/noice.nvim", config = interface.noice , requires = { "MunifTanjim/nui.nvim" } }
-	use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup{} end }
+	use { "folke/zen-mode.nvim", config = function() require("zen-mode").setup{} end, keys = {'zn'} }
+
+
 	-- Neotree
 	local neotree_requires = { "nvim-lua/plenary.nvim", 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim',
 		's1n7ax/nvim-window-picker' }
