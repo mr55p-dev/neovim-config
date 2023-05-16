@@ -28,6 +28,6 @@ vim.keymap.set({ 't' }, '<Esc>', [[<C-\><C-n>]])
 
 -- Zen mode
 vim.keymap.set('n', '<leader>en', function() require("zen-mode").toggle() end, { silent = true, desc="Toggle zen mode" })
-vim.keymap.set('n', '<leader>en', function() vim.cmd('NoNeckPain') end, { silent = true, desc = 'Toggle no neck pain'})
-vim.keymap.set('n', '<leader>e>', function() vim.cmd('NoNeckPainWidthUp') end, { silent = true, desc = 'Toggle no neck pain'})
-vim.keymap.set('n', '<leader>e<', function() vim.cmd('NoNeckPainWidthDown') end, { silent = true, desc = 'Toggle no neck pain'})
+vim.keymap.set('n', '<leader>en', function() vim.cmd('NoNeckPain') end, { silent = true, desc = 'NNP: Toggle'})
+vim.keymap.set('n', '<leader>e>', function() vim.cmd('NoNeckPainWidthUp') end, { silent = true, desc = 'NNP: Expand window'})
+vim.keymap.set('n', '<leader>e<', function() vim.cmd('NoNeckPainWidthDown') end, { silent = true, desc = 'NNP: Shrink window'})
