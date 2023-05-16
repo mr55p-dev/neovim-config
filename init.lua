@@ -176,6 +176,7 @@ require("packer").startup(function(use)
 		config = cmp.setup,
 	})                                                                  -- Autocompletion
 	use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } }) -- Snippet Engine and Snippet Expansion
+	use("rafamadriz/friendly-snippets")
 	-- use { "zbirenbaum/copilot.lua", config = cmp.copilot }
 	-- use { "zbirenbaum/copilot-cmp", after = { "copilot.lua" }, config = cmp.copilot_cmp }
 

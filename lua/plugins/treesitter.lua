@@ -1,65 +1,82 @@
 local M = {}
 
-function M.config() 
-	require('nvim-treesitter.configs').setup {
-	  -- Add languages to be installed here that you want installed for treesitter
-	  ensure_installed = { 'bash', 'c', 'cpp', 'go', 'lua', 'markdown', 'markdown_inline', 'python', 'regex', 'rust', 'typescript', 'sql', 'vim', 'hcl', 'terraform' },
+function M.config()
+	require("nvim-treesitter.configs").setup({
+		-- Add languages to be installed here that you want installed for treesitter
+		ensure_installed = {
+			"bash",
+			"c",
+			"cpp",
+			"go",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"python",
+			"regex",
+			"rust",
+			"typescript",
+			"tsx",
+			"sql",
+			"vim",
+			"hcl",
+			"terraform",
+		},
 
-	  highlight = { enable = true },
-	  indent = { enable = true },
-	  incremental_selection = {
-		enable = true,
-		keymaps = {
-		  init_selection = '<c-space>',
-		  node_incremental = '<c-space>',
-		  scope_incremental = '<c-s>',
-		  node_decremental = '<c-backspace>',
+		highlight = { enable = true },
+		indent = { enable = true },
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<c-space>",
+				node_incremental = "<c-space>",
+				scope_incremental = "<c-s>",
+				node_decremental = "<c-backspace>",
+			},
 		},
-	  },
-	  textobjects = {
-		select = {
-		  enable = true,
-		  lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-		  keymaps = {
-			-- You can use the capture groups defined in textobjects.scm
-			['af'] = '@function.outer',
-			['if'] = '@function.inner',
-			['ac'] = '@class.outer',
-			['ic'] = '@class.inner',
-			['ia'] = '@parameter.inner',
-		  },
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@class.outer",
+					["ic"] = "@class.inner",
+					["ia"] = "@parameter.inner",
+				},
+			},
+			move = {
+				enable = true,
+				set_jumps = true, -- whether to set jumps in the jumplist
+				goto_next_start = {
+					["]m"] = "@function.outer",
+					["]]"] = "@class.outer",
+				},
+				goto_next_end = {
+					["]M"] = "@function.outer",
+					["]["] = "@class.outer",
+				},
+				goto_previous_start = {
+					["[m"] = "@function.outer",
+					["[["] = "@class.outer",
+				},
+				goto_previous_end = {
+					["[M"] = "@function.outer",
+					["[]"] = "@class.outer",
+				},
+			},
+			swap = {
+				enable = false,
+				--  swap_next = {
+				-- ['<leader>a'] = '@parameter.inner',
+				--  },
+				--  swap_previous = {
+				-- ['<leader>A'] = '@parameter.inner',
+				--  },
+			},
 		},
-		move = {
-		  enable = true,
-		  set_jumps = true, -- whether to set jumps in the jumplist
-		  goto_next_start = {
-			[']m'] = '@function.outer',
-			[']]'] = '@class.outer',
-		  },
-		  goto_next_end = {
-			[']M'] = '@function.outer',
-			[']['] = '@class.outer',
-		  },
-		  goto_previous_start = {
-			['[m'] = '@function.outer',
-			['[['] = '@class.outer',
-		  },
-		  goto_previous_end = {
-			['[M'] = '@function.outer',
-			['[]'] = '@class.outer',
-		  },
-		},
-		swap = {
-		  enable = false,
-		 --  swap_next = {
-			-- ['<leader>a'] = '@parameter.inner',
-		 --  },
-		 --  swap_previous = {
-			-- ['<leader>A'] = '@parameter.inner',
-		 --  },
-		},
-	  },
-	}
+	})
 end
 
 return M

@@ -12,7 +12,7 @@ end
 
 function M.mason_lspconfig()
 	require("mason-lspconfig").setup({
-		ensure_installed = { "clangd", "rust_analyzer", "pyright", "tsserver", "lua_ls", "sqlls" },
+		ensure_installed = { "clangd", "rust_analyzer", "pyright", "html", "cssls", "tsserver", "lua_ls", "sqlls" },
 		automatic_installation = true,
 	})
 end
@@ -24,6 +24,13 @@ function M.lspconfig()
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
+	vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, { silent = true, noremap = true, desc = "Code action" })
+	vim.keymap.set("n", "<C-.>", function()
+		vim.cmd([[CodeActionMenu]])
+	end, { silent = true, noremap = true, desc = "Code action" })
+	vim.keymap.set("n", "<Leader>lf", function()
+		vim.lsp.buf.format({ async = true })
+	end, { silent = true, noremap = true, desc = "Format buffer" })
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
 	local on_attach = function(_, bufnr)
@@ -47,13 +54,6 @@ function M.lspconfig()
 		vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.type_definition, setOpts("Goto type definition"))
 		vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, setOpts("Rename symbol"))
 		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, setOpts("Rename symbol"))
-		vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, setOpts("Code action"))
-		vim.keymap.set("n", "<C-.>", function()
-			vim.cmd([[CodeActionMenu]])
-		end, setOpts("Code action"))
-		vim.keymap.set("n", "<Leader>lf", function()
-			vim.lsp.buf.format({ async = true })
-		end, setOpts("Format buffer"))
 	end
 
 	local lsp_flags = {
@@ -105,10 +105,27 @@ function M.lspconfig()
 		flags = lsp_flags,
 		capabilities = capabilities,
 	})
+
+	require("lspconfig")["html"].setup({
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	})
+
+	require("lspconfig")["emmet_ls"].setup({
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	})
+
+	require("lspconfig")["cssls"].setup({
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	})
 end
 
-function M.signature()
-end
+function M.signature() end
 
 function M.null_ls()
 	local null_ls = require("null-ls")
@@ -132,9 +149,22 @@ function M.null_ls()
 
 			null_ls.builtins.formatting.black,
 			null_ls.builtins.formatting.codespell,
-			null_ls.builtins.formatting.eslint,
-			null_ls.builtins.formatting.fixjson,
-			null_ls.builtins.formatting.prettier,
+			null_ls.builtins.formatting.prettier.with({
+				filetypes = {
+					"vue",
+					"css",
+					"scss",
+					"less",
+					"html",
+					"json",
+					"jsonc",
+					"yaml",
+					"markdown",
+					"markdown.mdx",
+					"graphql",
+					"handlebars",
+				},
+			}),
 			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.formatting.sqlfluff.with({
 				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
