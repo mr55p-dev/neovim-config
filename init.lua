@@ -134,7 +134,17 @@ require("packer").startup(function(use)
 	-- Git
 	use({ "tpope/vim-fugitive", config = git.fugitive.setup }) -- Git commands in nvim
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = git.gitsigns })
-	use({ "ldelossa/gh.nvim", config = git.gh, requires = { { "ldelossa/litee.nvim" } } })
+	use({
+		'pwntester/octo.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+			'kyazdani42/nvim-web-devicons',
+		},
+		after = 'telescope.nvim',
+		config = git.octo
+	})
+	--
 	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -170,9 +180,9 @@ require("packer").startup(function(use)
 	-- use { "zbirenbaum/copilot-cmp", after = { "copilot.lua" }, config = cmp.copilot_cmp }
 
 	-- LSP
-	use({ "williamboman/mason.nvim", config = lsp.mason })                  -- Manage external editor tooling i.e LSP servers
-	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig, after = { "mason.nvim" }}) -- Automatically install language servers to stdpath
-	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig })                -- Collection of configurations for built-in LSP client
+	use({ "williamboman/mason.nvim", config = lsp.mason })                                            -- Manage external editor tooling i.e LSP servers
+	use({ "williamboman/mason-lspconfig.nvim", config = lsp.mason_lspconfig, after = { "mason.nvim" } }) -- Automatically install language servers to stdpath
+	use({ "neovim/nvim-lspconfig", config = lsp.lspconfig })                                          -- Collection of configurations for built-in LSP client
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu", config = lsp.action_menu })
 	use({ "jose-elias-alvarez/null-ls.nvim", config = lsp.null_ls })
 	use({
