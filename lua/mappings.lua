@@ -31,3 +31,27 @@ vim.keymap.set('n', '<leader>en', function() require("zen-mode").toggle() end, {
 vim.keymap.set('n', '<leader>en', function() vim.cmd('NoNeckPain') end, { silent = true, desc = 'NNP: Toggle'})
 vim.keymap.set('n', '<leader>e>', function() vim.cmd('NoNeckPainWidthUp') end, { silent = true, desc = 'NNP: Expand window'})
 vim.keymap.set('n', '<leader>e<', function() vim.cmd('NoNeckPainWidthDown') end, { silent = true, desc = 'NNP: Shrink window'})
+
+
+-- Fugitive toggle
+local function showFugitiveGit()
+  if vim.fn.FugitiveHead() ~= '' then
+    vim.cmd [[
+    Git
+    " wincmd H  " Open Git window in vertical split
+    setlocal winfixwidth
+    horizontal resize 31
+    setlocal winfixwidth
+    setlocal nonumber
+    setlocal norelativenumber
+    ]]
+  end
+end
+local function toggleFugitiveGit()
+  if vim.fn.buflisted(vim.fn.bufname('fugitive:///*/.git//$')) ~= 0 then
+    vim.cmd[[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]]
+  else
+    showFugitiveGit()
+  end
+end
+vim.keymap.set('n', '<F3>', toggleFugitiveGit, { desc = "Show fugitive"})

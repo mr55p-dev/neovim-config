@@ -53,7 +53,7 @@ require("packer").startup(function(use)
 	use({ "terror/chatgpt.nvim", run = "pip3 install -r requirements.txt" })
 
 	-- mini
-	use({ "echasnovski/mini.basics", config = mini_config.setup })
+	use({ "echasnovski/mini.nvim", branch = "stable", config = mini_config.setup})
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 
 	-- Editor pane
@@ -65,7 +65,7 @@ require("packer").startup(function(use)
 	use({ "abecodes/tabout.nvim", event = "InsertEnter", requires = { "nvim-treesitter" }, config = editor.tabout }) -- Tabout for getting out of autopairs
 	use({ "dnlhc/glance.nvim", config = editor.glance, event = "BufReadPost" })                                   -- Glance window for code
 	use({ "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys })
-	use({ "Wansmer/treesj", requires = { "nvim-treesitter" }, config = editor.treesj.setup, keys = editor.treesj.keys })
+	-- use({ "Wansmer/treesj", requires = { "nvim-treesitter" }, config = editor.treesj.setup, keys = editor.treesj.keys }) -- replaced by mioni.splitjoin
 	use({ "tamton-aquib/duck.nvim", config = editor.duck.setup, keys = editor.duck.keys })
 	use({ "aduros/ai.vim" })
 	use({
@@ -83,7 +83,7 @@ require("packer").startup(function(use)
 	use({
 		"petertriho/nvim-scrollbar",
 		config = function()
-			require("scrollbar").setup()
+			require("scrollbar")
 		end,
 	}) -- Scrollbar
 	use({
@@ -168,6 +168,7 @@ require("packer").startup(function(use)
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", tag = "*", config = ts.config, run = ":TSUpdate" }) -- Highlight, edit, and navigate code
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })     -- Additional textobjects for treesitter
+	use({ "https://github.com/windwp/nvim-ts-autotag", config = function() require('nvim-ts-autotag').setup() end, after = { "nvim-treesitter" }})
 
 	-- CMP
 	use({
