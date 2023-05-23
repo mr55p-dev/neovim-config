@@ -62,11 +62,11 @@ function M.setup()
 			-- end, { 'i', 's' })
 		}),
 		sources = {
-			{ name = "nvim_lsp", priority = 1 },
+			{ name = "nvim_lsp", priority = 3 },
 			-- { name = "copilot", group_index = 2 },
-			{ name = "luasnip" },
-			{ name = "buffer" },
-			{ name = "path" },
+			-- { name = "luasnip" },
+			{ name = "buffer", priority = 1 },
+			{ name = "path", priority = 2},
 		},
 		formatting = {
 			format = lspkind.cmp_format({
@@ -89,7 +89,8 @@ function M.setup()
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
-			{ name = "buffer" },
+			{ name = "path", priority = 2 },
+			{ name = "buffer", priority = 1 },
 		},
 	})
 end
