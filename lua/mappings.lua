@@ -55,3 +55,8 @@ local function toggleFugitiveGit()
   end
 end
 vim.keymap.set('n', '<F3>', toggleFugitiveGit, { desc = "Show fugitive"})
+
+
+-- Sessions
+vim.keymap.set('n', '<leader>Sw', function() require('mini.sessions').write() end, { desc = "write session" })
+vim.keymap.set('n', '<leader>Sr', function() require('mini.sessions').read() end, { desc = "read session" })

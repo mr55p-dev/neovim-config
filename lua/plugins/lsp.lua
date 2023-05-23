@@ -29,7 +29,11 @@ function M.lspconfig()
 		vim.cmd([[CodeActionMenu]])
 	end, { silent = true, noremap = true, desc = "Code action" })
 	vim.keymap.set("n", "<Leader>lf", function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({
+			filter = function(client)
+				return client.name ~= "volar"
+			end,
+		})
 	end, { silent = true, noremap = true, desc = "Format buffer" })
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
@@ -112,20 +116,19 @@ function M.lspconfig()
 		capabilities = capabilities,
 	})
 
-	require("lspconfig")["emmet_ls"].setup({
-		on_attach = on_attach,
-		flags = lsp_flags,
-		capabilities = capabilities,
-	})
+	--Enable (broadcasting) snippet capability for completion
+	local css_capabilities = vim.lsp.protocol.make_client_capabilities()
+	css_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 	require("lspconfig")["cssls"].setup({
 		on_attach = on_attach,
 		flags = lsp_flags,
-		capabilities = capabilities,
+		capabilities = css_capabilities,
 	})
 end
 
-function M.signature() end
+function M.signature()
+end
 
 function M.null_ls()
 	local null_ls = require("null-ls")
@@ -134,19 +137,20 @@ function M.null_ls()
 		sources = {
 			null_ls.builtins.completion.spell,
 
-			null_ls.builtins.code_actions.eslint,
+			null_ls.builtins.code_actions.eslint_d,
 			null_ls.builtins.code_actions.refactoring,
 			null_ls.builtins.code_actions.gitsigns,
 
 			null_ls.builtins.diagnostics.checkmake,
 			null_ls.builtins.diagnostics.commitlint,
-			null_ls.builtins.diagnostics.eslint,
+			null_ls.builtins.diagnostics.eslint_d,
 			null_ls.builtins.diagnostics.jsonlint,
 			null_ls.builtins.diagnostics.sqlfluff.with({
 				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
 			}),
 			null_ls.builtins.diagnostics.yamllint,
 
+			null_ls.builtins.formatting.eslint_d,
 			null_ls.builtins.formatting.black,
 			null_ls.builtins.formatting.codespell,
 			null_ls.builtins.formatting.prettier.with({
