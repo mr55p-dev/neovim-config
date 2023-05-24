@@ -80,6 +80,7 @@ require("packer").startup(function(use)
 			vim.keymap.set("n", "<F1>", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 		end,
 	})
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async", run = ":TSUpdate", config = editor.ufo })
 
 	-- Interface
 	use({ "nvim-lualine/lualine.nvim", config = interface.lualine })                                 -- Fancier statusline
@@ -121,7 +122,7 @@ require("packer").startup(function(use)
 		config = function()
 			require("zen-mode").setup({})
 		end,
-		keys = { "zn" },
+		keys = { "<leader>en" },
 	})
 	use({
 		"folke/which-key.nvim",
