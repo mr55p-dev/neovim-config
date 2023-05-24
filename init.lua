@@ -29,7 +29,13 @@ require("packer").startup(function(use)
 	use({
 		"folke/tokyonight.nvim",
 		config = function()
-			vim.cmd("colorscheme tokyonight")
+			-- vim.cmd("colorscheme tokyonight")
+		end,
+	})
+	use({
+		"projekt0n/github-nvim-theme",
+		config = function()
+			vim.cmd("colorscheme github_dark")
 		end,
 	})
 
@@ -53,7 +59,7 @@ require("packer").startup(function(use)
 	use({ "terror/chatgpt.nvim", run = "pip3 install -r requirements.txt" })
 
 	-- mini
-	use({ "echasnovski/mini.nvim", branch = "stable", config = mini_config.setup})
+	use({ "echasnovski/mini.nvim", branch = "stable", config = mini_config.setup })
 	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
 
 	-- Editor pane
@@ -135,14 +141,14 @@ require("packer").startup(function(use)
 	use({ "tpope/vim-fugitive", config = git.fugitive.setup }) -- Git commands in nvim
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = git.gitsigns })
 	use({
-		'pwntester/octo.nvim',
+		"pwntester/octo.nvim",
 		requires = {
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope.nvim',
-			'kyazdani42/nvim-web-devicons',
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
 		},
-		after = 'telescope.nvim',
-		config = git.octo
+		after = "telescope.nvim",
+		config = git.octo,
 	})
 	--
 	-- Telescope
@@ -168,7 +174,13 @@ require("packer").startup(function(use)
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", tag = "*", config = ts.config, run = ":TSUpdate" }) -- Highlight, edit, and navigate code
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })     -- Additional textobjects for treesitter
-	use({ "https://github.com/windwp/nvim-ts-autotag", config = function() require('nvim-ts-autotag').setup() end, after = { "nvim-treesitter" }})
+	use({
+		"https://github.com/windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+		after = { "nvim-treesitter" },
+	})
 
 	-- CMP
 	use({

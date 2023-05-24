@@ -15,7 +15,7 @@ function M.lualine()
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			theme = "tokyonight",
+			-- theme = "tokyonight",
 			component_separators = "|",
 			section_separators = "",
 		},
