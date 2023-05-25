@@ -184,4 +184,9 @@ function M.action_menu()
 	end, { desc = "Code actions" })
 end
 
+function M.symboloutline()
+	require("symbols-outline").setup() 
+	vim.keymap.set({ "n" }, "<leader>so", vim.cmd[[SymbolsOutline]], { desc = "Show symbol outline", silent = true })
+end
+
 return M

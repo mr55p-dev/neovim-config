@@ -213,6 +213,8 @@ require("packer").startup(function(use)
 			end, { desc = "Toggle workspace diagnostics" })
 		end,
 	})
+	use ({ 'simrat39/symbols-outline.nvim', config = lsp.symboloutline })
+
 	-- FT-specific
 	use({ "ellisonleao/glow.nvim", ft = { "markdown" }, config = ft_plugins.glow }) -- Markdown syntax control
 
