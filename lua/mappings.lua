@@ -94,3 +94,7 @@ vim.keymap.set("n", "<leader>Sr", function()
 		require("mini.sessions").read(input)
 	end)
 end, { desc = "read session" })
+
+
+-- Symbols outline
+vim.keymap.set({ "n" }, "<leader>so", function() vim.cmd[[SymbolsOutline]] end, { desc = "Show symbol outline", silent = true })

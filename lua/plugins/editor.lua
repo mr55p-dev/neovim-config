@@ -137,12 +137,12 @@ function M.duck.setup()
 	end, {})
 end
 
-function M.ufo()
-	require("ufo").setup({
-		provider_selector = function(bufnr, filetype, buftype)
-			return { "treesitter", "indent" }
-		end,
-	})
-end
+-- function M.ufo()
+-- 	require("ufo").setup({
+-- 		provider_selector = function(bufnr, filetype, buftype)
+-- 			return { "treesitter", "indent" }
+-- 		end,
+-- 	})
+-- end
 
 return M
