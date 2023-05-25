@@ -122,7 +122,7 @@ require("packer").startup(function(use)
 		config = function()
 			require("zen-mode").setup({})
 		end,
-		keys = { "<leader>en" },
+		keys = { "<leader>ez" },
 	})
 	use({
 		"folke/which-key.nvim",

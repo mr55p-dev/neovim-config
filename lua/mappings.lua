@@ -45,7 +45,7 @@ end, { silent = true })
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
 
 -- Zen mode
-vim.keymap.set("n", "<leader>en", function()
+vim.keymap.set("n", "<leader>ez", function()
 	require("zen-mode").toggle()
 end, { silent = true, desc = "Toggle zen mode" })
 vim.keymap.set("n", "<leader>en", function()
