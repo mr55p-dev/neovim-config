@@ -31,7 +31,7 @@ function M.lspconfig()
 	vim.keymap.set("n", "<Leader>lf", function()
 		vim.lsp.buf.format({
 			filter = function(client)
-				return client.name ~= "volar"
+				return client.name ~= "volar" and client.name ~= "tsserver"
 			end,
 		})
 	end, { silent = true, noremap = true, desc = "Format buffer" })
@@ -89,6 +89,7 @@ function M.lspconfig()
 		on_attach = on_attach,
 		flags = lsp_flags,
 		capabilities = capabilities,
+
 	})
 
 	require("lspconfig")["lua_ls"].setup({
@@ -150,31 +151,10 @@ function M.null_ls()
 			}),
 			null_ls.builtins.diagnostics.yamllint,
 
-			-- null_ls.builtins.formatting.eslint_d.with({
-			-- 	extra_args = {
-			-- 		"--rule", '"indent": ["error", 2]',
-			-- 		"--plugin", "typescript-eslint/eslint-recommended",
-			-- 	}
-			-- }),
 			null_ls.builtins.formatting.black,
 			null_ls.builtins.formatting.codespell,
+			null_ls.builtins.formatting.prettier_eslint,
 			null_ls.builtins.formatting.prettier,
-			-- null_ls.builtins.formatting.prettier.with({
-			-- 	filetypes = {
-			-- 		"vue",
-			-- 		"css",
-			-- 		"scss",
-			-- 		"less",
-			-- 		"html",
-			-- 		"json",
-			-- 		"jsonc",
-			-- 		"yaml",
-			-- 		"markdown",
-			-- 		"markdown.mdx",
-			-- 		"graphql",
-			-- 		"handlebars",
-			-- 	},
-			-- }),
 			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.formatting.sqlfluff.with({
 				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
