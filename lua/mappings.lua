@@ -41,8 +41,16 @@ vim.keymap.set({ "n", "v", "i" }, "<C-S-k>", function()
 	vim.cmd("move-2")
 end, { silent = true })
 
--- Exit terminal mode
+-- Terminal mode
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
+vim.keymap.set("n", "<leader>ts", function()
+	vim.cmd [[split]]
+	vim.cmd [[term]]
+end, { silent = true, desc = "Open a terminal in a new split" })
+vim.keymap.set("n", "<leader>tS", function()
+	vim.cmd [[vsplit]]
+	vim.cmd [[term]]
+end, { silent = true, desc = "Open a terminal in a new vsplit" })
 
 -- Zen mode
 vim.keymap.set("n", "<leader>ez", function()
@@ -97,4 +105,5 @@ end, { desc = "read session" })
 
 
 -- Symbols outline
-vim.keymap.set({ "n" }, "<leader>so", function() vim.cmd[[SymbolsOutline]] end, { desc = "Show symbol outline", silent = true })
+vim.keymap.set({ "n" }, "<leader>so", function() vim.cmd [[SymbolsOutline]] end,
+	{ desc = "Show symbol outline", silent = true })

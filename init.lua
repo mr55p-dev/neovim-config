@@ -162,7 +162,19 @@ require("packer").startup(function(use)
 		cmd = "Telescope",
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
-
+	use {
+		'mrded/nvim-zond',
+		after = { "telescope.nvim" },
+		config = function()
+			vim.keymap.set("n", "<leader>st", function()
+				require('zond').find_and_run({
+					title = 'Run a test',
+					filter = '*.test.ts$',
+					cmd = 'vsplit term://npx jest %s'
+				})
+			end)
+		end,
+	}
 	-- Terminal
 	use({
 		"voldikss/vim-floaterm",
@@ -213,7 +225,7 @@ require("packer").startup(function(use)
 			end, { desc = "Toggle workspace diagnostics" })
 		end,
 	})
-	use ({ 'simrat39/symbols-outline.nvim', config = lsp.symboloutline })
+	use({ 'simrat39/symbols-outline.nvim', config = lsp.symboloutline })
 
 	-- FT-specific
 	use({ "ellisonleao/glow.nvim", ft = { "markdown" }, config = ft_plugins.glow }) -- Markdown syntax control

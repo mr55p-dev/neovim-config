@@ -48,6 +48,7 @@ M.keys = {
 	'<leader>sg',
 	'<leader>sr',
 	'<leader>sh',
+	'<leader>st',
 	'<C-p>',
 	'<C-A-p>',
 }
