@@ -117,6 +117,12 @@ function M.lspconfig()
 		capabilities = capabilities,
 	})
 
+	require("lspconfig")["gopls"].setup({
+		on_attach = on_attach,
+		flags = lsp_flags,
+		capabilities = capabilities,
+	})
+
 	--Enable (broadcasting) snippet capability for completion
 	local css_capabilities = vim.lsp.protocol.make_client_capabilities()
 	css_capabilities.textDocument.completion.completionItem.snippetSupport = true
