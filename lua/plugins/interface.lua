@@ -34,6 +34,7 @@ function M.neotree()
 
 	require("neo-tree").setup({
 		close_if_last_window = true,
+		open_files_do_not_replace_types = { "Trouble", "qf", "edgy" },
 		filesystem = {
 			follow_current_file = true,
 		},
@@ -71,7 +72,7 @@ function M.noice()
 			bottom_search = true, -- use a classic bottom cmdline for search
 			command_palette = true, -- position the cmdline and popupmenu together
 			long_message_to_split = true, -- long messages will be sent to a split
-			inc_rename = false, -- enables an input dialog for inc-rename.nvim
+			inc_rename = false,  -- enables an input dialog for inc-rename.nvim
 			lsp_doc_border = false, -- add a border to hover docs and signature help
 		},
 	})
@@ -130,8 +131,8 @@ function M.which_key()
 		layout = {
 			height = { min = 4, max = 25 }, -- min and max height of the columns
 			width = { min = 20, max = 50 }, -- min and max width of the columns
-			spacing = 3, -- spacing between columns
-			align = "center", -- align columns left, center or right
+			spacing = 3,           -- spacing between columns
+			align = "center",      -- align columns left, center or right
 		},
 	})
 end
