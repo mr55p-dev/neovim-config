@@ -16,7 +16,7 @@ function M.setup()
 
 	-- See `:help telescope.builtin`
 	-- vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-	vim.keymap.set('n', '<leader><space>', function() require('telescope.builtin').find_files({ hidden = true }) end, { desc = '[ ] Find existing buffers' })
+	vim.keymap.set('n', '<leader><space>', function() require('telescope.builtin').git_files({ hidden = true }) end, { desc = 'Find git files' })
 	vim.keymap.set('n', '<leader>/', function()
 	  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
 	    -- winblend = 10,
