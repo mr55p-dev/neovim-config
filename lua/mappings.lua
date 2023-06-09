@@ -71,9 +71,9 @@ local function showFugitiveGit()
 		vim.cmd([[
     Git
     " setlocal winfixwidth
-    horizontal resize 20
-    setlocal winfixwidth
-	setlocal winfixheight
+ "    horizontal resize 20
+ "    setlocal winfixwidth
+	" setlocal winfixheight
     setlocal nonumber
     setlocal norelativenumber
     ]])

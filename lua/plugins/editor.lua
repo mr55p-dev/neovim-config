@@ -205,7 +205,12 @@ function M.edgy()
 			-- any other neo-tree windows
 			"neo-tree",
 		},
+		right = {
+			{ ft = "fugitive", size = { height = 0.25 } }
+		}
 	})
+
+	vim.keymap.set("n", "<C-,>", function() require("edgy").open() end, { desc = "Show edgy bar" })
 end
 
 -- function M.ufo()
