@@ -65,3 +65,6 @@ vim.g.maplocalleader = ' '
 
 -- Enable nord borders
 vim.g.nord_borders = true
+
+-- Edgy config
+vim.opt.splitkeep = "screen"

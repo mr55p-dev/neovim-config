@@ -24,12 +24,11 @@ vim.keymap.set({ "n", "v", "t" }, "<C-l>", function()
 	vim.cmd("wincmd l")
 end, { silent = true })
 
-vim.keymap.set({ "n" }, "<C-q>", ":wqa<CR>", { silent = true, desc = "Quit neovim" })
+-- vim.keymap.set({ "n" }, "<C-q>", ":wqa<CR>", { silent = true, desc = "Quit neovim" })
 vim.keymap.set("n", "<Leader>ps", function()
 	vim.cmd("PackerSync")
 end)
 vim.keymap.set("n", "<Leader>pc", function()
-	vim.cmd([[ !rm ~/.config/nvim/plugin/packer_compiled.lua]])
 	vim.cmd("PackerCompile")
 end)
 
@@ -105,5 +104,5 @@ end, { desc = "read session" })
 
 
 -- Symbols outline
-vim.keymap.set({ "n" }, "<leader>so", function() vim.cmd [[SymbolsOutline]] end,
+vim.keymap.set({ "n" }, "<leader>do", function() vim.cmd [[SymbolsOutline]] end,
 	{ desc = "Show symbol outline", silent = true })

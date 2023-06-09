@@ -80,7 +80,7 @@ require("packer").startup(function(use)
 			vim.keymap.set("n", "<F1>", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
 		end,
 	})
-	-- use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async", run = ":TSUpdate", config = editor.ufo })
+	use({ "folke/edgy.nvim", config = editor.edgy })
 
 	-- Interface
 	use({ "nvim-lualine/lualine.nvim", config = interface.lualine })                                 -- Fancier statusline
