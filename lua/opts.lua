@@ -4,6 +4,7 @@
 vim.o.hlsearch = true
 
 vim.o.number = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'

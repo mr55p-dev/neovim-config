@@ -139,6 +139,9 @@ end
 
 function M.edgy()
 	require("edgy").setup({
+		animate = {
+			enabled = false
+		},
 		bottom = {
 			-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
 			{
@@ -187,6 +190,7 @@ function M.edgy()
 				end,
 				pinned = true,
 				open = "Neotree position=right git_status",
+				size = { width = 0.15 },
 			},
 			{
 				title = "Neo-Tree Buffers",
@@ -196,17 +200,17 @@ function M.edgy()
 				end,
 				pinned = true,
 				open = "Neotree position=top buffers",
+				size = { width = 0.15 },
 			},
 			{
 				ft = "Outline",
 				pinned = true,
 				open = "SymbolsOutline",
+				size = { width = 0.15 },
 			},
-			-- any other neo-tree windows
-			"neo-tree",
 		},
 		right = {
-			{ ft = "fugitive", size = { height = 0.25 } }
+			{ ft = "fugitive", size = { width = 0.25 } }
 		}
 	})
 
