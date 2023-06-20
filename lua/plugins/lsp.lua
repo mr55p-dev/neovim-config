@@ -142,8 +142,6 @@ function M.null_ls()
 
 	null_ls.setup({
 		sources = {
-			null_ls.builtins.completion.spell,
-
 			null_ls.builtins.code_actions.eslint_d,
 			null_ls.builtins.code_actions.refactoring,
 			null_ls.builtins.code_actions.gitsigns,
@@ -178,6 +176,10 @@ end
 
 function M.symboloutline()
 	require("symbols-outline").setup()
+end
+
+function M.fileops()
+	require("lsp-file-operations").setup()
 end
 
 return M

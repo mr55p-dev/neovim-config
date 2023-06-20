@@ -142,6 +142,10 @@ function M.edgy()
 		animate = {
 			enabled = false
 		},
+		options = {
+			left = { size = 40 },
+			right = { size = 40 },
+		},
 		bottom = {
 			-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
 			{
@@ -183,6 +187,11 @@ function M.edgy()
 				size = { height = 0.5 },
 			},
 			{
+				ft = "Outline",
+				pinned = true,
+				open = "SymbolsOutlineOpen",
+			},
+			{
 				title = "Neo-Tree Git",
 				ft = "neo-tree",
 				filter = function(buf)
@@ -190,7 +199,6 @@ function M.edgy()
 				end,
 				pinned = true,
 				open = "Neotree position=right git_status",
-				size = { width = 0.15 },
 			},
 			{
 				title = "Neo-Tree Buffers",
@@ -200,13 +208,6 @@ function M.edgy()
 				end,
 				pinned = true,
 				open = "Neotree position=top buffers",
-				size = { width = 0.15 },
-			},
-			{
-				ft = "Outline",
-				pinned = true,
-				open = "SymbolsOutline",
-				size = { width = 0.15 },
 			},
 		},
 		right = {

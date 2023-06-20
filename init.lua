@@ -81,7 +81,7 @@ require("packer").startup(function(use)
 		end,
 	})
 	use({ "folke/edgy.nvim", config = editor.edgy })
-
+use { "chrisgrieser/nvim-spider" }
 	-- Interface
 	use({ "nvim-lualine/lualine.nvim", config = interface.lualine })                                 -- Fancier statusline
 	use({ "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", config = interface.blankline }) -- Add indentation guides on blank lines
@@ -226,6 +226,14 @@ require("packer").startup(function(use)
 		end,
 	})
 	use({ 'simrat39/symbols-outline.nvim', config = lsp.symboloutline })
+	use {
+		'antosha417/nvim-lsp-file-operations',
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "kyazdani42/nvim-tree.lua" },
+		},
+		config = lsp.fileops
+	}
 
 	-- FT-specific
 	use({ "ellisonleao/glow.nvim", ft = { "markdown" }, config = ft_plugins.glow }) -- Markdown syntax control
