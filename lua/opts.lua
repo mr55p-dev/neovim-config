@@ -60,10 +60,6 @@ vim.o.termguicolors = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,menuone,noselect'
 
--- Set the leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Enable nord borders
 vim.g.nord_borders = true
 
