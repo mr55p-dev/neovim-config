@@ -42,11 +42,11 @@ end, { silent = true })
 
 -- Terminal mode
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
-vim.keymap.set("n", "<leader>ts", function()
+vim.keymap.set("n", "<leader>tS", function()
 	vim.cmd [[split]]
 	vim.cmd [[term]]
 end, { silent = true, desc = "Open a terminal in a new split" })
-vim.keymap.set("n", "<leader>tS", function()
+vim.keymap.set("n", "<leader>ts", function()
 	vim.cmd [[vsplit]]
 	vim.cmd [[term]]
 end, { silent = true, desc = "Open a terminal in a new vsplit" })
@@ -55,15 +55,6 @@ end, { silent = true, desc = "Open a terminal in a new vsplit" })
 vim.keymap.set("n", "<leader>ez", function()
 	require("zen-mode").toggle()
 end, { silent = true, desc = "Toggle zen mode" })
-vim.keymap.set("n", "<leader>en", function()
-	vim.cmd("NoNeckPain")
-end, { silent = true, desc = "NNP: Toggle" })
-vim.keymap.set("n", "<leader>e>", function()
-	vim.cmd("NoNeckPainWidthUp")
-end, { silent = true, desc = "NNP: Expand window" })
-vim.keymap.set("n", "<leader>e<", function()
-	vim.cmd("NoNeckPainWidthDown")
-end, { silent = true, desc = "NNP: Shrink window" })
 
 -- Fugitive toggle
 local function showFugitiveGit()
@@ -103,6 +94,6 @@ vim.keymap.set("n", "<leader>Sr", function()
 end, { desc = "read session" })
 
 
--- Symbols outline
-vim.keymap.set({ "n" }, "<leader>do", function() vim.cmd [[SymbolsOutline]] end,
-	{ desc = "Show symbol outline", silent = true })
+-- Create new splits
+vim.keymap.set({ "n" }, "<leader>js", function() vim.cmd [[vsplit]] end, { desc = "Vertical split", silent = true })
+vim.keymap.set({ "n" }, "<leader>jS", function() vim.cmd [[vsplit]] end, { desc = "Vertical split", silent = true })

@@ -89,7 +89,6 @@ function M.lspconfig()
 		on_attach = on_attach,
 		flags = lsp_flags,
 		capabilities = capabilities,
-
 	})
 
 	require("lspconfig")["lua_ls"].setup({
@@ -134,8 +133,7 @@ function M.lspconfig()
 	})
 end
 
-function M.signature()
-end
+function M.signature() end
 
 function M.null_ls()
 	local null_ls = require("null-ls")
@@ -144,7 +142,6 @@ function M.null_ls()
 		sources = {
 			null_ls.builtins.code_actions.eslint_d,
 			null_ls.builtins.code_actions.refactoring,
-			null_ls.builtins.code_actions.gitsigns,
 
 			null_ls.builtins.diagnostics.checkmake,
 			null_ls.builtins.diagnostics.commitlint,
@@ -176,6 +173,9 @@ end
 
 function M.symboloutline()
 	require("symbols-outline").setup()
+	vim.keymap.set({ "n" }, "<leader>do", function()
+		vim.cmd([[SymbolsOutline]])
+	end, { desc = "Show symbol outline", silent = true })
 end
 
 function M.dap()

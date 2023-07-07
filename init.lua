@@ -23,15 +23,10 @@ require("packer").startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
 
 	-- Color schemes
-	-- use { 'shaunsingh/nord.nvim', config = function() vim.cmd 'colorscheme nord' end } -- Nord theme
-	-- use { 'andersevenrud/nordic.nvim', config = function () require('nordic').colorscheme({ italic_comments=true }) end }
-	-- use { 'mjlbach/onedark.nvim', disabled = true } -- Theme inspired by Atom
-	use({
-		"folke/tokyonight.nvim",
-		config = function()
-			-- vim.cmd("colorscheme tokyonight")
-		end,
-	})
+	use({ "shaunsingh/nord.nvim" })               -- Nord theme
+	use({ "andersevenrud/nordic.nvim" })
+	use({ "mjlbach/onedark.nvim", disabled = true }) -- Theme inspired by Atom
+	use({ "folke/tokyonight.nvim" })
 	use({
 		"projekt0n/github-nvim-theme",
 		config = function()
@@ -56,24 +51,24 @@ require("packer").startup(function(use)
 	})
 	-- use { 'glepnir/dashboard-nvim', config = application.dashboard, event = "VimEnter", requires = {'nvim-tree/nvim-web-devicons'} }
 	use({ "hood/popui.nvim", config = application.pop })
-	use({ "terror/chatgpt.nvim", run = "pip3 install -r requirements.txt" })
 
 	-- mini
 	use({ "echasnovski/mini.nvim", branch = "stable", config = mini_config.setup })
-	-- use { 'echasnovski/mini.animate', config = application.animate, disabled = true }
+
+	-- Meme
+	use({ "tamton-aquib/duck.nvim", config = editor.duck.setup, keys = editor.duck.keys })
 
 	-- Editor pane
 	use({ "numToStr/Comment.nvim", keys = { { "v", "gc" }, "gc" }, config = editor.comment })                     -- "gc" to comment visual regions/lines
-	use({ "tpope/vim-sleuth", disable = true })                                                                   -- Detect tabstop and shiftwidth automatically
 	use({ "windwp/nvim-autopairs", event = "InsertEnter", config = editor.autopairs, module = "nvim-autopairs" }) -- Automatic bracket pairing
 	use({ "kylechui/nvim-surround", tag = "*", event = "BufReadPost", config = editor.surround })                 -- We love this one
 	use({ "phaazon/hop.nvim", branch = "v2", keys = editor.hop.keys, config = editor.hop.config })                -- hop
 	use({ "abecodes/tabout.nvim", event = "InsertEnter", requires = { "nvim-treesitter" }, config = editor.tabout }) -- Tabout for getting out of autopairs
-	use({ "dnlhc/glance.nvim", config = editor.glance, event = "BufReadPost" })                                   -- Glance window for code
-	use({ "nullchilly/fsread.nvim", config = editor.fsread.setup, keys = editor.fsread.keys })
-	-- use({ "Wansmer/treesj", requires = { "nvim-treesitter" }, config = editor.treesj.setup, keys = editor.treesj.keys }) -- replaced by mioni.splitjoin
-	use({ "tamton-aquib/duck.nvim", config = editor.duck.setup, keys = editor.duck.keys })
-	use({ "aduros/ai.vim" })
+	use("kshenoy/vim-signature")                                                                                  -- Marks in the gutter
+	use({ "folke/edgy.nvim", config = editor.edgy })
+
+	-- Interface
+	use({ "dnlhc/glance.nvim", config = editor.glance, event = "BufReadPost" }) -- Glance window for code
 	use({
 		"mbbill/undotree",
 		config = function()
@@ -85,14 +80,6 @@ require("packer").startup(function(use)
 	-- Interface
 	use({ "nvim-lualine/lualine.nvim", config = interface.lualine })                                 -- Fancier statusline
 	use({ "lukas-reineke/indent-blankline.nvim", event = "BufReadPost", config = interface.blankline }) -- Add indentation guides on blank lines
-	use({ "gorbit99/codewindow.nvim", keys = { "<Leader>mm" }, config = interface.codewindow })      -- Code minimap
-	use("kshenoy/vim-signature")                                                                     -- Marks in the gutter
-	use({
-		"petertriho/nvim-scrollbar",
-		config = function()
-			require("scrollbar")
-		end,
-	}) -- Scrollbar
 	use({
 		"alvarosevilla95/luatab.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
@@ -107,22 +94,15 @@ require("packer").startup(function(use)
 			require("window-picker").setup()
 		end,
 	})
-	use({
-		"shortcuts/no-neck-pain.nvim",
-		tag = "*",
-		config = function()
-			require("no-neck-pain").setup()
-		end,
-		cmd = "NoNeckPain",
-		module = "no-neck-pain",
-	})
 	use({ "folke/noice.nvim", config = interface.noice, requires = { "MunifTanjim/nui.nvim" } })
 	use({
 		"folke/zen-mode.nvim",
 		config = function()
 			require("zen-mode").setup({})
+			vim.api.keymap({ "n" }, function()
+				vim.cmd([[ZenMode]])
+			end, { desc = "Zen mode toggle", silent = true })
 		end,
-		keys = { "<leader>ez" },
 	})
 	use({
 		"folke/which-key.nvim",
@@ -130,28 +110,22 @@ require("packer").startup(function(use)
 	})
 
 	-- Neotree
-	local neotree_requires = {
-		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons",
-		"MunifTanjim/nui.nvim",
-		"s1n7ax/nvim-window-picker",
-	}
-	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", config = interface.neotree, requires = neotree_requires })
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		config = interface.neotree,
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+			"s1n7ax/nvim-window-picker",
+		},
+	})
 
 	-- Git
 	use({ "tpope/vim-fugitive", config = git.fugitive.setup }) -- Git commands in nvim
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = git.gitsigns })
-	use({
-		"pwntester/octo.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"kyazdani42/nvim-web-devicons",
-		},
-		after = "telescope.nvim",
-		config = git.octo,
-	})
-	--
+	
 	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -162,26 +136,8 @@ require("packer").startup(function(use)
 		cmd = "Telescope",
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
-	use {
-		'mrded/nvim-zond',
-		after = { "telescope.nvim" },
-		config = function()
-			vim.keymap.set("n", "<leader>st", function()
-				require('zond').find_and_run({
-					title = 'Run a test',
-					filter = '*.test.ts$',
-					cmd = 'vsplit term://npx jest %s'
-				})
-			end)
-		end,
-	}
+	
 	-- Terminal
-	use({
-		"voldikss/vim-floaterm",
-		keys = terminal.floatterm.keys,
-		config = terminal.floatterm.setup,
-		cmd = "Floatterm",
-	})
 	use({ "akinsho/toggleterm.nvim", tag = "*", keys = terminal.toggleterm.keys, config = terminal.toggleterm.setup })
 
 	-- Treesitter
@@ -195,16 +151,14 @@ require("packer").startup(function(use)
 		after = { "nvim-treesitter" },
 	})
 
-	-- CMP
+	-- Completion
+	use({ "aduros/ai.vim" })
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "onsails/lspkind.nvim" },
 		config = cmp.setup,
 	})                                                                  -- Autocompletion
 	use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } }) -- Snippet Engine and Snippet Expansion
-	use("rafamadriz/friendly-snippets")
-	-- use { "zbirenbaum/copilot.lua", config = cmp.copilot }
-	-- use { "zbirenbaum/copilot-cmp", after = { "copilot.lua" }, config = cmp.copilot_cmp }
 
 	-- LSP
 	use({ "williamboman/mason.nvim", config = lsp.mason })                                            -- Manage external editor tooling i.e LSP servers

@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-	command = 'source <afile> | PackerCompile',
+	command = 'source init.lua | PackerCompile',
 	group = packer_group,
 	pattern = vim.fn.expand '$MYVIMRC',
 })
@@ -45,6 +45,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- Terminal settings
 local terminal_group = vim.api.nvim_create_augroup('Terminal', { clear = true })
 vim.api.nvim_create_autocmd('TermOpen', {
-	command = 'setlocal nonumber',
+	command = 'setlocal nonumber norelativenumber',
 	group = terminal_group
 })
