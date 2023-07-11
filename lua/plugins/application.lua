@@ -21,74 +21,31 @@ function M.autosession()
 	-- vim.keymap.set('n', '<Leader>ssl', function() vim.cmd'RestoreSession' end, {})
 end
 
-function M.pomodoro()
-	require('pomodoro').setup {
-	  time_work = 25,
-	  time_break = 5,
-	  time_break_long = 15,
-	  timers_to_long_break = 4
-	}
+return {
+	"djoshea/vim-autoread", -- Auto-reload files from disk
+	{
+		"sindrets/winshift.nvim",
+		keys = {
+			{ '<C-w><CR>', function() vim.cmd [[WinShift]] end, desc = "Winshift" }
+		},
+		event = "WinEnter",
+	}, -- Winshift
+	{
+		"willothy/flatten.nvim",
+		config = true,
+	},
+	{
+		"hood/popui.nvim",
+		config = function()
+			vim.ui.select = require "popui.ui-overrider"
+			vim.ui.input = require "popui.input-overrider"
 
-	vim.keymap.set('n', '<Leader>ps', function() vim.cmd('PomodoroStart') end, { silent = false })
-	vim.keymap.set('n', '<Leader>px', function() vim.cmd('PomodoroStop') end, { silent = false })
-	vim.keymap.set('n', '<Leader>pp', function() vim.cmd('PomodoroStatus') end, { silent = false })
-end
+			vim.api.nvim_set_keymap("n", ",d", ':lua require"popui.diagnostics-navigator"()<CR>',
+				{ noremap = true, silent = true, desc = "Show diagnostics navigator" })
+			vim.api.nvim_set_keymap("n", ",m", ':lua require"popui.marks-manager"()<CR>',
+				{ noremap = true, silent = true, desc = "Show marks navigator" })
+		end,
+	},
 
-function M.winshift.setup()
-	vim.keymap.set('n', '<C-w><CR>', function() vim.cmd'WinShift' end, {})
-end
 
-M.winshift.keys = {
-	'<C-w><CR>'
 }
-
-function M.dashboard()
-	local home = os.getenv('HOME')
-	local db = require('dashboard')
-
-	db.preview_command = 'cat | lolcat -F 0.3'
-	-- db.preview_command = 'cat'
-	db.preview_file_height = 6
-	db.preview_file_width = 55
-	db.preview_file_path = home .. '/.config/nvim/dashboard_cover.cat'
-	db.custom_center = {
-	{ icon = '  ',
-		desc = 'Recently latest session                 ',
-		shortcut = 'SPC s l',
-		action = 'SessionLoad' },
-	-- { icon = '  ',
-	--   desc = 'Recently opened files                   ',
-	--   action = 'DashboardFindHistory',
-	--   shortcut = 'SPC f h' },
-	{ icon = '  ',
-		desc = 'Find  File                              ',
-		action = 'Telescope find_files find_command=rg,--hidden,--files',
-		shortcut = 'SPC f f' },
-	-- { icon = '  ',
-	--   desc = 'File Browser                            ',
-	--   action = 'Telescope find_files',
-	--   shortcut = 'SPC f b' },
-	{ icon = '  ',
-		desc = 'Find  word                              ',
-		action = 'Telescope live_grep',
-		shortcut = 'SPC f w' },
-	{ icon = '  ',
-		desc = 'Open Personal dotfiles                  ',
-		action = 'Telescope find_files hidden=true path=' .. home .. '/.config/nvim',
-		shortcut = 'SPC f d' },
-	}
-end
-
-function M.pop()
-	vim.ui.select = require"popui.ui-overrider"
-	vim.ui.input = require"popui.input-overrider"
-
-	vim.api.nvim_set_keymap("n", ",d", ':lua require"popui.diagnostics-navigator"()<CR>', { noremap = true, silent = true, desc="Show diagnostics navigator" })
-	vim.api.nvim_set_keymap("n", ",m", ':lua require"popui.marks-manager"()<CR>', { noremap = true, silent = true, desc="Show marks navigator" })
-end
-
-function M.animate()
-	require('mini.animate').setup()
-end
-
-return M
