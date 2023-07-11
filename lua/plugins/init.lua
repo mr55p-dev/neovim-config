@@ -84,22 +84,6 @@ return {
 		config = terminal.toggleterm.setup,
 	},
 
-	-- Treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		config = ts.config,
-		build = ":TSUpdate",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			{
-				"https://github.com/windwp/nvim-ts-autotag",
-				config = function()
-					require("nvim-ts-autotag").setup()
-				end,
-			},
-		},
-	}, -- Highlight, edit, and navigate code
-
 	-- Completion
 	"aduros/ai.vim",
 	{
