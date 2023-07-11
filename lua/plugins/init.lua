@@ -55,43 +55,93 @@ return {
 	-- Meme
 	{
 		"tamton-aquib/duck.nvim",
-		config = editor.duck.setup,
-		keys = editor.duck.keys,
+		keys = {
+			{ "<leader>dd", function() require("duck").hatch() end, desc = "Hatch a duck" },
+			{ "<leader>dk", function() require("duck").cook() end,  desc = "Cook a duck" },
+		},
 	},
 
-	-- Editor pane
-	{
-		"numToStr/Comment.nvim",
-		keys = { "gc" },
-		config = editor.comment,
-	}, -- "gc" to comment visual regions/lines
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = editor.autopairs,
-		module = "nvim-autopairs",
-	}, -- Automatic bracket pairing
-	{
-		"kylechui/nvim-surround",
-		event = "BufReadPost",
-		config = editor.surround,
-	}, -- We love this one
-	{
-		"phaazon/hop.nvim",
-		branch = "v2",
-		keys = editor.hop.keys,
-		config = editor.hop.config,
-	}, -- hop
-	{
-		"abecodes/tabout.nvim",
-		event = "InsertEnter",
-		dependencies = { "nvim-treesitter" },
-		config = editor.tabout,
-	},                    -- Tabout for getting out of autopairs
-	"kshenoy/vim-signature", -- Marks in the gutter
 	{
 		"folke/edgy.nvim",
-		config = editor.edgy,
+		config = {
+			animate = {
+				enabled = false
+			},
+			options = {
+				left = { size = 40 },
+				right = { size = 40 },
+			},
+			bottom = {
+				-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
+				{
+					ft = "toggleterm",
+					size = { height = 0.4 },
+					-- exclude floating windows
+					filter = function(buf, win)
+						return vim.api.nvim_win_get_config(win).relative == ""
+					end,
+				},
+				{
+					ft = "lazyterm",
+					title = "LazyTerm",
+					size = { height = 0.4 },
+					filter = function(buf)
+						return not vim.b[buf].lazyterm_cmd
+					end,
+				},
+				"Trouble",
+				{ ft = "qf",            title = "QuickFix" },
+				{
+					ft = "help",
+					size = { height = 20 },
+					-- only show help buffers
+					filter = function(buf)
+						return vim.bo[buf].buftype == "help"
+					end,
+				},
+				{ ft = "spectre_panel", size = { height = 0.4 } },
+			},
+			left = {
+				-- Neo-tree filesystem always takes half the screen height
+				{
+					title = "Neo-Tree",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "filesystem"
+					end,
+					size = { height = 0.5 },
+				},
+				{
+					ft = "Outline",
+					pinned = true,
+					open = "SymbolsOutlineOpen",
+				},
+				{
+					title = "Neo-Tree Git",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "git_status"
+					end,
+					pinned = true,
+					open = "Neotree position=right git_status",
+				},
+				{
+					title = "Neo-Tree Buffers",
+					ft = "neo-tree",
+					filter = function(buf)
+						return vim.b[buf].neo_tree_source == "buffers"
+					end,
+					pinned = true,
+					open = "Neotree position=top buffers",
+				},
+			},
+			right = {
+				{ ft = "fugitive", size = { width = 0.25 } }
+			}
+		},
+		keys = {
+			{ "<C-,>", function() require("edgy").open() end, desc = "Show edgy bar" },
+		},
 	},
 
 	-- Interface
