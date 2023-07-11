@@ -38,6 +38,9 @@ function M.neotree()
 		filesystem = {
 			follow_current_file = true,
 		},
+		window = {
+			width = 60
+		}
 	})
 
 	vim.api.nvim_set_keymap("n", "<C-n>", "<cmd>Neotree left toggle<CR>", { silent = true })
