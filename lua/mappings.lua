@@ -56,30 +56,6 @@ vim.keymap.set("n", "<leader>ez", function()
 	require("zen-mode").toggle()
 end, { silent = true, desc = "Toggle zen mode" })
 
--- Fugitive toggle
-local function showFugitiveGit()
-	if vim.fn.FugitiveHead() ~= "" then
-		vim.cmd([[
-    Git
-    " setlocal winfixwidth
- "    horizontal resize 20
- "    setlocal winfixwidth
-	" setlocal winfixheight
-    setlocal nonumber
-    setlocal norelativenumber
-    ]])
-	end
-end
-
-local function toggleFugitiveGit()
-	if vim.fn.buflisted(vim.fn.bufname("fugitive:///*/.git//$")) ~= 0 then
-		vim.cmd([[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]])
-	else
-		showFugitiveGit()
-	end
-end
-vim.keymap.set("n", "<F3>", toggleFugitiveGit, { desc = "Show fugitive" })
-
 -- Sessions
 vim.keymap.set("n", "<leader>Sw", function()
 	vim.ui.input({ prompt = "Session name" }, function(input)

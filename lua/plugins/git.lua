@@ -1,59 +1,54 @@
-local M = {}
-
-function M.gitsigns()
-	require("gitsigns").setup({
-		signs = {
-			add = { text = "+" },
-			change = { text = "~" },
-			delete = { text = "_" },
-			topdelete = { text = "‾" },
-			changedelete = { text = "~" },
-		},
-	})
+local function showFugitiveGit()
+	if vim.fn.FugitiveHead() ~= "" then
+		vim.cmd([[
+    Git
+    setlocal nonumber
+    setlocal norelativenumber
+    ]])
+	end
 end
 
-M.fugitive = {
-	keys = {
-		"<Leader>gg",
-		"<Leader>gl",
-		"<Leader>gs",
-		"<Leader>gcc",
-		"<Leader>gca",
-		"<Leader>gce",
-		"<Leader>gcf",
-		"<Leader>ga",
-		"<Leader>gA",
+local function toggleFugitiveGit()
+	if vim.fn.buflisted(vim.fn.bufname("fugitive:///*/.git//$")) ~= 0 then
+		vim.cmd([[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]])
+	else
+		showFugitiveGit()
+	end
+end
+
+return {
+	{
+		"tpope/vim-fugitive",
+		cmd = { "Git" },
+		keys = {
+			{
+				{ "n", "i", "v", "t" },
+				"<F3>",
+				toggleFugitiveGit,
+				desc = "Open fugitive"
+			},
+			{ "<Leader>gg",  "<cmd>Git<CR>",                                     desc = "Open Git" },
+			{ "<Leader>gcc", "<cmd>Git commit ",                                 desc = "Open Git commit" },
+			{ "<Leader>gca", function() vim.cmd("Git commit -a") end,            desc = "Commit all" },
+			{ "<Leader>gce", function() vim.cmd("Git commit --allow-empty") end, desc = "Commit empty" },
+			{
+				"<Leader>gcf",
+				function() vim.cmd("Git commit --no-verify") end,
+				desc = "Commit forced (no verify)"
+			},
+		}
+	}, -- Git commands in nvim
+	{
+		"lewis6991/gitsigns.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+			},
+		},
 	},
 }
-
-function M.fugitive.setup()
-	vim.keymap.set("n", "<Leader>gg", ":Git ", { desc = "Open Git" })
-	vim.keymap.set("n", "<Leader>gs", function()
-		vim.cmd("Git")
-	end, { silent = true, desc = "Git status" })
-	vim.keymap.set("n", "<Leader>gl", function()
-		vim.cmd("Git lg")
-	end, { silent = true, desc = "Git lg" })
-
-	vim.keymap.set("n", "<Leader>gcc", ":Git commit ", { desc = "Open Git commit" })
-	vim.keymap.set("n", "<Leader>gca", function()
-		vim.cmd("Git commit -a")
-	end, { desc = "Commit all" })
-	vim.keymap.set("n", "<Leader>gce", function()
-		vim.cmd("Git commit --allow-empty")
-	end, { desc = "Commit empty" })
-	vim.keymap.set("n", "<Leader>gcf", function()
-		vim.cmd("Git commit --no-verify")
-	end, { desc = "Commit forced (no verify)" })
-
-	vim.keymap.set("n", "<Leader>ga", ":Git add ", { desc = "Open Git add" })
-	vim.keymap.set("n", "<Leader>gA", function()
-		vim.cmd("Git add .")
-	end, { desc = "Add workdir" })
-end
-
-function M.octo()
-	require("octo").setup()
-end
-
-return M

@@ -77,16 +77,6 @@ return {
 		},
 		event = "BufReadPost",
 	}, -- Glance window for code
-	-- Git
-	{
-		"tpope/vim-fugitive",
-		config = git.fugitive.setup,
-	}, -- Git commands in nvim
-	{
-		"lewis6991/gitsigns.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = git.gitsigns,
-	},
 
 	-- Telescope
 	{
