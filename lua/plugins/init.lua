@@ -84,17 +84,6 @@ return {
 		config = terminal.toggleterm.setup,
 	},
 
-	-- Completion
-	"aduros/ai.vim",
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "onsails/lspkind.nvim" },
-		config = cmp.setup,
-	}, -- Autocompletion
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = { "saadparwaiz1/cmp_luasnip" },
-	}, -- Snippet Engine and Snippet Expansion
 	-- LSP
 	{
 		"williamboman/mason.nvim",
