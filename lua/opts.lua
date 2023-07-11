@@ -65,3 +65,10 @@ vim.g.nord_borders = true
 
 -- Edgy config
 vim.opt.splitkeep = "screen"
+
+-- For which-key
+vim.o.timeout = true
+vim.o.timeoutlen = 300
+
+-- For neotree
+vim.o.neo_tree_remove_legacy_commands = 1
