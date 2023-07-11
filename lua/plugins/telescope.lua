@@ -3,7 +3,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = {
+		opts = {
 			defaults = {
 				mappings = {
 					i = {
@@ -28,47 +28,47 @@ return {
 			},
 			{
 				"<leader>sf",
-				require('telescope.builtin').find_files,
+				function() require('telescope.builtin').find_files end,
 				desc = "[S]earch [F]iles"
 			},
 			{
 				"<leader>sb",
-				require('telescope.builtin').buffers,
+				function() require('telescope.builtin').buffers end,
 				desc = "[S]earch [B]uffers"
 			},
 			{
 				"<leader>so",
-				require('telescope.builtin').oldfiles,
+				function() require('telescope.builtin').oldfiles end,
 				desc = "[S]earch [O]ld"
 			},
 			{
 				"<leader>sd",
-				require('telescope.builtin').lsp_document_symbols,
+				function() require('telescope.builtin').lsp_document_symbols end,
 				desc = "[S]earch [D]ocument"
 			},
 			{
 				"<leader>ss",
-				require('telescope.builtin').lsp_dynamic_workspace_symbols,
+				function() require('telescope.builtin').lsp_dynamic_workspace_symbols end,
 				desc = "[S]earch [S]ymbols"
 			},
 			{
 				"<leader>sw",
-				require('telescope.builtin').grep_string,
+				function() require('telescope.builtin').grep_string end,
 				desc = "[S]earch current [W]ord"
 			},
 			{
 				"<leader>sg",
-				require('telescope.builtin').live_grep,
+				function() require('telescope.builtin').live_grep end,
 				desc = "[S]earch by [G]rep"
 			},
 			{
 				"<leader>sr",
-				require('telescope.builtin').resume,
+				function() require('telescope.builtin').resume end,
 				desc = "[S]earch [R]esume"
 			},
 			{
 				"<leader>sh",
-				require('telescope.builtin').help_tags,
+				function() require('telescope.builtin').help_tags end,
 				desc = "[S]earch [H]elp"
 			},
 			{
@@ -78,7 +78,7 @@ return {
 			},
 			{
 				"<C-A-p>",
-				require('telescope.builtin').commands,
+				function() require('telescope.builtin').commands end,
 				desc = "All commands"
 			},
 		}

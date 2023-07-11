@@ -1,6 +1,3 @@
-local terminal = require("plugins.terminal")
-local mini_config = require("plugins.mini_config")
-
 return {
 	-- Color schemes
 	"shaunsingh/nord.nvim", -- Nord theme
@@ -21,7 +18,27 @@ return {
 	{
 		"echasnovski/mini.nvim",
 		branch = "stable",
-		config = mini_config.setup,
+		config = function()
+			require('mini.ai').setup()
+			require('mini.bufremove').setup()
+			require('mini.cursorword').setup()
+			require('mini.splitjoin').setup()
+			require('mini.basics').setup({ windows = true })
+			require('mini.starter').setup({})
+
+			local session = require('mini.sessions')
+			local function close_nvim_tree() require 'neo-tree.sources.manager'.close_all() end
+			session.setup({
+				auto_write = true,
+				hooks = {
+					pre = {
+						read = close_nvim_tree,
+						write = close_nvim_tree,
+					}
+				}
+			}
+			)
+		end,
 	},
 
 	-- Meme
@@ -32,11 +49,4 @@ return {
 			{ "<leader>dk", function() require("duck").cook() end,  desc = "Cook a duck" },
 		},
 	},
-
-	{
-		"akinsho/toggleterm.nvim",
-		keys = terminal.toggleterm.keys,
-		config = terminal.toggleterm.setup,
-	},
-
 }

@@ -239,8 +239,8 @@ return {
 		},
 		keys = {
 			{ "<C-n>",   "<cmd>Neotree left toggle<CR>", silent = true, desc = "Toggle Neotree" },
-			{ "<C-A-N>", "<cmd>Neotree float toggle<CR>" silent = true, desc = "Toggle Neotree float" },
-		}
+			{ "<C-A-N>", "<cmd>Neotree float toggle<CR>", silent = true, desc = "Toggle Neotree float" },
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"kyazdani42/nvim-web-devicons",
