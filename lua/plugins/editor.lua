@@ -66,25 +66,6 @@ function M.tabout()
 	})
 end
 
-function M.glance()
-	local glance = require("glance")
-	local actions = glance.actions
-
-	glance.setup({
-		height = 18, -- Height of the window
-		border = {
-			enable = false, -- Show window borders. Only horizontal borders allowed
-			top_char = "―",
-			bottom_char = "―",
-		},
-	})
-
-	vim.keymap.set("n", "gd", "<CMD>Glance definitions<CR>")
-	vim.keymap.set("n", "gr", "<CMD>Glance references<CR>")
-	vim.keymap.set("n", "gy", "<CMD>Glance type_definitions<CR>")
-	vim.keymap.set("n", "gm", "<CMD>Glance implementations<CR>")
-end
-
 M.treesj = {
 	keys = {
 		"<Leader>ms",

@@ -87,7 +87,7 @@ return {
 		event = "InsertEnter",
 		dependencies = { "nvim-treesitter" },
 		config = editor.tabout,
-	}, -- Tabout for getting out of autopairs
+	},                    -- Tabout for getting out of autopairs
 	"kshenoy/vim-signature", -- Marks in the gutter
 	{
 		"folke/edgy.nvim",
@@ -97,14 +97,26 @@ return {
 	-- Interface
 	{
 		"dnlhc/glance.nvim",
-		config = editor.glance,
+		config = {
+			height = 18,
+			border = {
+				enable = false
+			},
+		},
+		keys = {
+			{ "gd", "<CMD>Glance definitions<CR>",      desc = "Glance definition" },
+			{ "gr", "<CMD>Glance references<CR>",       desc = "Glance references" },
+			{ "gy", "<CMD>Glance type_definitions<CR>", desc = "Glance type definition" },
+			{ "gm", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
+		},
 		event = "BufReadPost",
 	}, -- Glance window for code
 	{
 		"mbbill/undotree",
-		config = function()
-			vim.keymap.set("n", "<F1>", vim.cmd.UndotreeToggle, { desc = "Toggle undo tree" })
-		end,
+		keys = {
+			{ "<F1>", vim.cmd.UndotreeToggle, desc = "Toggle undo tree" }
+
+		}
 	},
 	{
 		"nvim-lualine/lualine.nvim",
