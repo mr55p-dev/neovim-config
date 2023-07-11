@@ -78,20 +78,6 @@ return {
 		event = "BufReadPost",
 	}, -- Glance window for code
 
-	-- Telescope
-	{
-		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = telescope.keys,
-		config = telescope.setup,
-		cmd = "Telescope",
-	},
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
-		cond = vim.fn.executable("make") == 1,
-	}, -- Terminal
 	{
 		"akinsho/toggleterm.nvim",
 		keys = terminal.toggleterm.keys,
