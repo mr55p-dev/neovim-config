@@ -84,41 +84,4 @@ return {
 		config = terminal.toggleterm.setup,
 	},
 
-	-- LSP
-	{
-		"williamboman/mason.nvim",
-		config = lsp.mason,
-		dependencies = {
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = lsp.mason_lspconfig,
-			}, -- Automatically install language servers to stdpath
-		},
-	}, -- Manage external editor tooling i.e LSP servers
-	{
-		"neovim/nvim-lspconfig",
-		config = lsp.lspconfig,
-	}, -- Collection of configurations for built-in LSP client
-	{ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu", config = lsp.action_menu },
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		config = lsp.null_ls,
-	},
-	{
-		"simrat39/symbols-outline.nvim",
-		config = lsp.symboloutline,
-	},
-	{
-		"folke/trouble.nvim",
-		dependencies = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({})
-			vim.keymap.set("n", "<leader>q", function()
-				vim.cmd([[TroubleToggle document_diagnostics]])
-			end, { desc = "Toggle document diagnostics" })
-			vim.keymap.set("n", "<leader>Q", function()
-				vim.cmd([[TroubleToggle workspace_diagnostics]])
-			end, { desc = "Toggle workspace diagnostics" })
-		end,
-	},
 }

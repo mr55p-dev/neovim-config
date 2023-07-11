@@ -1,22 +1,5 @@
 local M = {}
 
-function M.mason()
-	require("mason").setup({
-		ui = {
-			border = "single",
-		},
-	})
-
-	vim.keymap.set("n", "<Leader>lm", "<cmd>:Mason<CR>", { silent = true, desc = "Open mason" })
-end
-
-function M.mason_lspconfig()
-	require("mason-lspconfig").setup({
-		ensure_installed = { "clangd", "rust_analyzer", "pyright", "html", "cssls", "tsserver", "lua_ls", "sqlls" },
-		automatic_installation = true,
-	})
-end
-
 function M.lspconfig()
 	-- Mappings.
 	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -133,50 +116,6 @@ function M.lspconfig()
 	})
 end
 
-function M.signature() end
-
-function M.null_ls()
-	local null_ls = require("null-ls")
-
-	null_ls.setup({
-		sources = {
-			null_ls.builtins.code_actions.eslint_d,
-			null_ls.builtins.code_actions.refactoring,
-
-			null_ls.builtins.diagnostics.checkmake,
-			null_ls.builtins.diagnostics.commitlint,
-			null_ls.builtins.diagnostics.eslint_d,
-			null_ls.builtins.diagnostics.jsonlint,
-			null_ls.builtins.diagnostics.sqlfluff.with({
-				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
-			}),
-			null_ls.builtins.diagnostics.yamllint,
-
-			null_ls.builtins.formatting.black,
-			null_ls.builtins.formatting.codespell,
-			null_ls.builtins.formatting.prettier_eslint,
-			null_ls.builtins.formatting.prettier,
-			null_ls.builtins.formatting.stylua,
-			null_ls.builtins.formatting.sqlfluff.with({
-				extra_args = { "--dialect", "snowflake" }, -- change to your dialect
-			}),
-			null_ls.builtins.formatting.terraform_fmt,
-		},
-	})
-end
-
-function M.action_menu()
-	vim.keymap.set({ "n", "i" }, "<C-.>", function()
-		vim.cmd([[CodeActionMenu]])
-	end, { desc = "Code actions" })
-end
-
-function M.symboloutline()
-	require("symbols-outline").setup()
-	vim.keymap.set({ "n" }, "<leader>do", function()
-		vim.cmd([[SymbolsOutline]])
-	end, { desc = "Show symbol outline", silent = true })
-end
 
 function M.dap()
 	local dap = require('dap')
@@ -186,14 +125,13 @@ function M.dap()
 		path_to_jest_debug = "./node_modules/jest/bin/jest.js",
 		terminal_cmd = ":split | terminal",
 	})
-	vim.keymap.set("n", "<leader>jr", function() require"jester".run() end, { desc = "Jester run nearest"})
-	vim.keymap.set("n", "<leader>jR", function() require"jester".run_last() end, { desc = "Jester rerun last"})
-	vim.keymap.set("n", "<leader>jf", function() require"jester".run_file() end, { desc = "Jester run file"})
-	vim.keymap.set("n", "<leader>jd", function() require"jester".debug_file() end, { desc = "Jester debug nearest"})
+	vim.keymap.set("n", "<leader>jr", function() require "jester".run() end, { desc = "Jester run nearest" })
+	vim.keymap.set("n", "<leader>jR", function() require "jester".run_last() end, { desc = "Jester rerun last" })
+	vim.keymap.set("n", "<leader>jf", function() require "jester".run_file() end, { desc = "Jester run file" })
+	vim.keymap.set("n", "<leader>jd", function() require "jester".debug_file() end, { desc = "Jester debug nearest" })
 
 	vim.keymap.set("n", "<leader>dc", function() dap.continue() end, { desc = "Continue debug adapter" })
 	vim.keymap.set("n", "<leader>db", function() dap.toggle_breakpoint() end, { desc = "Toggle breakpoint" })
-
 end
 
 function M.dap_ui()
@@ -202,4 +140,7 @@ function M.dap_ui()
 	vim.keymap.set("n", "<leader>du", function() dapui.toggle() end, { desc = "Open debugger UI" })
 end
 
-return M
+return {
+
+
+}
