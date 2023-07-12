@@ -21,8 +21,8 @@ return {
 				mode = { "n", "i", "v", "t" },
 				desc = "Open fugitive"
 			},
-			{ "<Leader>gg",  "<cmd>Git<CR>",                                     desc = "Open Git" },
-			{ "<Leader>gcc", "<cmd>Git commit ",                                 desc = "Open Git commit" },
+			{ "<Leader>gg",  ":Git ",                                        desc = "Open Git" },
+			{ "<Leader>gcc", ":Git commit ",                                 desc = "Open Git commit" },
 			{ "<Leader>gca", function() vim.cmd("Git commit -a") end,            desc = "Commit all" },
 			{ "<Leader>gce", function() vim.cmd("Git commit --allow-empty") end, desc = "Commit empty" },
 			{
