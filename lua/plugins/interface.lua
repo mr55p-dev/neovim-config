@@ -77,6 +77,7 @@ return {
 				{ ft = "fugitive", size = { width = 0.25 } }
 			}
 		},
+		lazy = false,
 		keys = {
 			{ "<C-,>", function() require("edgy").open() end, desc = "Show edgy bar" },
 		},

@@ -1,15 +1,16 @@
 return {
 	"kshenoy/vim-signature", -- Marks in the gutter
+	"aduros/ai.vim", -- Ai completion
 	{
 		"numToStr/Comment.nvim",
-		keys = { "gc" },
+		keys = { {"gc", mode="v"}, {"gcc"} },
 		config = true
 	}, -- "gc" to comment visual regions/lines
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
-		module = "nvim-autopairs",
+		module = { "nvim-autopairs" },
 	}, -- Automatic bracket pairing
 	{
 		"kylechui/nvim-surround",

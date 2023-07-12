@@ -9,7 +9,7 @@ vim.o.relativenumber = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 vim.o.undofile = true
-vim.o.clipboard = "unnamedplus"
+-- vim.o.clipboard = "unnamedplus"
 vim.o.conceallevel = 3
 vim.o.cursorline = true
 vim.o.backup = false

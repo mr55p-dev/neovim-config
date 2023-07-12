@@ -5,7 +5,7 @@ return{
 		keys = {
 			{
 				[[<C-\>]],
-				modes = { "n", "v", "t", "i" },
+				mode = { "n", "v", "t", "i" },
 			}
 		},
 		config = {
