@@ -1,7 +1,7 @@
 return {
 	{
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v1.x',
+		branch = 'v2.x',
 		config = function()
 			local lsp = require("lsp-zero").preset({})
 
@@ -50,7 +50,7 @@ return {
 			end)
 
 			-- Complete LSP setup
-			-- require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+			require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 			lsp.setup()
 
 

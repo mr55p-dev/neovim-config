@@ -25,12 +25,7 @@ vim.keymap.set({ "n", "v", "t" }, "<C-l>", function()
 end, { silent = true })
 
 -- vim.keymap.set({ "n" }, "<C-q>", ":wqa<CR>", { silent = true, desc = "Quit neovim" })
-vim.keymap.set("n", "<Leader>ps", function()
-	vim.cmd("PackerSync")
-end)
-vim.keymap.set("n", "<Leader>pc", function()
-	vim.cmd("PackerCompile")
-end)
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<CR>", { silent = true, desc = "Open lazy" })
 
 -- Move lines
 vim.keymap.set({ "n", "v", "i" }, "<C-S-j>", function()
@@ -43,12 +38,12 @@ end, { silent = true })
 -- Terminal mode
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>tS", function()
-	vim.cmd [[split]]
-	vim.cmd [[term]]
+	vim.cmd([[split]])
+	vim.cmd([[term]])
 end, { silent = true, desc = "Open a terminal in a new split" })
 vim.keymap.set("n", "<leader>ts", function()
-	vim.cmd [[vsplit]]
-	vim.cmd [[term]]
+	vim.cmd([[vsplit]])
+	vim.cmd([[term]])
 end, { silent = true, desc = "Open a terminal in a new vsplit" })
 
 -- Zen mode
@@ -69,7 +64,10 @@ vim.keymap.set("n", "<leader>Sr", function()
 	end)
 end, { desc = "read session" })
 
-
 -- Create new splits
-vim.keymap.set({ "n" }, "<leader>js", function() vim.cmd [[vsplit]] end, { desc = "Vertical split", silent = true })
-vim.keymap.set({ "n" }, "<leader>jS", function() vim.cmd [[vsplit]] end, { desc = "Vertical split", silent = true })
+vim.keymap.set({ "n" }, "<leader>js", function()
+	vim.cmd([[vsplit]])
+end, { desc = "Vertical split", silent = true })
+vim.keymap.set({ "n" }, "<leader>jS", function()
+	vim.cmd([[vsplit]])
+end, { desc = "Vertical split", silent = true })
