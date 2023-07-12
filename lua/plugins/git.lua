@@ -1,30 +1,24 @@
-local function showFugitiveGit()
-	if vim.fn.FugitiveHead() ~= "" then
-		vim.cmd([[
-    Git
-    setlocal nonumber
-    setlocal norelativenumber
-    ]])
-	end
-end
-
-local function toggleFugitiveGit()
-	if vim.fn.buflisted(vim.fn.bufname("fugitive:///*/.git//$")) ~= 0 then
-		vim.cmd([[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]])
-	else
-		showFugitiveGit()
-	end
-end
-
 return {
 	{
 		"tpope/vim-fugitive",
 		cmd = { "Git" },
 		keys = {
 			{
-				{ "n", "i", "v", "t" },
 				"<F3>",
-				toggleFugitiveGit,
+				function()
+					if vim.fn.buflisted(vim.fn.bufname("fugitive:///*/.git//$")) ~= 0 then
+						vim.cmd([[ execute ":bdelete" bufname('fugitive:///*/.git//$') ]])
+					else
+						if vim.fn.FugitiveHead() ~= "" then
+							vim.cmd([[
+						Git
+						setlocal nonumber
+						setlocal norelativenumber
+						]])
+						end
+					end
+				end,
+				mode = { "n", "i", "v", "t" },
 				desc = "Open fugitive"
 			},
 			{ "<Leader>gg",  "<cmd>Git<CR>",                                     desc = "Open Git" },

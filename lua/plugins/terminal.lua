@@ -1,9 +1,12 @@
-return {
+return{
 	{
 		"akinsho/toggleterm.nvim",
-
+		lazy= true,
 		keys = {
-			{ { "n", "v", "t", "i" }, [[<C-\>]] }
+			{
+				[[<C-\>]],
+				modes = { "n", "v", "t", "i" },
+			}
 		},
 		config = {
 			open_mapping = [[<C-\>]],

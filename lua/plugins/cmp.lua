@@ -2,7 +2,16 @@ return {
 	"aduros/ai.vim",
 	{
 		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "onsails/lspkind.nvim" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"onsails/lspkind.nvim",
+			{
+				"L3MON4D3/LuaSnip",
+				dependencies = { "saadparwaiz1/cmp_luasnip" },
+			}, -- Snippet Engine and Snippet Expansion
+		},
 		config = function()
 			-- nvim-cmp setup
 			local cmp = require("cmp")
@@ -68,8 +77,8 @@ return {
 					{ name = "nvim_lsp", priority = 3 },
 					-- { name = "copilot", group_index = 2 },
 					-- { name = "luasnip" },
-					{ name = "buffer",   priority = 1 },
-					{ name = "path",     priority = 2 },
+					{ name = "buffer", priority = 1 },
+					{ name = "path", priority = 2 },
 				},
 				formatting = {
 					format = lspkind.cmp_format({
@@ -85,14 +94,10 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "path",   priority = 2 },
+					{ name = "path", priority = 2 },
 					{ name = "buffer", priority = 1 },
 				},
 			})
 		end,
 	}, -- Autocompletion
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = { "saadparwaiz1/cmp_luasnip" },
-	}, -- Snippet Engine and Snippet Expansion
 }

@@ -1,36 +1,6 @@
 -- LSP
 return {
 	{
-		"williamboman/mason.nvim",
-		config = {
-			ui = {
-				border = "single",
-			},
-		},
-		keys = {
-			{ "n", "<Leader>lm", "<cmd>:Mason<CR>", silent = true, desc = "Open mason" },
-		},
-		dependencies = {
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = {
-					ensure_installed = {
-						"clangd",
-						"gopls",
-						"rust_analyzer",
-						"pyright",
-						"html",
-						"cssls",
-						"tsserver",
-						"lua_ls",
-						"sqlls"
-					},
-					automatic_installation = true,
-				},
-			}, -- Automatically install language servers to stdpath
-		},
-	}, -- Manage external editor tooling i.e LSP servers
-	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			-- Mappings.
@@ -39,8 +9,12 @@ return {
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
-			vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action,
-				{ silent = true, noremap = true, desc = "Code action" })
+			vim.keymap.set(
+				"n",
+				"<Leader>ca",
+				vim.lsp.buf.code_action,
+				{ silent = true, noremap = true, desc = "Code action" }
+			)
 			vim.keymap.set("n", "<C-.>", function()
 				vim.cmd([[CodeActionMenu]])
 			end, { silent = true, noremap = true, desc = "Code action" })
@@ -147,19 +121,51 @@ return {
 				flags = lsp_flags,
 				capabilities = css_capabilities,
 			})
-		end
+		end,
 	}, -- Collection of configurations for built-in LSP client
+	{
+		"williamboman/mason.nvim",
+		config = {
+			ui = {
+				border = "single",
+			},
+		},
+		keys = {
+			{ "<Leader>lm", "<cmd>:Mason<CR>", silent = true, desc = "Open mason" },
+		},
+		dependencies = {
+			{
+				"williamboman/mason-lspconfig.nvim",
+				config = {
+					ensure_installed = {
+						"clangd",
+						"gopls",
+						"rust_analyzer",
+						"pyright",
+						"html",
+						"cssls",
+						"tsserver",
+						"lua_ls",
+						"sqlls",
+					},
+					automatic_installation = true,
+				},
+			}, -- Automatically install language servers to stdpath
+		},
+	}, -- Manage external editor tooling i.e LSP servers
 	{
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
 		keys = {
 			{
-				{ "n", "i" },
 				"<C-.>",
-				function() vim.cmd([[CodeActionMenu]]) end,
-				desc = "Code actions"
-			}
-		}
+				function()
+					vim.cmd([[CodeActionMenu]])
+				end,
+				mode = { "n", "i" },
+				desc = "Code actions",
+			},
+		},
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -186,20 +192,23 @@ return {
 					extra_args = { "--dialect", "snowflake" }, -- change to your dialect
 				}),
 				require("null-ls").builtins.formatting.terraform_fmt,
-			}
-		}
+			},
+		},
 	},
 	{
 		"simrat39/symbols-outline.nvim",
 		config = true,
+		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
 		keys = {
 			{
 				"<leader>do",
-				function() vim.cmd([[SymbolsOutline]]) end,
+				function()
+					vim.cmd([[SymbolsOutline]])
+				end,
 				desc = "Show symbol outline",
-				silent = true
-			}
-		}
+				silent = true,
+			},
+		},
 	},
 	{
 		"folke/trouble.nvim",
@@ -208,29 +217,33 @@ return {
 		keys = {
 			{
 				"<leader>q",
-				function() vim.cmd([[TroubleToggle document_diagnostics]]) end,
-				desc = "Toggle document diagnostics"
+				function()
+					vim.cmd([[TroubleToggle document_diagnostics]])
+				end,
+				desc = "Toggle document diagnostics",
 			},
 			{
 				"<leader>Q",
-				function() vim.cmd([[TroubleToggle workspace_diagnostics]]) end,
-				desc = "Toggle workspace diagnostics"
+				function()
+					vim.cmd([[TroubleToggle workspace_diagnostics]])
+				end,
+				desc = "Toggle workspace diagnostics",
 			},
-		}
+		},
 	},
 	{
 		"dnlhc/glance.nvim",
 		config = {
 			height = 18,
 			border = {
-				enable = false
+				enable = false,
 			},
 		},
 		keys = {
-			{ "gd", "<CMD>Glance definitions<CR>",      desc = "Glance definition" },
-			{ "gr", "<CMD>Glance references<CR>",       desc = "Glance references" },
+			{ "gd", "<CMD>Glance definitions<CR>", desc = "Glance definition" },
+			{ "gr", "<CMD>Glance references<CR>", desc = "Glance references" },
 			{ "gy", "<CMD>Glance type_definitions<CR>", desc = "Glance type definition" },
-			{ "gm", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
+			{ "gm", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
 		},
 		event = "BufReadPost",
 	}, -- Glance window for code
