@@ -32,6 +32,8 @@ return {
 				})
 			end, { silent = true, noremap = true, desc = "Format buffer" })
 
+			vim.keymap.set("n", "<leader>lm", "<cmd>Mason<CR>", { silent = false, })
+
 			-- Set mappings on attach
 			lsp.on_attach(function(client, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
