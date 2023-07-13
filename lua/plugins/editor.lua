@@ -4,7 +4,12 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		keys = { { "gc", mode = "v" }, { "gcc" } },
-		config = true,
+		config = {
+			hook = function()
+				require("ts_context_commentstring.internal").update_commentstring()
+			end,
+		},
+		dependencies = { "nvim-treesitter/nvim-treesitter" }
 	}, -- "gc" to comment visual regions/lines
 	{
 		"windwp/nvim-autopairs",
@@ -50,11 +55,7 @@ return {
 	}, -- hop
 	{
 		"abecodes/tabout.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"hrsh7th/nvim-cmp",
-		},
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			tabkey = "<Tab>",
 			backwards_tabkey = "<S-Tab>",
@@ -78,85 +79,101 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		config = {
-			-- Add languages to be installed here that you want installed for treesitter
-			ensure_installed = {
-				"bash",
-				"c",
-				"cpp",
-				"go",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"regex",
-				"rust",
-				"typescript",
-				"tsx",
-				"sql",
-				"vim",
-				"hcl",
-				"terraform",
-			},
-
-			highlight = { enable = true },
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<c-space>",
-					node_incremental = "<c-space>",
-					scope_incremental = "<c-s>",
-					node_decremental = "<c-backspace>",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- Add languages to be installed here that you want installed for treesitter
+				ensure_installed = {
+					"bash",
+					"c",
+					"cpp",
+					"hcl",
+					"go",
+					"lua",
+					"javascript",
+					"markdown",
+					"markdown_inline",
+					"python",
+					"regex",
+					"rust",
+					"sql",
+					"terraform",
+					"typescript",
+					"tsx",
+					"vim",
 				},
-			},
-			textobjects = {
-				select = {
+				highlight = { enable = true },
+				indent = { enable = true },
+				incremental_selection = {
 					enable = true,
-					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-						["ia"] = "@parameter.inner",
+						init_selection = "<c-space>",
+						node_incremental = "<c-space>",
+						scope_incremental = "<c-s>",
+						node_decremental = "<c-backspace>",
 					},
 				},
-				move = {
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+							["ia"] = "@parameter.inner",
+							["il"] = { query = "@assignment.lhs", desc = "Assignment LHS" },
+							["ir"] = { query = "@assignment.rhs", desc = "Assignment RHS" },
+							["ie"] = {
+								query = { "@conditional.inner", "@loop.inner" },
+								desc = "Inner loop or coditional",
+							},
+							["ae"] = {
+								query = { "@conditional.inner", "@loop.inner" },
+								desc = "Outer loop or conditional",
+							},
+						},
+					},
+					move = {
+						enable = true,
+						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["]m"] = "@function.outer",
+							["]]"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]["] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[m"] = "@function.outer",
+							["[["] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[]"] = "@class.outer",
+						},
+					},
+					swap = {
+						enable = false,
+					},
+				},
+				context_commentstring = {
 					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]m"] = "@function.outer",
-						["]]"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]M"] = "@function.outer",
-						["]["] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[m"] = "@function.outer",
-						["[["] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[M"] = "@function.outer",
-						["[]"] = "@class.outer",
-					},
+					enable_autocmd = false,
 				},
-				swap = {
-					enable = false,
-				},
-			},
-		},
+			})
+		end,
 		build = ":TSUpdate",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			{
-				"https://github.com/windwp/nvim-ts-autotag",
-				config = function()
-					require("nvim-ts-autotag").setup()
-				end,
-			},
-		},
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 	}, -- Highlight, edit, and navigate code
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
+	{
+		"https://github.com/windwp/nvim-ts-autotag",
+		config = true,
+	},
 }
