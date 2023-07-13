@@ -3,6 +3,9 @@ return {
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
 		config = function()
+			-- configure neodev first
+			require("neodev").setup()
+
 			local lsp = require("lsp-zero").preset({})
 
 			---- LSP setup
@@ -74,17 +77,18 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					-- ["<Tab>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.confirm({
-					-- 			behavior = cmp.ConfirmBehavior.Replace,
-					-- 			select = false,
-					-- 		})
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() and cmp.get_active_entry() then
+							cmp.confirm({
+								behavior = cmp.ConfirmBehavior.Replace,
+								select = false,
+							})
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 					["<C-e>"] = cmp.mapping.abort(),
+					
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -112,7 +116,7 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "path", priority = 2 },
+					{ name = "path",   priority = 2 },
 					{ name = "buffer", priority = 1 },
 				},
 			})
@@ -157,6 +161,7 @@ return {
 			},
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "jose-elias-alvarez/null-ls.nvim" },
+			{ "folke/neodev.nvim" },
 			-- Completion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp" },
@@ -238,10 +243,10 @@ return {
 			},
 		},
 		keys = {
-			{ "gd", "<CMD>Glance definitions<CR>", desc = "Glance definition" },
-			{ "gr", "<CMD>Glance references<CR>", desc = "Glance references" },
+			{ "gd", "<CMD>Glance definitions<CR>",      desc = "Glance definition" },
+			{ "gr", "<CMD>Glance references<CR>",       desc = "Glance references" },
 			{ "gy", "<CMD>Glance type_definitions<CR>", desc = "Glance type definition" },
-			{ "gm", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
+			{ "gm", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
 		},
 	},
 }
