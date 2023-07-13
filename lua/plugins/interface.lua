@@ -196,10 +196,10 @@ return {
 			key_labels = {
 				-- override the label used to display some keys. It doesn't effect WK in any other way.
 				-- For example:
-				-- ["<space>"] = "SPC",
+				["<space>"] = "SPC",
 				["<leader>"] = "SPC",
-				-- ["<cr>"] = "RET",
-				-- ["<tab>"] = "TAB",
+				["<cr>"] = "CR",
+				["<tab>"] = "TAB",
 			},
 			icons = {
 				breadcrumb = "»", -- symbol used in the command line area that shows your active key combo

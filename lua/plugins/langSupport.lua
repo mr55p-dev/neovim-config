@@ -1,7 +1,7 @@
 return {
 	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
+		"VonHeikemen/lsp-zero.nvim",
+		branch = "v2.x",
 		config = function()
 			local lsp = require("lsp-zero").preset({})
 
@@ -17,12 +17,9 @@ return {
 				vim.lsp.buf.code_action,
 				{ silent = true, noremap = true, desc = "Code action" }
 			)
-			vim.keymap.set(
-				"n",
-				"<C-.>",
-				function() vim.cmd([[CodeActionMenu]]) end,
-				{ silent = true, noremap = true, desc = "Code action" }
-			)
+			vim.keymap.set("n", "<C-.>", function()
+				vim.cmd([[CodeActionMenu]])
+			end, { silent = true, noremap = true, desc = "Code action" })
 
 			vim.keymap.set("n", "<Leader>lf", function()
 				vim.lsp.buf.format({
@@ -32,10 +29,10 @@ return {
 				})
 			end, { silent = true, noremap = true, desc = "Format buffer" })
 
-			vim.keymap.set("n", "<leader>lm", "<cmd>Mason<CR>", { silent = false, })
+			vim.keymap.set("n", "<leader>lm", "<cmd>Mason<CR>", { silent = false })
 
 			-- Set mappings on attach
-			lsp.on_attach(function(client, bufnr)
+			lsp.on_attach(function(_, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -54,7 +51,6 @@ return {
 			-- Complete LSP setup
 			require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 			lsp.setup()
-
 
 			---- Nvim cmp setup
 			local cmp = require("cmp")
@@ -78,41 +74,50 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.confirm({
-								behavior = cmp.ConfirmBehavior.Replace,
-								select = true,
-							})
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback) end, { "i", "s" }),
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.confirm({
+					-- 			behavior = cmp.ConfirmBehavior.Replace,
+					-- 			select = false,
+					-- 		})
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
+					["<C-e>"] = cmp.mapping.abort(),
 				}),
-				sources = {
-					{ name = "nvim_lsp", priority = 3 },
-					{ name = "buffer",   priority = 1 },
-					{ name = "path",     priority = 2 },
-					{ name = "emoji",    priority = 0 },
-				},
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "emoji" },
+				}),
 				formatting = {
 					format = lspkind.cmp_format({
-						mode = "symbol", -- show only symbol annotations
-						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						mode = "symbol",
+						maxwidth = 50,
+						ellipsis_char = "...",
 					}),
 				},
 			})
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources({
+					{ name = "git" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "path",   priority = 2 },
+					{ name = "path", priority = 2 },
 					{ name = "buffer", priority = 1 },
 				},
 			})
+
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 			---- Null LS
 			local null_ls = require("null-ls")
@@ -143,24 +148,25 @@ return {
 		end,
 		dependencies = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },
+			{ "neovim/nvim-lspconfig" },
 			{
 				"williamboman/mason.nvim",
 				build = function()
 					pcall(vim.cmd, "MasonUpdate")
 				end,
 			},
-			{ 'williamboman/mason-lspconfig.nvim' },
-			{ "jose-elias-alvarez/null-ls.nvim", },
+			{ "williamboman/mason-lspconfig.nvim" },
+			{ "jose-elias-alvarez/null-ls.nvim" },
 			-- Completion
-			{ 'hrsh7th/nvim-cmp' },
-			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-emoji" },
+			{ "petertriho/cmp-git" },
 			{ "onsails/lspkind.nvim" },
-			{ 'saadparwaiz1/cmp_luasnip' },
-			{ 'hrsh7th/cmp-nvim-lua' },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lua" },
 
 			-- Snippets
 			{
@@ -169,8 +175,8 @@ return {
 					return {}
 				end,
 			},
-			{ 'rafamadriz/friendly-snippets' },
-		}
+			{ "rafamadriz/friendly-snippets" },
+		},
 	},
 
 	{
@@ -232,11 +238,10 @@ return {
 			},
 		},
 		keys = {
-			{ "gd", "<CMD>Glance definitions<CR>",      desc = "Glance definition" },
-			{ "gr", "<CMD>Glance references<CR>",       desc = "Glance references" },
+			{ "gd", "<CMD>Glance definitions<CR>", desc = "Glance definition" },
+			{ "gr", "<CMD>Glance references<CR>", desc = "Glance references" },
 			{ "gy", "<CMD>Glance type_definitions<CR>", desc = "Glance type definition" },
-			{ "gm", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
+			{ "gm", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
 		},
 	},
-
 }
