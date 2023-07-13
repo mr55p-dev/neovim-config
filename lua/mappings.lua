@@ -71,3 +71,13 @@ end, { desc = "Vertical split", silent = true })
 vim.keymap.set({ "n" }, "<leader>jS", function()
 	vim.cmd([[vsplit]])
 end, { desc = "Vertical split", silent = true })
+
+vim.api.nvim_create_user_command("W", "w", {})
+vim.api.nvim_create_user_command("Wa", "wa", {})
+vim.api.nvim_create_user_command("Q", "q", {})
+vim.api.nvim_create_user_command("Qa", "qa", {})
+
+vim.keymap.set("n", "<leader>y", [[<cmd>call nvim_feedkeys('"+y', 'n', v:false)<CR>]],
+	{ silent = true, desc = "yank system register" })
+vim.keymap.set("n", "<leader>p", [[<cmd>call nvim_feedkeys('"+p', 'n', v:false)<CR>]],
+	{ silent = true, desc = "paste system register" })
