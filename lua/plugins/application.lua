@@ -37,13 +37,9 @@ return {
 	{
 		"hood/popui.nvim",
 		config = function()
-			vim.ui.select = require "popui.ui-overrider"
+			-- vim.ui.select = require "popui.ui-overrider"
 			vim.ui.input = require "popui.input-overrider"
-
-			vim.api.nvim_set_keymap("n", ",d", ':lua require"popui.diagnostics-navigator"()<CR>',
-				{ noremap = true, silent = true, desc = "Show diagnostics navigator" })
-			vim.api.nvim_set_keymap("n", ",m", ':lua require"popui.marks-manager"()<CR>',
-				{ noremap = true, silent = true, desc = "Show marks navigator" })
+			vim.ui.select()
 		end,
 	},
 

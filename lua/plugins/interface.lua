@@ -231,7 +231,7 @@ return {
 			}
 		},
 		keys = {
-			{ "<C-n>",   "<cmd>Neotree left toggle<CR>", silent = true, desc = "Toggle Neotree" },
+			{ "<C-n>",   "<cmd>Neotree left toggle<CR>",  silent = true, desc = "Toggle Neotree" },
 			{ "<C-A-N>", "<cmd>Neotree float toggle<CR>", silent = true, desc = "Toggle Neotree float" },
 		},
 		dependencies = {
@@ -241,4 +241,14 @@ return {
 			"s1n7ax/nvim-window-picker",
 		},
 	},
+	{
+		'mrjones2014/legendary.nvim',
+		priority = 10000,
+		lazy = false,
+		keys = {
+			{ "<C-p>", "<cmd>Legendary<CR>" },
+		}
+		-- sqlite is only needed if you want to use frecency sorting
+		-- dependencies = { 'kkharji/sqlite.lua' }
+	}
 }
