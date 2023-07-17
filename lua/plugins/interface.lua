@@ -242,13 +242,25 @@ return {
 		},
 	},
 	{
-		'mrjones2014/legendary.nvim',
+		"mrjones2014/legendary.nvim",
 		priority = 10000,
 		lazy = false,
 		keys = {
-			{ "<C-p>", "<cmd>Legendary<CR>" },
+			{ "<C-p>", "<cmd>Legendary<CR>", mode = { "n", "v", "i" } },
 		}
-		-- sqlite is only needed if you want to use frecency sorting
-		-- dependencies = { 'kkharji/sqlite.lua' }
+	},
+	{
+		'stevearc/dressing.nvim',
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		opts = {
+			input = {
+				enabled = false
+			},
+			select = {
+				enabled = true,
+				backend = "telescope",
+				-- telescope = require('telescope.themes').get_dropdown()
+			}
+		}
 	}
 }
