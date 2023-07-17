@@ -32,5 +32,4 @@ return {
 			{ "<leader>du", function() require('dapui').toggle() end, desc = "Open debugger UI" },
 		},
 	},
-
 }

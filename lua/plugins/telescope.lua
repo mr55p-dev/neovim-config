@@ -4,15 +4,17 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			{ 'nvim-telescope/telescope-ui-select.nvim' },
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
 				cond = vim.fn.executable("make") == 1,
-				config = function()
-					require("telescope").load_extension("fzf")
-				end,
 			}, -- Terminal
 		},
+		config = function(_, opts)
+			require("telescope").load_extension("fzf")
+			require('telescope').load_extension("ui-select")
+		end,
 		opts = {
 			defaults = {
 				mappings = {
@@ -22,61 +24,12 @@ return {
 					},
 				},
 			},
+			extensions = {
+				["ui-select"] = {
+					require('telescope.themes').get_dropdown()
+				}
+			}
 		},
-		config = function(_, opts)
-			require("telescope").setup(opts)
-			local function selector(items, opts, on_choice)
-				local theme = require("telescope.themes").get_dropdown()
-				local pickers = require("telescope.pickers")
-				local actions = require("telescope.actions")
-				on_choice = vim.schedule_wrap(on_choice)
-				pickers.new(opts.telescope, {
-					prompt_title = opts.prompt,
-					previewer = false,
-					finder = require("telescope.finders").new_table({
-						results = items,
-						entry_maker = function(item)
-							local formatted = opts.format_item(item)
-							return {
-								display = formatted,
-								ordinal = formatted,
-								value = item,
-							}
-						end,
-						sorter = require('telescope.config').values.generic_sorter(opts),
-						attach_mappings = function(prompt_bufnr)
-							actions.select_default:replace(function()
-								local selection = require("telescope.actions.state").get_selected_entry()
-								local callback = on_choice
-								on_choice = function(_, _) end
-								actions.close(prompt_bufnr)
-								if not selection then
-									callback(nil, nil)
-									return
-								end
-								local idx = nil
-								for i, item in ipairs(items) do
-									if item == selection.value then
-										idx = i
-										break
-									end
-								end
-								callback(selection.value, idx)
-							end)
-
-							actions.close:enhance({
-								post = function()
-									on_choice(nil, nil)
-								end
-							})
-
-							return true
-						end
-					})
-				}):find()
-			end
-			vim.ui.select = selector
-		end,
 		lazy = false,
 		priority = 10000,
 		cmd = "Telescope",

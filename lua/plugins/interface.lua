@@ -219,7 +219,7 @@ return {
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
 		config = {
 			close_if_last_window = true,
 			open_files_do_not_replace_types = { "Trouble", "qf", "edgy" },
