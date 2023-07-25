@@ -81,3 +81,5 @@ vim.keymap.set("n", "<leader>y", [[<cmd>call nvim_feedkeys('"+y', 'n', v:false)<
 	{ silent = true, desc = "yank system register" })
 vim.keymap.set("n", "<leader>p", [[<cmd>call nvim_feedkeys('"+p', 'n', v:false)<CR>]],
 	{ silent = true, desc = "paste system register" })
+
+vim.keymap.set("v", "p", function() vim.cmd[[norm "_d]]; vim.cmd[[norm p]] end, {})
