@@ -28,6 +28,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre "}, {
 		vim.cmd[[noh]]
 	end
 })
+vim.api.nvim_create_autocmd({ "ExitPre" }, {
+	callback = function()
+		require'dapui'.close()
+	end
+})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

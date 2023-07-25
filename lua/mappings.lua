@@ -38,16 +38,17 @@ end, { silent = true })
 -- Terminal mode
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>tS", function()
-	vim.cmd([[split]])
-	vim.cmd([[term]])
+	vim.cmd([[split | term]])
 end, { silent = true, desc = "Open a terminal in a new split" })
 vim.keymap.set("n", "<leader>ts", function()
-	vim.cmd([[vsplit]])
-	vim.cmd([[term]])
+	vim.cmd([[vsplit | term]])
 end, { silent = true, desc = "Open a terminal in a new vsplit" })
+vim.keymap.set("n", "<leader>tt", function()
+	vim.cmd([[tabnew | term]])
+end, { silent = true, desc = "Open a terminal in a new tab" })
 
 -- Zen mode
-vim.keymap.set("n", "<leader>ez", function()
+vim.keymap.set("n", "gz", function()
 	require("zen-mode").toggle()
 end, { silent = true, desc = "Toggle zen mode" })
 

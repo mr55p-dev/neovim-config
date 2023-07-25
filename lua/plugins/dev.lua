@@ -10,6 +10,9 @@ return {
 					"nvm use && npm run storybook" }
 			},
 		},
+		keys = {
+			{ "<leader>jj", function() require'jobber'.pick_layout() end, desc = "Open Jobber" },
+		},
 		dependencies = {
 			"pianocomposer321/consolation.nvim",
 		},
