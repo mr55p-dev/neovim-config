@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 vim.api.nvim_create_autocmd({ "BufWritePre "}, {
 	callback = function()
 		vim.cmd[[%s#golui/#../../#gce]]
+		vim.cmd[[noh]]
 	end
 })
 
