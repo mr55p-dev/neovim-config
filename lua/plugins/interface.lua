@@ -106,7 +106,7 @@ return {
 					lualine_c = {
 						{ "filename", path = 1 },
 					},
-					lualine_x = { "filetype", "windows", "tabs" },
+					lualine_x = { "filetype" },
 					lualine_y = { encoding(), "progress", fileformat() },
 				},
 			})
