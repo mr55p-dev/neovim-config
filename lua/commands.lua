@@ -22,6 +22,11 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 		vim.cmd "normal zR"
 	end,
 })
+vim.api.nvim_create_autocmd({ "BufWritePre "}, {
+	callback = function()
+		vim.cmd[[%s#golui/#../../#gce]]
+	end
+})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
