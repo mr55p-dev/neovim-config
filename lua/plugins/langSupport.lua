@@ -87,8 +87,14 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-e>"] = cmp.mapping.abort(),
-					
+					["<C-e>"] = function(fallback)
+						if cmp.visible() then
+							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+						else
+							fallback()
+						end
+					end,
+
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
