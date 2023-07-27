@@ -176,4 +176,9 @@ return {
 		"https://github.com/windwp/nvim-ts-autotag",
 		config = true,
 	},
+	{
+		"RishabhRD/nvim-cheat.sh",
+		cmd = { "Cheat", "CheatWithoutComments" },
+		dependencies = { "RishabhRD/popfix" }
+	}
 }

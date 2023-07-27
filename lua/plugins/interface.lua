@@ -3,7 +3,7 @@ return {
 		"folke/edgy.nvim",
 		config = {
 			animate = {
-				enabled = false
+				enabled = false,
 			},
 			options = {
 				left = { size = 40 },
@@ -28,7 +28,7 @@ return {
 					end,
 				},
 				"Trouble",
-				{ ft = "qf",            title = "QuickFix" },
+				{ ft = "qf", title = "QuickFix" },
 				{ ft = "spectre_panel", size = { height = 0.4 } },
 			},
 			left = {
@@ -66,20 +66,25 @@ return {
 				},
 			},
 			right = {
-				{ ft = "fugitive", size = { width = 0.25 } }
-			}
+				{ ft = "fugitive", size = { width = 0.25 } },
+			},
 		},
 		lazy = false,
 		keys = {
-			{ "<C-,>", function() require("edgy").open() end, desc = "Show edgy bar" },
+			{
+				"<C-,>",
+				function()
+					require("edgy").open()
+				end,
+				desc = "Show edgy bar",
+			},
 		},
 	},
 	{
 		"mbbill/undotree",
 		keys = {
-			{ "<F1>", vim.cmd.UndotreeToggle, desc = "Toggle undo tree" }
-
-		}
+			{ "<F1>", vim.cmd.UndotreeToggle, desc = "Toggle undo tree" },
+		},
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -118,7 +123,7 @@ return {
 		config = {
 			char = "┊",
 			show_trailing_blankline_indent = false,
-		}
+		},
 	}, -- Add indentation guides on blank lines
 	{
 		"alvarosevilla95/luatab.nvim",
@@ -212,8 +217,8 @@ return {
 			layout = {
 				height = { min = 4, max = 25 }, -- min and max height of the columns
 				width = { min = 20, max = 50 }, -- min and max width of the columns
-				spacing = 3,        -- spacing between columns
-				align = "center",   -- align columns left, center or right
+				spacing = 3, -- spacing between columns
+				align = "center", -- align columns left, center or right
 			},
 		},
 	},
@@ -227,11 +232,11 @@ return {
 				follow_current_file = true,
 			},
 			window = {
-				width = 60
-			}
+				width = 60,
+			},
 		},
 		keys = {
-			{ "<C-n>",   "<cmd>Neotree left toggle<CR>",  silent = true, desc = "Toggle Neotree" },
+			{ "<C-n>", "<cmd>Neotree left toggle<CR>", silent = true, desc = "Toggle Neotree" },
 			{ "<C-A-N>", "<cmd>Neotree float toggle<CR>", silent = true, desc = "Toggle Neotree float" },
 		},
 		dependencies = {
@@ -247,20 +252,20 @@ return {
 		lazy = false,
 		keys = {
 			{ "<C-p>", "<cmd>Legendary<CR>", mode = { "n", "v", "i" } },
-		}
+		},
 	},
 	{
-		'stevearc/dressing.nvim',
+		"stevearc/dressing.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		opts = {
 			input = {
-				enabled = false
+				enabled = false,
 			},
 			select = {
 				enabled = true,
 				backend = "telescope",
 				-- telescope = require('telescope.themes').get_dropdown()
-			}
-		}
-	}
+			},
+		},
+	},
 }

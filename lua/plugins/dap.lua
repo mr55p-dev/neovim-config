@@ -4,6 +4,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require('dap-go').setup()
+			require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 			require('jester').setup({
 				path_to_jest_run = "./node_modules/jest/bin/jest.js",
 				path_to_jest_debug = "./node_modules/jest/bin/jest.js",
@@ -37,6 +38,7 @@ return {
 		},
 		dependencies = {
 			{ "leoluz/nvim-dap-go" },
+			{ "mfussenegger/nvim-dap-python" },
 			{ "David-Kunz/jester" },
 		}
 	},
