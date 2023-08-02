@@ -37,6 +37,7 @@ end, { silent = true })
 
 -- Terminal mode
 vim.keymap.set({ "t" }, "<Esc>", [[<C-\><C-n>]])
+vim.keymap.set("n", "<leader>t<CR>", function() vim.cmd [[term]] end, { desc = "Open a terminal buffer", silent = true })
 vim.keymap.set("n", "<leader>tS", function()
 	vim.cmd([[split | term]])
 end, { silent = true, desc = "Open a terminal in a new split" })
@@ -83,4 +84,6 @@ vim.keymap.set("n", "<leader>y", [[<cmd>call nvim_feedkeys('"+y', 'n', v:false)<
 vim.keymap.set("n", "<leader>p", [[<cmd>call nvim_feedkeys('"+p', 'n', v:false)<CR>]],
 	{ silent = true, desc = "paste system register" })
 
-vim.keymap.set("v", "p", function() vim.cmd[[norm "_d]]; vim.cmd[[norm p]] end, {})
+vim.keymap.set("v", "p", function()
+	vim.cmd [[norm "_d]]; vim.cmd [[norm p]]
+end, {})
