@@ -28,7 +28,7 @@ return {
 					end,
 				},
 				"Trouble",
-				{ ft = "qf", title = "QuickFix" },
+				{ ft = "qf",            title = "QuickFix" },
 				{ ft = "spectre_panel", size = { height = 0.4 } },
 			},
 			left = {
@@ -217,8 +217,8 @@ return {
 			layout = {
 				height = { min = 4, max = 25 }, -- min and max height of the columns
 				width = { min = 20, max = 50 }, -- min and max width of the columns
-				spacing = 3, -- spacing between columns
-				align = "center", -- align columns left, center or right
+				spacing = 3,        -- spacing between columns
+				align = "center",   -- align columns left, center or right
 			},
 		},
 	},
@@ -238,7 +238,7 @@ return {
 			},
 		},
 		keys = {
-			{ "<C-n>", "<cmd>Neotree left toggle<CR>", silent = true, desc = "Toggle Neotree" },
+			{ "<C-n>",   "<cmd>Neotree left toggle<CR>",  silent = true, desc = "Toggle Neotree" },
 			{ "<C-A-N>", "<cmd>Neotree float toggle<CR>", silent = true, desc = "Toggle Neotree float" },
 		},
 		dependencies = {
@@ -270,4 +270,19 @@ return {
 			},
 		},
 	},
+	{
+		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
+		config = true,
+		cmd = "ChatGPT",
+		keys = {
+			{ "<leader>ch", function() vim.cmd [[ChatGPT]] end, silent = true, desc = "ChatGPT" }
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim"
+		}
+	}
 }
+
