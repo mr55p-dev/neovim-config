@@ -1,11 +1,11 @@
 return {
 	-- Color schemes
-	"shaunsingh/nord.nvim", -- Nord theme
-	"andersevenrud/nordic.nvim",
-	{
-		"mjlbach/onedark.nvim",
-		disabled = true,
-	}, -- Theme inspired by Atom
+	-- "shaunsingh/nord.nvim", -- Nord theme
+	-- "andersevenrud/nordic.nvim",
+	-- {
+	-- 	"mjlbach/onedark.nvim",
+	-- 	disabled = true,
+	-- }, -- Theme inspired by Atom
 	"folke/tokyonight.nvim",
 	{
 		"projekt0n/github-nvim-theme",
@@ -49,4 +49,10 @@ return {
 			{ "<leader>Dc", function() require("duck").cook() end,  desc = "Cook a duck" },
 		},
 	},
+	{
+		'eandrju/cellular-automaton.nvim',
+		keys = {
+			{ "<leader>fml", function() vim.cmd [[CellularAutomaton game_of_life]] end, desc = "CellularAutomation" }
+		}
+	}
 }

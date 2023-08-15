@@ -1,6 +1,6 @@
 return {
 	"kshenoy/vim-signature", -- Marks in the gutter
-	"aduros/ai.vim", -- Ai completion
+	"aduros/ai.vim",      -- Ai completion
 	{
 		"numToStr/Comment.nvim",
 		keys = { { "gc", mode = "v" }, { "gcc" } },
@@ -42,7 +42,7 @@ return {
 			end, { remap = true })
 			vim.keymap.set("", "<Leader>hw", function()
 				hop.hint_words()
-			end, { remap = true })
+			end, { remap = true, desc = "Hop to any word" })
 			hop.setup({})
 		end,
 		keys = {
@@ -171,6 +171,11 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
+	{
+		"https://github.com/nvim-treesitter/nvim-treesitter-context",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = true,
 	},
 	{
 		"https://github.com/windwp/nvim-ts-autotag",
