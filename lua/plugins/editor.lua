@@ -1,6 +1,9 @@
 return {
-	"kshenoy/vim-signature", -- Marks in the gutter
-	"aduros/ai.vim",      -- Ai completion
+	"kshenoy/vim-signature",              -- Marks in the gutter
+	{
+		"aduros/ai.vim",
+		event = "VeryLazy"
+	}, -- Ai completion
 	{
 		"numToStr/Comment.nvim",
 		keys = { { "gc", mode = "v" }, { "gcc" } },
