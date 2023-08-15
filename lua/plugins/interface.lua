@@ -1,11 +1,5 @@
 return {
 	{
-		"mbbill/undotree",
-		keys = {
-			{ "<F1>", vim.cmd.UndotreeToggle, desc = "Toggle undo tree" },
-		},
-	},
-	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
 			-- Override 'encoding': Don't display if encoding is UTF-8.
@@ -53,28 +47,27 @@ return {
 		"s1n7ax/nvim-window-picker",
 		config = true,
 	},
-	{
-		"folke/noice.nvim",
-		config = {
-			lsp = {
-				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-			},
-			-- you can enable a preset for easier configuration
-			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
-		},
-		dependencies = { "MunifTanjim/nui.nvim" },
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	config = {
+	-- 		lsp = {
+	-- 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+	-- 			override = {
+	-- 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+	-- 				["vim.lsp.util.stylize_markdown"] = true,
+	-- 				["cmp.entry.get_documentation"] = true,
+	-- 			},
+	-- 		},
+	-- 		presets = {
+	-- 			bottom_search = true, -- use a classic bottom cmdline for search
+	-- 			command_palette = true, -- position the cmdline and popupmenu together
+	-- 			long_message_to_split = true, -- long messages will be sent to a split
+	-- 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
+	-- 			lsp_doc_border = false, -- add a border to hover docs and signature help
+	-- 		},
+	-- 	},
+	-- 	dependencies = { "MunifTanjim/nui.nvim" },
+	-- },
 	{
 		"folke/zen-mode.nvim",
 		config = function()
@@ -168,14 +161,6 @@ return {
 		},
 	},
 	{
-		"mrjones2014/legendary.nvim",
-		priority = 10000,
-		lazy = false,
-		keys = {
-			{ "<C-p>", "<cmd>Legendary<CR>", mode = { "n", "v", "i" } },
-		},
-	},
-	{
 		"stevearc/dressing.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		opts = {
@@ -191,9 +176,8 @@ return {
 	},
 	{
 		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
 		config = true,
-		cmd = "ChatGPT",
+		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions", "ChatGPTCompleteCode" },
 		keys = {
 			{ "<leader>ch", function() vim.cmd [[ChatGPT]] end, silent = true, desc = "ChatGPT" }
 		},

@@ -35,8 +35,7 @@ return {
 			vim.keymap.set("n", "<leader>lm", "<cmd>Mason<CR>", { silent = false })
 
 			-- Set mappings on attach
-			lsp.on_attach(function(client, bufnr)
-				require("lsp-inlayhints").on_attach(client, bufnr)
+			lsp.on_attach(function(_, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -54,34 +53,6 @@ return {
 
 			-- Complete LSP setup
 			require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-			require("lspconfig").tsserver.setup({
-				settings = {
-					typescript = {
-						inlayHints = {
-							includeInlayParameterNameHints = 'all',
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						}
-					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = 'all',
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						}
-					}
-				}
-			})
 			lsp.setup()
 
 			---- Nvim cmp setup
@@ -157,6 +128,7 @@ return {
 			})
 
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			require("cmp_git").setup()
 
 			---- Null LS
 			local null_ls = require("null-ls")
@@ -197,41 +169,14 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "jose-elias-alvarez/null-ls.nvim" },
 			{ "folke/neodev.nvim" },
-			{ "lvimuser/lsp-inlayhints.nvim" },
 			-- Completion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-emoji" },
 			{ "petertriho/cmp-git" },
 			{ "onsails/lspkind.nvim" },
-			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lua" },
-
-			-- Snippets
-			{
-				"L3MON4D3/LuaSnip",
-				keys = function()
-					return {}
-				end,
-			},
-			{ "rafamadriz/friendly-snippets" },
-		},
-	},
-
-	{
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-		keys = {
-			{
-				"<C-.>",
-				function()
-					vim.cmd([[CodeActionMenu]])
-				end,
-				mode = { "n", "i" },
-				desc = "Code actions",
-			},
 		},
 	},
 	{
