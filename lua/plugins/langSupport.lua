@@ -94,7 +94,6 @@ return {
 							fallback()
 						end
 					end,
-
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -122,7 +121,7 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "path",   priority = 2 },
+					{ name = "path", priority = 2 },
 					{ name = "buffer", priority = 1 },
 				},
 			})
@@ -177,6 +176,8 @@ return {
 			{ "petertriho/cmp-git" },
 			{ "onsails/lspkind.nvim" },
 			{ "hrsh7th/cmp-nvim-lua" },
+			-- Snippets
+			{"L3MON4D3/LuaSnip",},
 		},
 	},
 	{
@@ -224,10 +225,10 @@ return {
 			},
 		},
 		keys = {
-			{ "gd", "<CMD>Glance definitions<CR>",      desc = "Glance definition" },
-			{ "gr", "<CMD>Glance references<CR>",       desc = "Glance references" },
+			{ "gd", "<CMD>Glance definitions<CR>", desc = "Glance definition" },
+			{ "gr", "<CMD>Glance references<CR>", desc = "Glance references" },
 			{ "gy", "<CMD>Glance type_definitions<CR>", desc = "Glance type definition" },
-			{ "gm", "<CMD>Glance implementations<CR>",  desc = "Glance implementations" },
+			{ "gm", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
 		},
 	},
 }
