@@ -12,10 +12,14 @@ return {
 		},
 		config = function(_, opts)
 			require("telescope").load_extension("fzf")
+			require("telescope").setup(opts)
 		end,
 		opts = {
 			defaults = {
 				mappings = {
+					n = {
+						['<C-d>'] = require('telescope.actions').delete_buffer
+					},
 					i = {
 						['<C-u>'] = false,
 						['<C-d>'] = false,
@@ -85,11 +89,11 @@ return {
 				function() require('telescope.builtin').help_tags() end,
 				desc = "[S]earch [H]elp"
 			},
-			-- {
-			-- 	"<C-p>",
-			-- 	function() vim.cmd [[Telescope]] end,
-			-- 	desc = "All commands"
-			-- },
+			{
+				"<C-p>",
+				function() vim.cmd [[Telescope]] end,
+				desc = "All commands"
+			},
 			{
 				"<C-A-p>",
 				function() require('telescope.builtin').commands() end,
