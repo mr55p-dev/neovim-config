@@ -55,6 +55,11 @@ return {
 				desc = "[S]earch [B]uffers"
 			},
 			{
+				"<leader>sn",
+				function() require('telescope.builtin').git_branches() end,
+				desc = "[S]earch [N]branches"
+				},
+			{
 				"<leader>so",
 				function() require('telescope.builtin').oldfiles() end,
 				desc = "[S]earch [O]ld"

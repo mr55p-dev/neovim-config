@@ -49,6 +49,8 @@ return {
 				vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.type_definition, setOpts("Goto type definition"))
 				vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, setOpts("Rename symbol"))
 				vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, setOpts("Rename symbol"))
+
+				vim.keymap.set("n", "gR", vim.lsp.buf.references, setOpts("Reference (quickfix)"))
 			end)
 
 			-- Complete LSP setup

@@ -79,7 +79,14 @@ vim.api.nvim_create_user_command("Wa", "wa", {})
 vim.api.nvim_create_user_command("Q", "q", {})
 vim.api.nvim_create_user_command("Qa", "qa", {})
 
-vim.keymap.set("n", "<leader>y", [[<cmd>call nvim_feedkeys('"+y', 'n', v:false)<CR>]],
+vim.keymap.set({ "n", "v" }, "<leader>y", [[<cmd>call nvim_feedkeys('"+y', 'n', v:false)<CR>]],
 	{ silent = true, desc = "yank system register" })
-vim.keymap.set("n", "<leader>p", [[<cmd>call nvim_feedkeys('"+p', 'n', v:false)<CR>]],
+vim.keymap.set("n", "<leader>Y", function() vim.cmd [[normal "+Y]] end,
+	{ silent = true, desc = "yank system register" })
+vim.keymap.set({ "n", "v" }, "<leader>p", function() vim.cmd [[normal "+p]] end,
 	{ silent = true, desc = "paste system register" })
+vim.keymap.set("n", "<leader>P", function() vim.cmd [[normal "+P]] end,
+	{ silent = true, desc = "paste system register" })
+vim.keymap.set("n", "yfp", function()
+	vim.cmd [[let @+=@%]]
+end, { desc = "Yank file path" })
